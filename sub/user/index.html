@@ -1,0 +1,304 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="UTF-8">
+        <title>concertian - local concert search engine</title>
+
+        <link rel="stylesheet" type="text/css" href="css/main.css">
+        
+        <script type="text/javascript" src="js/jquery-1.11.3.min.js?v=1.11.3"></script>
+        <script src="http://maps.googleapis.com/maps/api/js"></script>
+
+        <script>
+            $(document).ready(function() {
+                $('.imgSearch').hover(function() {
+                    $('.thirdsRow').toggleClass('buttonHover');
+                });
+                
+            /*    console.log("Post: " + JSON.stringify(
+                                $.post("http://api.bandcloud.net/users/events", {results: "10", page: "0"})
+                                                     )
+                           );*/
+                
+                console.log(JSON.stringify($.ajax({
+  'url': 'http://api.bandcloud.net/users/events',
+  'method': 'POST',
+  'data': { results: '10', page: '0' },
+})));
+            });
+            
+            function initialize() {
+                var mapProp = {
+                    center: new google.maps.LatLng(48.6724821, 19.696058),
+                    zoom: 7,
+                    mapTypeId: google.maps.MapTypeId.ROADMAP,
+                    disableDefaultUI: true
+                };
+
+                var map = new google.maps.Map(document.getElementById("map"), mapProp);
+            }
+
+            google.maps.event.addDomListener(window, 'load', initialize);
+        </script>
+
+        <meta name="author" content="QUAWER">
+        <meta name="robots" content="nofollow, noindex">
+    </head>
+
+    <body>
+        <div id="columnSearch">
+            <div class="containerForm">
+                <span class="firstRow">
+                    <span class="company"><img class="company_logo" src="images/concertian.logo.png"></span>
+                    <span class="tellContainer">
+                        <span class="imgBorder"><span class="imgFB"></span></span>
+                        <span class="imgBorder"><span class="imgG"></span></span>
+                        <span class="imgBorder"><span class="imgTwitter"></span></span>
+                    </span>
+                </span>
+                <span class="secondRow borderBottom">
+                    <span class="textButton">
+                        <span class="text borderRight">Recent</span>
+                    </span>
+                    <span class="textButton">
+                        <span class="text">Most viewed</span>
+                    </span>
+                </span>
+                <div class="thirdsRow">
+                    <form>
+                        <input type="text" name="city"/>
+                    </form>
+                    <span class="imgSearch" ></span>
+                </div>
+            </div>
+            <span class="containerResult">
+                <span class="resultElement">
+                    <span class="resultImage">
+                        <span class="imgHome"></span>
+                    </span>
+                    <span class="resultTextContainer">
+                        <span class="resultTextFirst">Sundeck</span>
+                        <span class="resultTextSecond">Nitra</span>
+                    </span>
+                    <span class="resultTextContainer resultBorder">
+                        <span class="resultTextFirst">Sundeck</span>
+                        <span class="resultTextSecond">Nitra</span>
+                    </span>
+                    <span class="resultTextContainer resultBorder">
+                        <span class="resultTextFirst">Sundeck</span>
+                        <span class="resultTextSecond">Nitra</span>
+                    </span>
+                    <span class="resultInfoButton">
+                        <span class="ingShare"></span>
+                    </span>
+                </span>
+                <span class="resultElement">
+                    <span class="resultImage">
+                        <span class="imgHome"></span>
+                    </span>
+                    <span class="resultTextContainer">
+                        <span class="resultTextFirst">Sundeck</span>
+                        <span class="resultTextSecond">Nitra</span>
+                    </span>
+                    <span class="resultTextContainer resultBorder">
+                        <span class="resultTextFirst">Sundeck</span>
+                        <span class="resultTextSecond">Nitra</span>
+                    </span>
+                    <span class="resultTextContainer resultBorder">
+                        <span class="resultTextFirst">Sundeck</span>
+                        <span class="resultTextSecond">Nitra</span>
+                    </span>
+                    <span class="resultInfoButton">
+                        <span class="ingShare"></span>
+                    </span>
+                </span>
+                <span class="resultElement">
+                    <span class="resultImage">
+                        <span class="imgHome"></span>
+                    </span>
+                    <span class="resultTextContainer">
+                        <span class="resultTextFirst">Sundeck</span>
+                        <span class="resultTextSecond">Nitra</span>
+                    </span>
+                    <span class="resultTextContainer resultBorder">
+                        <span class="resultTextFirst">Sundeck</span>
+                        <span class="resultTextSecond">Nitra</span>
+                    </span>
+                    <span class="resultTextContainer resultBorder">
+                        <span class="resultTextFirst">Sundeck</span>
+                        <span class="resultTextSecond">Nitra</span>
+                    </span>
+                    <span class="resultInfoButton">
+                        <span class="ingShare"></span>
+                    </span>
+                </span>
+                <span class="resultElement">
+                    <span class="resultImage">
+                        <span class="imgHome"></span>
+                    </span>
+                    <span class="resultTextContainer">
+                        <span class="resultTextFirst">Sundeck</span>
+                        <span class="resultTextSecond">Nitra</span>
+                    </span>
+                    <span class="resultTextContainer resultBorder">
+                        <span class="resultTextFirst">Sundeck</span>
+                        <span class="resultTextSecond">Nitra</span>
+                    </span>
+                    <span class="resultTextContainer resultBorder">
+                        <span class="resultTextFirst">Sundeck</span>
+                        <span class="resultTextSecond">Nitra</span>
+                    </span>
+                    <span class="resultInfoButton">
+                        <span class="ingShare"></span>
+                    </span>
+                </span>
+                <span class="resultElement">
+                    <span class="resultImage">
+                        <span class="imgHome"></span>
+                    </span>
+                    <span class="resultTextContainer">
+                        <span class="resultTextFirst">Sundeck</span>
+                        <span class="resultTextSecond">Nitra</span>
+                    </span>
+                    <span class="resultTextContainer resultBorder">
+                        <span class="resultTextFirst">Sundeck</span>
+                        <span class="resultTextSecond">Nitra</span>
+                    </span>
+                    <span class="resultTextContainer resultBorder">
+                        <span class="resultTextFirst">Sundeck</span>
+                        <span class="resultTextSecond">Nitra</span>
+                    </span>
+                    <span class="resultInfoButton">
+                        <span class="ingShare"></span>
+                    </span>
+                </span><span class="resultElement">
+                    <span class="resultImage">
+                        <span class="imgHome"></span>
+                    </span>
+                    <span class="resultTextContainer">
+                        <span class="resultTextFirst">Sundeck</span>
+                        <span class="resultTextSecond">Nitra</span>
+                    </span>
+                    <span class="resultTextContainer resultBorder">
+                        <span class="resultTextFirst">Sundeck</span>
+                        <span class="resultTextSecond">Nitra</span>
+                    </span>
+                    <span class="resultTextContainer resultBorder">
+                        <span class="resultTextFirst">Sundeck</span>
+                        <span class="resultTextSecond">Nitra</span>
+                    </span>
+                    <span class="resultInfoButton">
+                        <span class="ingShare"></span>
+                    </span>
+                </span>
+                <span class="resultElement">
+                    <span class="resultImage">
+                        <span class="imgHome"></span>
+                    </span>
+                    <span class="resultTextContainer">
+                        <span class="resultTextFirst">Sundeck</span>
+                        <span class="resultTextSecond">Nitra</span>
+                    </span>
+                    <span class="resultTextContainer resultBorder">
+                        <span class="resultTextFirst">Sundeck</span>
+                        <span class="resultTextSecond">Nitra</span>
+                    </span>
+                    <span class="resultTextContainer resultBorder">
+                        <span class="resultTextFirst">Sundeck</span>
+                        <span class="resultTextSecond">Nitra</span>
+                    </span>
+                    <span class="resultInfoButton">
+                        <span class="ingShare"></span>
+                    </span>
+                </span>
+                <span class="resultElement">
+                    <span class="resultImage">
+                        <span class="imgHome"></span>
+                    </span>
+                    <span class="resultTextContainer">
+                        <span class="resultTextFirst">Sundeck</span>
+                        <span class="resultTextSecond">Nitra</span>
+                    </span>
+                    <span class="resultTextContainer resultBorder">
+                        <span class="resultTextFirst">Sundeck</span>
+                        <span class="resultTextSecond">Nitra</span>
+                    </span>
+                    <span class="resultTextContainer resultBorder">
+                        <span class="resultTextFirst">Sundeck</span>
+                        <span class="resultTextSecond">Nitra</span>
+                    </span>
+                    <span class="resultInfoButton">
+                        <span class="ingShare"></span>
+                    </span>
+                </span>
+                <span class="resultElement">
+                    <span class="resultImage">
+                        <span class="imgHome"></span>
+                    </span>
+                    <span class="resultTextContainer">
+                        <span class="resultTextFirst">Sundeck</span>
+                        <span class="resultTextSecond">Nitra</span>
+                    </span>
+                    <span class="resultTextContainer resultBorder">
+                        <span class="resultTextFirst">Sundeck</span>
+                        <span class="resultTextSecond">Nitra</span>
+                    </span>
+                    <span class="resultTextContainer resultBorder">
+                        <span class="resultTextFirst">Sundeck</span>
+                        <span class="resultTextSecond">Nitra</span>
+                    </span>
+                    <span class="resultInfoButton">
+                        <span class="ingShare"></span>
+                    </span>
+                </span>
+                <span class="resultElement">
+                    <span class="resultImage">
+                        <span class="imgHome"></span>
+                    </span>
+                    <span class="resultTextContainer">
+                        <span class="resultTextFirst">Sundeck</span>
+                        <span class="resultTextSecond">Nitra</span>
+                    </span>
+                    <span class="resultTextContainer resultBorder">
+                        <span class="resultTextFirst">Sundeck</span>
+                        <span class="resultTextSecond">Nitra</span>
+                    </span>
+                    <span class="resultTextContainer resultBorder">
+                        <span class="resultTextFirst">Sundeck</span>
+                        <span class="resultTextSecond">Nitra</span>
+                    </span>
+                    <span class="resultInfoButton">
+                        <span class="ingShare"></span>
+                    </span>
+                </span><span class="resultElement">
+                    <span class="resultImage">
+                        <span class="imgHome"></span>
+                    </span>
+                    <span class="resultTextContainer">
+                        <span class="resultTextFirst">Sundeck</span>
+                        <span class="resultTextSecond">Nitra</span>
+                    </span>
+                    <span class="resultTextContainer resultBorder">
+                        <span class="resultTextFirst">Sundeck</span>
+                        <span class="resultTextSecond">Nitra</span>
+                    </span>
+                    <span class="resultTextContainer resultBorder">
+                        <span class="resultTextFirst">Sundeck</span>
+                        <span class="resultTextSecond">Nitra</span>
+                    </span>
+                    <span class="resultInfoButton">
+                        <span class="ingShare"></span>
+                    </span>
+                </span>
+                
+                
+            </span>
+        </div>
+        <div id="columnMap">
+            <span class="countOwerMap">
+                <span class="slim">Nitra <span class="bold">999999 results</span></span>
+            </span>
+            <span id="map"></span>
+        </div>
+    </body>
+</html>

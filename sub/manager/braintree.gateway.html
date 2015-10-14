@@ -1,0 +1,167 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+ 
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<meta name="description" content="">
+	<title>BANDCLOUD</title>
+	 
+	<link href="css/bootstrap.css" rel="stylesheet">	 
+	<link href="css/registration.css" rel="stylesheet">
+ 
+	<link rel="shortcut icon" href="images/favicon.png">
+	<script src="js/pace.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+ 
+	<link href='http://fonts.googleapis.com/css?family=Open+Sans:300,600&subset=latin,latin-ext' rel='stylesheet' type='text/css'>
+
+</head>
+
+<body>
+	<div class="preloader"></div>
+    <! -- ******************** NAVBAR ******************** -->	
+     <nav class="navbar-inverse" role="navigation">
+        <div class="container">
+            <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+                <ul class="nav navbar-nav navbar-left">
+                    <li><a href="#contact">powered by QUAWER</a></li>
+                </ul>
+                <div class="nav navbar-nav navbar-right divider">
+                    
+                    <div class="border1 languageparent">
+                        <span class="languageopener">LANGUAGE
+                            <ul class="dropdown-menu languagemenu">
+                                <li><a class="option" href="#">ENGLISH</a></li>
+                                <li><a class="option" href="#">SLOVAK</a></li>
+                                <li><a class="option" href="#">CZECH</a></li>
+                            </ul>
+                        </span>
+                    </div>
+                    <div class="border2">
+                        <a class="scrollto" style="color:#FFF" href="#threesteps">O SLUŽBE</a>
+                    </div>
+                    <div class="border3">
+                        <a class="scrollto" style="color:#FFF" href="#pricing">CENNÍK</a>
+                    </div>
+                    <div class="border4">
+                        <a class="scrollto" style="color:#FFF" href="#contact">KONTAKT</a>
+                    </div>
+                    <div class="border5">
+                        <a style="color:#FFF" href="http://blog.bandcloud.net/">BLOG</a>
+                    </div>
+                    
+                    
+                </div>
+            </div>
+            <!-- /.navbar-collapse -->
+        </div>
+        <!-- /.container -->
+    </nav>
+	
+<main id="top" class="header" role="main">
+		<div class="container">
+            <div class="col-lg-12 col-md-12">
+			<div class="logo"><a href="index.html#"><img src="images/bandcloud.logo.png" alt="logo"></a>
+			</div>
+                <div class="clearfix"></div>
+			<h1><strong>Vitajte v registrácií</strong></h1>
+            </div>
+        </div>  
+                <br>
+				<a href="#registration" class="scrollto">
+				<p>Registrácia</p>
+				<p class="scrollto--arrow"><img src="images/scroll_down.png" alt="scroll down arrow"></p>
+				</a>
+</main>
+ 
+<div class="container">
+    <div class='row'>
+        <div class='col-md-4'></div>
+        <div class='col-md-4'>
+          <div class='col-md-12 form-group'>
+  <div class="form-row">      
+      <h1>BrainTree</h1>
+ </div>
+  
+<form id="checkout" method="post" action="/checkout">
+    <div id="payment-form"></div>
+    <input type="submit" value="Zaplatiť 39€">
+</form>
+
+<script src="https://js.braintreegateway.com/v2/braintree.js"></script>
+<script>
+// We generated a client token for you so you can test out this code
+// immediately. In a production-ready integration, you will need to
+// generate a client token on your server (see section below).
+var clientToken = "eyJ2ZXJzaW9uIjoyLCJhdXRob3JpemF0aW9uRmluZ2VycHJpbnQiOiI2OGZiZWZiZGNhYjYwNGY2ZjA3ZjhmMDVmNzFiODVhMWMzZjc4YmFiYTQ3NGQxNDY3ZTI2YTYwZGYyZDI1OWIyfGNyZWF0ZWRfYXQ9MjAxNS0wOC0wN1QxMjoyNjoyOC41NTczNjM5NjIrMDAwMFx1MDAyNm1lcmNoYW50X2lkPWRjcHNweTJicndkanIzcW5cdTAwMjZwdWJsaWNfa2V5PTl3d3J6cWszdnIzdDRuYzgiLCJjb25maWdVcmwiOiJodHRwczovL2FwaS5zYW5kYm94LmJyYWludHJlZWdhdGV3YXkuY29tOjQ0My9tZXJjaGFudHMvZGNwc3B5MmJyd2RqcjNxbi9jbGllbnRfYXBpL3YxL2NvbmZpZ3VyYXRpb24iLCJjaGFsbGVuZ2VzIjpbXSwiZW52aXJvbm1lbnQiOiJzYW5kYm94IiwiY2xpZW50QXBpVXJsIjoiaHR0cHM6Ly9hcGkuc2FuZGJveC5icmFpbnRyZWVnYXRld2F5LmNvbTo0NDMvbWVyY2hhbnRzL2RjcHNweTJicndkanIzcW4vY2xpZW50X2FwaSIsImFzc2V0c1VybCI6Imh0dHBzOi8vYXNzZXRzLmJyYWludHJlZWdhdGV3YXkuY29tIiwiYXV0aFVybCI6Imh0dHBzOi8vYXV0aC52ZW5tby5zYW5kYm94LmJyYWludHJlZWdhdGV3YXkuY29tIiwiYW5hbHl0aWNzIjp7InVybCI6Imh0dHBzOi8vY2xpZW50LWFuYWx5dGljcy5zYW5kYm94LmJyYWludHJlZWdhdGV3YXkuY29tIn0sInRocmVlRFNlY3VyZUVuYWJsZWQiOnRydWUsInRocmVlRFNlY3VyZSI6eyJsb29rdXBVcmwiOiJodHRwczovL2FwaS5zYW5kYm94LmJyYWludHJlZWdhdGV3YXkuY29tOjQ0My9tZXJjaGFudHMvZGNwc3B5MmJyd2RqcjNxbi90aHJlZV9kX3NlY3VyZS9sb29rdXAifSwicGF5cGFsRW5hYmxlZCI6dHJ1ZSwicGF5cGFsIjp7ImRpc3BsYXlOYW1lIjoiQWNtZSBXaWRnZXRzLCBMdGQuIChTYW5kYm94KSIsImNsaWVudElkIjpudWxsLCJwcml2YWN5VXJsIjoiaHR0cDovL2V4YW1wbGUuY29tL3BwIiwidXNlckFncmVlbWVudFVybCI6Imh0dHA6Ly9leGFtcGxlLmNvbS90b3MiLCJiYXNlVXJsIjoiaHR0cHM6Ly9hc3NldHMuYnJhaW50cmVlZ2F0ZXdheS5jb20iLCJhc3NldHNVcmwiOiJodHRwczovL2NoZWNrb3V0LnBheXBhbC5jb20iLCJkaXJlY3RCYXNlVXJsIjpudWxsLCJhbGxvd0h0dHAiOnRydWUsImVudmlyb25tZW50Tm9OZXR3b3JrIjp0cnVlLCJlbnZpcm9ubWVudCI6Im9mZmxpbmUiLCJ1bnZldHRlZE1lcmNoYW50IjpmYWxzZSwiYnJhaW50cmVlQ2xpZW50SWQiOiJtYXN0ZXJjbGllbnQzIiwibWVyY2hhbnRBY2NvdW50SWQiOiJzdGNoMm5mZGZ3c3p5dHc1IiwiY3VycmVuY3lJc29Db2RlIjoiVVNEIn0sImNvaW5iYXNlRW5hYmxlZCI6dHJ1ZSwiY29pbmJhc2UiOnsiY2xpZW50SWQiOiIxMWQyNzIyOWJhNThiNTZkN2UzYzAxYTA1MjdmNGQ1YjQ0NmQ0ZjY4NDgxN2NiNjIzZDI1NWI1NzNhZGRjNTliIiwibWVyY2hhbnRBY2NvdW50IjoiY29pbmJhc2UtZGV2ZWxvcG1lbnQtbWVyY2hhbnRAZ2V0YnJhaW50cmVlLmNvbSIsInNjb3BlcyI6ImF1dGhvcml6YXRpb25zOmJyYWludHJlZSB1c2VyIiwicmVkaXJlY3RVcmwiOiJodHRwczovL2Fzc2V0cy5icmFpbnRyZWVnYXRld2F5LmNvbS9jb2luYmFzZS9vYXV0aC9yZWRpcmVjdC1sYW5kaW5nLmh0bWwiLCJlbnZpcm9ubWVudCI6Im1vY2sifSwibWVyY2hhbnRJZCI6ImRjcHNweTJicndkanIzcW4iLCJ2ZW5tbyI6Im9mZmxpbmUiLCJhcHBsZVBheSI6eyJzdGF0dXMiOiJtb2NrIiwiY291bnRyeUNvZGUiOiJVUyIsImN1cnJlbmN5Q29kZSI6IlVTRCIsIm1lcmNoYW50SWRlbnRpZmllciI6Im1lcmNoYW50LmNvbS5icmFpbnRyZWVwYXltZW50cy5zYW5kYm94LkJyYWludHJlZS1EZW1vIiwic3VwcG9ydGVkTmV0d29ya3MiOlsidmlzYSIsIm1hc3RlcmNhcmQiLCJhbWV4Il19fQ==";
+
+braintree.setup(clientToken, "dropin", {
+  container: "payment-form"
+});
+</script>
+        </div>   </div>
+        
+        <div class='col-md-4'></div>
+    </div>
+</div>
+</div>
+    
+    
+    
+    
+    
+    
+    
+    
+
+		<div class="container">
+			<section class="row breath">
+				<div class="col-md-12 footerlinks">
+					<p>&copy; 2015 Bandcloud.net</p>
+				</div>
+                <div class="col-lg-12 col-md-12 footerlinks">
+					<a href="google.sk" class="color">Obchodné podmienky a ochrana osobných údajov Bandcloud 2015</a>
+				</div>
+			</section><! --/section -->
+		</div><! --/container -->
+ 
+ 
+ 
+<script src="js/jquery.js"></script>
+<script src="js/bootstrap.js"></script>
+<script src="js/easing.js"></script>
+<script src="js/nicescroll.js"></script>
+<script src="js/experiment.js"></script>
+<script type="text/javascript" src="js/circles.js"></script> 
+<script>
+ $(function() {
+    $('.scrollto, .gototop').bind('click',function(event){
+		 var $anchor = $(this);
+		 $('html, body').stop().animate({
+         scrollTop: $($anchor.attr('href')).offset().top
+          }, 1500,'easeInOutExpo');
+     event.preventDefault();
+      });
+
+  });
+$("input:checkbox").on('click', function() {
+  // in the handler, 'this' refers to the box clicked on
+  var $box = $(this);
+  if ($box.is(":checked")) {
+    // the name of the box is retrieved using the .attr() method
+    // as it is assumed and expected to be immutable
+    var group = "input:checkbox[name='" + $box.attr("name") + "']";
+    // the checked state of the group/box on the other hand will change
+    // and the current value is retrieved using .prop() method
+    $(group).prop("checked", false);
+    $box.prop("checked", true);
+  } else {
+    $box.prop("checked", false);
+  }
+});
+</script>
+    
+
+</body>
+</html>

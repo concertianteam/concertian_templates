@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html dir="ltr">
+	<head>
+	<meta charset="utf-8">
+	
+	<title>concertian for managers</title>
+	
+    <script src="http://code.jquery.com/jquery-latest.min.js"></script>
+    <script src="js/pace.js"></script>
+	<link href='http://fonts.googleapis.com/css?family=Open+Sans:300,600&subset=latin,latin-ext' rel='stylesheet' type='text/css'>
+	<link rel="stylesheet" type="text/css" href="css/main.css">
+    <link rel="stylesheet" href="http://code.jquery.com/ui/1.10.0/themes/base/jquery-ui.css" />
+    <link rel="stylesheet" href="css/jquery.ui.autocomplete.css">
+
+    
+    <meta name="author" content="QUAWER">
+	<meta name="robots" content="nofollow, noindex">
+</head>
+<body>
+    	<div class="preloader"></div>
+
+    <div id="header_part">
+        <span class="overlay"></span>
+        <div class="navbar">
+            <ul>
+                <li class="language hvr-grow" href="index.html">SK</li>
+                <li class="language hvr-grow" href="index.cz.html">CZ</li>
+                <li class="language hvr-grow" href="index.en.html">EN</li>
+            </ul>
+        </div>
+        <div class="share addthis_sharing_toolbox"></div>
+        <div class="header_logo"><img class="header_logo_img" src="img/header.png" href=""></div>
+        <div class="header">
+            <span class="header_2">"novodobý google na vyhľadávanie koncertov"</span>
+        </div>
+        <form class="button_discover" action="http://manager.concertian.com/" target="_blank">
+            <button class="discover_more hvr-buzz-out">Chcem vedieť viac</button>
+        </form>
+    </div>  
+    
+    <div id="form_part">
+    <form action="http://manager.concertian.com/" target="_blank">
+        <div class="header_1">Spropagujte Vaše koncerty. Rýchlo a jednoducho<button type="submit" class="discover_more_small hvr-buzz-out">Ako?</button></div>
+    </form>
+        <div id="overview_list">            
+            <div id="venue_title">
+                <div class="head"><img class="venue_logo" src="img/avatar.default.jpg"></div>
+                <div class="venue_name"><h4>Zadajte meno klubu</h4></div>
+                <div class="concerts"><h4>Vaše koncerty</h4></div>
+            </div>
+            <div id="container"></div>
+        </div>
+        
+        <form id="form_event" action="create_event.php" name="form_event" method="POST">
+            <span class="form_steps"><img class="step_img" src="img/step_1.png">Meno podniku</span>
+                <label>
+                    <input type="text" name="venue_name" placeholder="Meno podniku" id="restSearch">
+                    
+                    <input type="hidden" name="id_venue" value="" id="idVenue">
+                </label>
+            <span class="form_steps"><img class="step_img" src="img/step_2.png">Názov podujatia</span>
+                <label>
+                    <input id="event_name_id"  name="event_name" type="text" placeholder="Názov podujatia">
+                </label>
+            <span class="form_steps"><img class="step_img" src="img/step_3.png">Dátum a čas podujatia</span>
+                <label>
+                    <input name="event_date" type="text" placeholder="dátum YYYY-MM-dd">
+                </label>
+                <label>
+                    <input name="event_time" type="text" placeholder="čas HH:mm:ss">
+                </label>
+                <label>
+                <input type="submit" class="hvr-buzz-out" name="button" placeholder="ODOSLAŤ">
+                </label>
+        </form>
+        
+    </div>
+    
+    <div id="bottom_bar">
+    
+    <h4>Nenašli ste svoj podnik v zozname? Zadajte vašu emailovú adresu a my to napravíme.</h4>
+    
+        <form id="mc_embed_signup" action="//concertian.us11.list-manage.com/subscribe/post?u=e093ef781a825976ba9b91f1a&amp;id=6a3d93656a" method="post" id="mc-embedded-subscribe-form" name="mc-embedded-subscribe-form" class="validate send_invitation" target="_blank" novalidate>
+        <div id="mc-embedded-subscribe-form">
+            <label for="mce-EMAIL"></label>
+            <input type="email" value="" name="EMAIL" class="required email" id="mce-EMAIL">
+            <input type="submit" value="" name="subscribe" id="mc-embedded-subscribe" class="button">
+        </div>
+        </form>
+    </div>
+    
+    
+    
+<script src="js/jquery-ui.js"></script>
+<script type="text/javascript" src="js/restSearch.js"></script>
+<!-- Go to www.addthis.com/dashboard to customize your tools -->
+<script type="text/javascript" src="//s7.addthis.com/js/300/addthis_widget.js#pubid=ra-55d9f3747523b0bc" async="async"></script>
+
+
+</body>
+</html>
