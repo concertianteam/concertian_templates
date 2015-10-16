@@ -295,6 +295,7 @@ body{
                     margin: 12px 10px;
                     border-radius: 33px;
                     border: 2px solid #ffc95c;
+                    cursor: pointer;
                 }
                 #columnSearch
                 .containerResult
@@ -302,10 +303,21 @@ body{
                 .resultImage:hover
                 .imgHome{
                     background: url('../images/sprite.png') no-repeat 0 0;
-    width: 5px;
-    height: 10px;
-    display: block;
-    margin: 4px 6px;
+				    width: 5px;
+				    height: 10px;
+				    display: block;
+				    margin: 4px 6px;
+                }
+                #columnSearch
+                .containerResult
+                .resultElement
+                .resultImage
+                .image{
+                	float: left;
+                    width: 40px;
+                    height: 40px;
+                    border-radius: 33px;
+                    color: transparent;
                 }
                 #columnSearch
                 .containerResult
