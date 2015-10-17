@@ -5,7 +5,7 @@
 	<meta charset="utf-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
 	<meta name="description" content="">
-	<title>Concertian - registrace pro manažery. Zaregistrujte se nebo svůj podnik a organizujte a propagujte své eventy efketívnejšie.</title>
+	<title>Concertian - platební brána </title>
 	 
 	<link href="css/bootstrap.css" rel="stylesheet">	 
 	<link href="css/concertian.css" rel="stylesheet">
@@ -29,9 +29,9 @@
                     <div class="border1 languageparent">
                         <span class="languageopener">LANGUAGE
                             <ul class="dropdown-menu languagemenu">
-                                <li><a class="option" href="registration.en.html">ENGLISH</a></li>
-                                <li><a class="option" href="registration.html">SLOVAK</a></li>
-                                <li><a class="option" href="registration.html">CZECH</a></li>
+                                <li><a class="option" href="payment.en.html">ENGLISH</a></li>
+                                <li><a class="option" href="payment.html">SLOVAK</a></li>
+                                <li><a class="option" href="payment.cz.html">CZECH</a></li>
                             </ul>
                         </span>
                     </div>
@@ -64,44 +64,35 @@
 <div class="col-lg-6 col-md-6 col-sm-6">
     <div class="heading">
         <div class="heading-logo"><a href="index.cz.html"><img class="img-responsive" src="images/concertian_logo.png"></a></div>
-        <h2 class="heading-text">Účet jednoduše ve třech krocích,<p class="light">stejně jako vytvoření koncertu v concertian</p></h2>
-    <img class="timeless" src="images/concertian_registration_mockup.png">
+        <h2 class="heading-text">Bezstarostná a bezpečná platba<p class="light">platební kartou nebo systémem PayPal</p></h2>
+    <img class="timeless" src="images/concertian_payment_mockup.png">
     </div>
 </div>
     
 <div class="col-lg-6 col-md-6 col-sm-6">
-    <form id="registration_form" action="registrate.php" name="registrate_form" method="post">
-        <div class="input_mark">
-            <img class="input_number" src="images/step.1.png">
-            <h6 class="input_title">Název provozu</h6>
-        </div>
-        <label><input type="text" name="venue_name" placeholder="concertian music club"></label>
-        <div class="input_mark">
-            <img class="input_number" src="images/step.2.png">
-            <h6 class="input_title">Mailová adresa</h6>
-        </div>
-        <label><input type="text" name="email" placeholder="concertian@club.com"></label>
-        <div class="input_mark">
-            <img class="input_number" src="images/step.3.png">
-            <h6 class="input_title">Heslo</h6>
-        </div>
-        <label><input type="text" name="password" placeholder="**********"></label>
-        <div class="input_mark">
-            <img class="input_number" src="images/step.4.png">
-            <h6 class="input_title">Adresa Vašeho klubu</h6>
-        </div>
-        <label><input type="text" name="state" placeholder="State"></label>
-        <label><input type="text" name="city" placeholder="City"></label>
-        <label><input type="text" name="address" placeholder="Address"></label>
-        <div class="checkbox">
-            <label><input type="checkbox" name="checkbox" class="checkbox"></label>
-            <h6 class="checkbox_text">Souhlasím s <a class="color" href="terms&services.cz.html">obchodními podmínkami</a> platnými pro tuto službu</h6>
-        </div>
-            
-        <label><input type="submit" name="nutton" value="Dokončiť registraci" class="hvr-buzz-out"></label>
-    </form>
-</div> 
-    </div>
+<div class="payment_colum">
+  <div class="form-row">      
+      <h1>BrainTree</h1>
+  </div>
+  
+<form id="checkout" method="post" action="/checkout">
+    <div id="payment-form"></div>
+    <input type="submit" value="Zaplatit 49€">
+</form>
+
+<script src="https://js.braintreegateway.com/v2/braintree.js"></script>
+<script>
+// We generated a client token for you so you can test out this code
+// immediately. In a production-ready integration, you will need to
+// generate a client token on your server (see section below).
+var clientToken = "eyJ2ZXJzaW9uIjoyLCJhdXRob3JpemF0aW9uRmluZ2VycHJpbnQiOiI2OGZiZWZiZGNhYjYwNGY2ZjA3ZjhmMDVmNzFiODVhMWMzZjc4YmFiYTQ3NGQxNDY3ZTI2YTYwZGYyZDI1OWIyfGNyZWF0ZWRfYXQ9MjAxNS0wOC0wN1QxMjoyNjoyOC41NTczNjM5NjIrMDAwMFx1MDAyNm1lcmNoYW50X2lkPWRjcHNweTJicndkanIzcW5cdTAwMjZwdWJsaWNfa2V5PTl3d3J6cWszdnIzdDRuYzgiLCJjb25maWdVcmwiOiJodHRwczovL2FwaS5zYW5kYm94LmJyYWludHJlZWdhdGV3YXkuY29tOjQ0My9tZXJjaGFudHMvZGNwc3B5MmJyd2RqcjNxbi9jbGllbnRfYXBpL3YxL2NvbmZpZ3VyYXRpb24iLCJjaGFsbGVuZ2VzIjpbXSwiZW52aXJvbm1lbnQiOiJzYW5kYm94IiwiY2xpZW50QXBpVXJsIjoiaHR0cHM6Ly9hcGkuc2FuZGJveC5icmFpbnRyZWVnYXRld2F5LmNvbTo0NDMvbWVyY2hhbnRzL2RjcHNweTJicndkanIzcW4vY2xpZW50X2FwaSIsImFzc2V0c1VybCI6Imh0dHBzOi8vYXNzZXRzLmJyYWludHJlZWdhdGV3YXkuY29tIiwiYXV0aFVybCI6Imh0dHBzOi8vYXV0aC52ZW5tby5zYW5kYm94LmJyYWludHJlZWdhdGV3YXkuY29tIiwiYW5hbHl0aWNzIjp7InVybCI6Imh0dHBzOi8vY2xpZW50LWFuYWx5dGljcy5zYW5kYm94LmJyYWludHJlZWdhdGV3YXkuY29tIn0sInRocmVlRFNlY3VyZUVuYWJsZWQiOnRydWUsInRocmVlRFNlY3VyZSI6eyJsb29rdXBVcmwiOiJodHRwczovL2FwaS5zYW5kYm94LmJyYWludHJlZWdhdGV3YXkuY29tOjQ0My9tZXJjaGFudHMvZGNwc3B5MmJyd2RqcjNxbi90aHJlZV9kX3NlY3VyZS9sb29rdXAifSwicGF5cGFsRW5hYmxlZCI6dHJ1ZSwicGF5cGFsIjp7ImRpc3BsYXlOYW1lIjoiQWNtZSBXaWRnZXRzLCBMdGQuIChTYW5kYm94KSIsImNsaWVudElkIjpudWxsLCJwcml2YWN5VXJsIjoiaHR0cDovL2V4YW1wbGUuY29tL3BwIiwidXNlckFncmVlbWVudFVybCI6Imh0dHA6Ly9leGFtcGxlLmNvbS90b3MiLCJiYXNlVXJsIjoiaHR0cHM6Ly9hc3NldHMuYnJhaW50cmVlZ2F0ZXdheS5jb20iLCJhc3NldHNVcmwiOiJodHRwczovL2NoZWNrb3V0LnBheXBhbC5jb20iLCJkaXJlY3RCYXNlVXJsIjpudWxsLCJhbGxvd0h0dHAiOnRydWUsImVudmlyb25tZW50Tm9OZXR3b3JrIjp0cnVlLCJlbnZpcm9ubWVudCI6Im9mZmxpbmUiLCJ1bnZldHRlZE1lcmNoYW50IjpmYWxzZSwiYnJhaW50cmVlQ2xpZW50SWQiOiJtYXN0ZXJjbGllbnQzIiwibWVyY2hhbnRBY2NvdW50SWQiOiJzdGNoMm5mZGZ3c3p5dHc1IiwiY3VycmVuY3lJc29Db2RlIjoiVVNEIn0sImNvaW5iYXNlRW5hYmxlZCI6dHJ1ZSwiY29pbmJhc2UiOnsiY2xpZW50SWQiOiIxMWQyNzIyOWJhNThiNTZkN2UzYzAxYTA1MjdmNGQ1YjQ0NmQ0ZjY4NDgxN2NiNjIzZDI1NWI1NzNhZGRjNTliIiwibWVyY2hhbnRBY2NvdW50IjoiY29pbmJhc2UtZGV2ZWxvcG1lbnQtbWVyY2hhbnRAZ2V0YnJhaW50cmVlLmNvbSIsInNjb3BlcyI6ImF1dGhvcml6YXRpb25zOmJyYWludHJlZSB1c2VyIiwicmVkaXJlY3RVcmwiOiJodHRwczovL2Fzc2V0cy5icmFpbnRyZWVnYXRld2F5LmNvbS9jb2luYmFzZS9vYXV0aC9yZWRpcmVjdC1sYW5kaW5nLmh0bWwiLCJlbnZpcm9ubWVudCI6Im1vY2sifSwibWVyY2hhbnRJZCI6ImRjcHNweTJicndkanIzcW4iLCJ2ZW5tbyI6Im9mZmxpbmUiLCJhcHBsZVBheSI6eyJzdGF0dXMiOiJtb2NrIiwiY291bnRyeUNvZGUiOiJVUyIsImN1cnJlbmN5Q29kZSI6IlVTRCIsIm1lcmNoYW50SWRlbnRpZmllciI6Im1lcmNoYW50LmNvbS5icmFpbnRyZWVwYXltZW50cy5zYW5kYm94LkJyYWludHJlZS1EZW1vIiwic3VwcG9ydGVkTmV0d29ya3MiOlsidmlzYSIsIm1hc3RlcmNhcmQiLCJhbWV4Il19fQ==";
+
+braintree.setup(clientToken, "dropin", {
+  container: "payment-form"
+});
+</script>
+</div>       
+</div>
     
 </div>
 </div>

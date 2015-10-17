@@ -8,7 +8,7 @@
 	<title>Concertian- registrácia pre manažérov. Zaregistrujte sa alebo svoj podnik a organizujte a propagujte svoje eventy efketívnejšie. </title>
 	 
 	<link href="css/bootstrap.css" rel="stylesheet">	 
-	<link href="css/registration.css" rel="stylesheet">
+	<link href="css/concertian.css" rel="stylesheet">
  
 	<link rel="shortcut icon" href="images/favicon.png">
 	<script src="js/pace.js"></script>
@@ -20,34 +20,32 @@
 
 <body>
 	<div class="preloader"></div>
+    <div id="registration">
     <! -- ******************** NAVBAR ******************** -->	
     <nav class="navbar-inverse" role="navigation">
         <div class="container">
-            <div class="navbar-header">
-            <a class="navbar-brand">Powered by quawer</a>
-            </div>
             <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
                 <div class="nav navbar-nav navbar-right divider">
                     <div class="border1 languageparent">
                         <span class="languageopener">LANGUAGE
                             <ul class="dropdown-menu languagemenu">
-                                <li><a class="option" href="index..en.html">ENGLISH</a></li>
-                                <li><a class="option" href="index.html">SLOVAK</a></li>
-                                <li><a class="option" href="index.cz.html">CZECH</a></li>
+                                <li><a class="option" href="registration.en.html">ENGLISH</a></li>
+                                <li><a class="option" href="registration.html">SLOVAK</a></li>
+                                <li><a class="option" href="registration.cz.html">CZECH</a></li>
                             </ul>
                         </span>
                     </div>
                     <div class="btn btn-login effect border0">
-                        <a class="scrollto" style="color:#FFF" href="index.html#threesteps">LOG IN</a>
+                        <a class="scrollto" style="color:#FFF" href="index.html">LOG IN</a>
                     </div>
                     <div class="border2">
-                        <a class="scrollto" style="color:#FFF" href="index.html#feature">O SLUŽBE</a>
+                        <a class="scrollto" style="color:#FFF" href="index.html">O SLUŽBE</a>
                     </div>
                     <div class="border3">
-                        <a class="scrollto" style="color:#FFF" href="index.html#pricing">CENNÍK</a>
+                        <a class="scrollto" style="color:#FFF" href="index.html">CENNÍK</a>
                     </div>
                     <div class="border4">
-                        <a class="scrollto" style="color:#FFF" href="index.html#contact">KONTAKT</a>
+                        <a class="scrollto" style="color:#FFF" href="index.html">KONTAKT</a>
                     </div>
                     <div class="border5">
                         <a style="color:#FFF; text-decoration: none" href="http://blog.bandcloud.net/"><strong>BLOG</strong></a>
@@ -60,240 +58,66 @@
         </div>
         <!-- /.container -->
     </nav>
-	
-<main id="top" class="header" role="main">
-		<div class="container">
-            <div class="col-lg-12 col-md-12">
-			<div class="logo"><a href="index.html#"><img src="images/concertian.logo.png" alt="logo"></a>
-			</div>
-                <div class="clearfix"></div>
-			<h1><strong>Vitajte v registrácií</strong></h1>
-            </div>
-        </div>  
-                <br>
-				<a href="#registration" class="scrollto">
-				<p>Registrácia</p>
-				<p class="scrollto--arrow"><img src="images/scroll_down.png" alt="scroll down arrow"></p>
-				</a>
-</main>
- 
-
-<div class="container" id="registration">
-<div class="row">
-<div class="col-xs-12 col-sm-8 col-md-6 col-sm-offset-2 col-md-offset-3">
-<form role="form" method="post" action="php/registration.php">
-			<h2 class="center">Vytvorte si účet <small>jednoducho a rýchľo.</small></h2>
+<div class="container">
     
-    
-    
-            <h2><img class="stepimg" src="images/step.1.png"><small> Prevádzka</small></h2>
-                <div class="content-section-a">
-			     <div class="row">
-                 <div class="form-group col-md-12"><input type="email" name="venue_email" id="venue_email" class="form-control input-lg" placeholder="Email" tabindex="1">
-			     </div>
-                     
-                <div class="form-group col-md-12"><input type="email" name="venue_name" id="venue_name" class="form-control input-lg" placeholder="Marketingový názov" tabindex="1">
-			     </div>
-                     
-                <div class="col-xs-12 col-sm-6 col-md-6">
-					           <div class="form-group"><input type="password" name="password" id="password" class="form-control input-lg" placeholder="Heslo" tabindex="2"></div>
-                </div>
-                     
-				<div class="col-xs-12 col-sm-6 col-md-6">
-					<div class="form-group"><input type="password" name="password_confirmation" id="password_confirmation" class="form-control input-lg" placeholder="Potvrďte heslo" tabindex="3"></div>
-				</div>
-                     
-			     </div>
-                </div>
-    
-    
-    
-    
-    
-<div class="breath"></div>
-    
-    
-    
-            <h2 class="color"><img src="images/step.2.png"><small> Obchodné údaje</small></h2>
-<div class="content-section-a">
-            <div class="row">
-                
-				<div class="col-xs-12 col-sm-6 col-md-6">
-					<div class="form-group">
-                        <input type="text" name="first_name" id="first_name" class="form-control input-lg" placeholder="Meno" tabindex="4">
-					</div>
-				</div>
-                
-				<div class="col-xs-12 col-sm-6 col-md-6">
-					<div class="form-group">
-						<input type="text" name="last_name" id="last_name" class="form-control input-lg" placeholder="Priezvisko" tabindex="5">
-                    </div>
-				</div>
-                
-        <div class="col-md-12">
-			<div class="form-group">
-				<input type="text" name="business_name" id="business_name" class="form-control input-lg" placeholder="Obchodné meno" tabindex="6">
-			</div>
-    
-			<div class="form-group">
-				<input type="email" name="company_adrese" id="company_adrese" class="form-control input-lg" placeholder="Sídlo" tabindex="7">
-			</div>
-    
-            <div class="form-group">
-				<input type="email" name="tax_identification" id="tax_identification" class="form-control input-lg" placeholder="IČO (identifikačné číslo organizácie)" tabindex="8">
-			</div>
-            <div class="form-group">
-				<input type="email" name="tax_identification" id="tax_identification" class="form-control input-lg" placeholder="DIČ (daňové identifikačné číslo)" tabindex="8">
-			</div>
-             <div class="form-group">
-				<input type="email" name="tax_identification" id="tax_identification" class="form-control input-lg" placeholder="IČ DPH" tabindex="8">
-			</div>
-        </div>
+    <div class="col-lg-12 col-md-12 col-sm-12">
+<div class="col-lg-6 col-md-6 col-sm-6">
+    <div class="heading">
+        <div class="heading-logo"><a href="index.html"><img class="img-responsive" src="images/concertian_logo.png"></a></div>
+        <h2 class="heading-text">Registrácia jednoducho a rýchlo,<p class="light">rovnako akým sa stalo vytvorenie koncertu</p></h2>
+    <img class="timeless" src="images/concertian_registration_mockup.png">
     </div>
 </div>
     
-    
-    
-    
-<div class="breath"></div>
-               
-            <h2 class="color"><img class="img-step" src="images/step.3.png"><small> Vyberte si spôsob platby</small></h2>
-    
- <input type="radio" id="c1" name="cc" checked="checked" />
-<label for="c1"><span class="btn btn-payment btn-payment-c1 btn-payment-active">Platba kartou<br><img src="images/payment.cards.png/visa.mastercard.maestro.png"></span></label>
- <input type="radio" id="c2" name="cc" />
-<label for="c2"><span class="btn btn-payment btn-payment-c2">Paypal a platobná karta<br><img src="images/payment.cards.png/powered.by.paypal.png"></span></label>
- <input type="radio" id="c3" name="cc" />
-<label for="c3"><span class="btn btn-payment btn-payment-c3">Bankový prevod<br><img src="images/payment.cards.png/internetbanking.png"></span></label>
-    
-    
-    
-    
-    
-    
-    
-    <div class="breath"></div>
-	
-    
-    
-    
-    
-    
-    
-    
-    
-    <div class="row">
-                <div class="col-xs-4 col-sm-3 com-md-3">
-                <input type="checkbox" name="checkboxG4" id="checkboxG4" class="css-checkbox"><label for="checkboxG4" class="css-label radGroup1">
-                </div>
-				<div class="col-xs-8 col-sm-9 col-md-9">
-					Kliknutím na <strong>Registrovať</strong>, súhlasite s <a class="color" href="#obchodne.podmienky.html" data-toggle="modal" data-target="#t_and_c_m">Obchodnými podmienkami</a> platnými pre túto službu, vrátane povolenia používať cookies.
-				</div>
-    </div>
-        
-        
-        
-        
-        
-        
-        
-        
-        <div class="breath"></div>
-		
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        <div class="row">
-            <div class="col-md-5">
-                <button type="submit" class="btn btn-login btn-lg" id="submit" type="submit" value="submit">Log in</button>
-            </div>
-            <div class="col-md-7">
-                <button type="submit" class="btn btn-registrate btn-lg" id="submit" type="submit" value="submit">Registrovať</button>
-            </div>
+<div class="col-lg-6 col-md-6 col-sm-6">
+    <form id="registration_form" action="registrate.php" name="registrate_form" method="post">
+        <div class="input_mark">
+            <img class="input_number" src="images/step.1.png">
+            <h6 class="input_title">Názov klubu</h6>
         </div>
-
-		</form>
-	</div>
-</div>
-</div>
-    
-    
-    		
-		
+        <label><input type="text" name="venue_name" placeholder="concertian music club"></label>
+        <div class="input_mark">
+            <img class="input_number" src="images/step.2.png">
+            <h6 class="input_title">Emailová adresa</h6>
+        </div>
+        <label><input type="text" name="email" placeholder="concertian@club.com"></label>
+        <div class="input_mark">
+            <img class="input_number" src="images/step.3.png">
+            <h6 class="input_title">Heslo</h6>
+        </div>
+        <label><input type="text" name="password" placeholder="**********"></label>
+        <div class="input_mark">
+            <img class="input_number" src="images/step.4.png">
+            <h6 class="input_title">Adresa Vášho klubu</h6>
+        </div>
+        <label><input type="text" name="state" placeholder="State"></label>
+        <label><input type="text" name="city" placeholder="City"></label>
+        <label><input type="text" name="address" placeholder="Address"></label>
+        <div class="checkbox">
+            <label><input type="checkbox" name="checkbox" class="checkbox"></label>
+            <h6 class="checkbox_text">Súhlasim s <a class="color" href="terms&services.html">Obchodnými podmienkami</a> platnými pre túto službu</h6>
+        </div>
             
- 		
- 
-		<div class="container">
-			<section class="row breath">
-				<div class="col-md-12 footerlinks">
-					<p>&copy; 2015 Bandcloud.net</p>
-				</div>
-                <div class="col-lg-12 col-md-12 footerlinks">
-					<a href="obchodne.podmienky.html" class="color" style="text-decoration: none">Obchodné podmienky a ochrana osobných údajov concertian 2015</a>
-				</div> 
-			</section><! --/section -->
-		</div><! --/container -->
- 
- 
- 
+        <label><input type="submit" name="nutton" value="Dokončiť registráciu" class="hvr-buzz-out"></label>
+    </form>
+</div> 
+    </div>
+    
+</div>
+</div>
+        
 <script src="js/jquery.js"></script>
 <script src="js/bootstrap.js"></script>
 <script src="js/easing.js"></script>
 <script type="text/javascript" src="js/circles.js"></script>
-    <script type="text/javascript" src="js/circles-master.js"></script>
-    <script type="text/javascript">
+<script type="text/javascript" src="js/circles-master.js"></script>
+<script type="text/javascript">
     jQuery(document).ready(function() {      
         CirclesMaster.initCirclesMaster1();
         //CirclesMaster.initCirclesMaster2();
     });
-    </script>
- 
- 
-<script src="https://cdnjs.cloudflare.com/ajax/libs/nicescroll/3.6.0/jquery.nicescroll.js"></script>
- 
- 
+</script> 
 <script>
-
-
-$(function() {
-    $('a.page-scroll').bind('click', function(event) {
-        var $anchor = $(this);
-        $('html, body').stop().animate({
-            scrollTop: $($anchor.attr('href')).offset().top
-        }, 1500, 'easeInOutExpo');
-        event.preventDefault();
-    });
-});
-        
-
-</script>
-<script>
-$("input:radio").on('click', function() {
-	$('.btn-payment').removeClass('btn-payment-active');
-  // in the handler, 'this' refers to the box clicked on
-  var $box = $(this);
-  if ($box.is(":checked")) {
- 	 console.log('aa');
-    // the name of the box is retrieved using the .attr() method
-    // as it is assumed and expected to be immutable
-    var group = "input:radio[name='" + $box.attr("name") + "']";
-    // the checked state of the group/box on the other hand will change
-    // and the current value is retrieved using .prop() method
-    $(group).prop("checked", false);
-    $box.prop("checked", true);
-    $('.btn-payment-' + $box.attr('id')).addClass('btn-payment-active');
-  } else {
-    $box.prop("checked", false);
-  }
-}); 
-</script>
-    
 <!-- ClickDesk Live Chat Service for websites -->
 <script type='text/javascript'>
 var _glc =_glc || []; _glc.push('all_ag9zfmNsaWNrZGVza2NoYXRyDwsSBXVzZXJzGKOPt9UMDA');
