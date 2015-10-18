@@ -47,14 +47,8 @@ var page = 0;
 function loadAndAddConcert(city){
 	$.ajax({ 'url' : 'http://api.bandcloud.net/users/events',
 		  'method' : 'POST',
-<<<<<<< HEAD
-		  'data' : { 'results' : "10",
-			 		 'page' : page
-=======
 		  'data' : { 'results' : "20",
-			 		 'page' : page,
-			 		 'city' : "Nitra"
->>>>>>> origin/master
+			 		 'page' : page
 		 		   },
 	  	  contentType : "application/x-www-form-urlencoded",
 		  'success' : function (json){
@@ -68,20 +62,12 @@ function loadAndAddConcert(city){
 										  '<span class="imgHome"></span>'+
 									  '</span>'+
 									  '<span class="resultTextContainer">'+
-<<<<<<< HEAD
-								  		  '<span class="resultTextFirst">' + (value.eventName.length > 50 ? value.eventName.substr(0,50) + "..." : value.eventName) + '</span>'+
-                                      '<span class="resultTextSecond">'+
-                                            '<span class="city">' + value.city + '</span>'+
-                                            '<span class="venueName">' + value.venueName + '</span>'+
-                                      '</span>'+
-=======
-										  '<span class="resultTextFirst">' + value.venueName + '</span>'+
-										  '<span class="resultTextSecond">' + value.city + '</span>'+
-									  '</span>'+
-									  '<span class="resultTextContainer resultBorder">'+
 								  		  '<span class="resultTextFirst">' + shortenText(40, value.eventName) + '</span>'+
->>>>>>> origin/master
-									  '</span>'+
+                                          '<span class="resultTextSecond">'+
+                                                '<span class="city">' + value.city + '</span>'+
+                                                '<span class="venueName">' + value.venueName + '</span>'+
+                                          '</span>'+
+                                      '</span>' +
 									  '<span class="resultTextContainer_datetime resultBorder">'+
 										  '<span class="resultTextFirst">' + value.date + '</span>'+
 										  '<span class="resultTextSecond">' + value.time + '</span>'+
