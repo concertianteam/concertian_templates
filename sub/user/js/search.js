@@ -47,7 +47,7 @@ var page = 0;
 function loadAndAddConcert(city){
 	$.ajax({ 'url' : 'http://api.bandcloud.net/users/events',
 		  'method' : 'POST',
-		  'data' : { 'results' : "20",
+		  'data' : { 'results' : "10",
 			 		 'page' : page
 		 		   },
 	  	  contentType : "application/x-www-form-urlencoded",
@@ -58,19 +58,19 @@ function loadAndAddConcert(city){
 					var value = json.events[i];
 					var element = '<span class="resultElement">'+
 									  '<span class="resultImage">'+
-										  '<img src="' + value.urlPhoto + '" alt="Image of club" class="image">'+
+										  '<a href="mailto:email"><img src="' + value.urlPhoto + '" alt="venue_img" class="image"></a>'+
 										  '<span class="imgHome"></span>'+
 									  '</span>'+
 									  '<span class="resultTextContainer">'+
-										  '<span class="resultTextFirst">' + value.venueName + '</span>'+
-										  '<span class="resultTextSecond">' + value.city + '</span>'+
-									  '</span>'+
-									  '<span class="resultTextContainer resultBorder">'+
 								  		  '<span class="resultTextFirst">' + (value.eventName.length > 50 ? value.eventName.substr(0,50) + "..." : value.eventName) + '</span>'+
+                                      '<span class="resultTextSecond">'+
+                                            '<span class="city">' + value.city + '</span>'+
+                                            '<span class="venueName">' + value.venueName + '</span>'+
+                                      '</span>'+
 									  '</span>'+
-									  '<span class="resultTextContainer resultBorder">'+
-										  '<span class="resultTextFirst">' + value.dateTime + '</span>'+
-										  '<span class="resultTextSecond">' + value.dateTime + '</span>'+
+									  '<span class="resultTextContainer_datetime resultBorder">'+
+										  '<span class="resultTextFirst">' + value.date + '</span>'+
+										  '<span class="resultTextSecond">' + value.time + '</span>'+
 									  '</span>'+
 									  '<span class="resultInfoButton">'+
 									  '<span class="ingShare"></span>'+
