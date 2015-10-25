@@ -44,8 +44,8 @@
     display: block;
     position: absolute;
     z-index: 1;
-}
-.imgSearch{
+	border: 0px;
+	color: transparent;
     cursor: pointer;
 }
 .buttonHover{
