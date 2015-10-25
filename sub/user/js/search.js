@@ -57,10 +57,9 @@ function loadAndAddConcert(city){
 				for(var i = 0; i < json.events.length; i++){
 					var value = json.events[i];
 					var element = '<span class="resultElement">'+
-									  '<span class="resultImage">'+
-										  '<a href="mailto:email"><img src="' + value.urlPhoto + '" alt="venue_img" class="image"></a>'+
-										  '<span class="imgHome"></span>'+
-									  '</span>'+
+									  '<a href="mailto:email"><span class="resultImage">'+
+										  '<img src="' + value.urlPhoto + '" alt="venue_img" class="image">'+
+									  '</span></a>'+
 									  '<span class="resultTextContainer">'+
 								  		  '<span class="resultTextFirst">' + shortenText(40, value.eventName) + '</span>'+
                                           '<span class="resultTextSecond">'+

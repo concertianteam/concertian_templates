@@ -1,42 +1,38 @@
 .imgBorder{
-    width: 17px;
-    height: 17px;
+    width: 30px;
+    height: 100%;
     display: block;
     float: left;
-    margin-left: 7px;
     background-color: #ffc95c;
-    border-radius: 33px;
 }
 .imgBorder:hover{
     cursor: pointer;
-    transform: scale(1.2, 1.2);
-    -ms-transform: scale(1.2, 1.2);
-    -webkit-transform: scale(1.2, 1.2);
+    background: #ffcf70;
 }
 
 .imgFB{
-    background: url('../images/sprite.png') no-repeat 0 0;
-    width: 5px;
-    height: 10px;
+    background: url('../images/sprite.png') -1px -1px;
+	width: 7px;
+	height: 13px;
     display: block;
-    margin: 4px 6px;
+    margin: 6px 12px;
 }
 .imgG{
-    background: url('../images/sprite.png') no-repeat -7px 0;
-	width: 6px;
+    background: url('../images/sprite.png') no-repeat -9px -1px;
+	width: 17px;
 	height: 10px;
     display: block;
-    margin: 4px 5.5px;
+    margin: 8px 7px;
 }
 .imgTwitter{
-    background: url('../images/sprite.png') no-repeat -15px 0;
-	width: 7px;
-	height: 10px;
+    background: url('../images/sprite.png') no-repeat -27px -1px;
+	width: 9px;
+	height: 12px;
     display: block;
-    margin: 3px 6px;
+    margin: 7px 9px;
 }
 .imgSearch{
-    background: url('../images/sprite.png') no-repeat -55px 0;
+    background: url('../images/sprite.png') no-repeat -38px -1px;
 	width: 16px;
 	height: 17px;
     top: 9px;
@@ -52,11 +48,11 @@
     background-color: #ffc95c;
 }
 .ingShare{
-    background: url('../images/sprite.png') no-repeat -37px 0;
-	width: 17px;
-	height: 17px;
+    background: url('../images/sprite.png') no-repeat -56px -1px;
+	width: 18px;
+	height: 18px;
     display: block;
-    margin: 6px 5px;
+    margin: 5.5px 4.5px;
 }
 
 ::-webkit-scrollbar {
@@ -80,7 +76,7 @@ body{
     width: 100%;
     height: 100%;
     min-height: 500px;
-    min-width: 600px;
+    min-width: 650px;
     margin: 0px auto;
     padding: 0px;
     position: absolute;
@@ -97,7 +93,7 @@ body{
         height: 100%;
         float: left;
     }
-@media (max-width: 900px) {
+@media (max-width: 1080px) {
     #columnSearch{
         width: 100%;
     }
@@ -121,27 +117,28 @@ body{
                 .containerForm
                 .firstRow
                 .company{
-                    font-size: 17px;
+                    display: inline-block;
                     float: left;
                     margin: 0px 15px;
-                    padding-top: 2px;
                     width: 70%;
+                    height: 100%;
                 }
                 #columnSearch
                 .containerForm
                 .firstRow
                 .company
-                .company_logo {
-                    width: 20%;
-                    margin-bottom: -4px;
+                .concertian_logo{
+                    background: url('../images/sprite.png') no-repeat -123px -1px;
+                    width: 173px;
+                    height: 20px;
+                    margin-top: 4px;
                 }
                 #columnSearch
                 .containerForm
                 .firstRow
                 .tellContainer{
+                    height: 100%;
                     float: right;
-                    margin: 0px 15px;
-                    padding-top: 3px;
                 }
             
             #columnSearch
@@ -300,13 +297,11 @@ body{
                 #columnSearch
                 .containerResult
                 .resultElement
-                .resultImage:hover
-                .imgHome{
-                    background: url('../images/sprite.png') no-repeat 0 0;
-				    width: 5px;
-				    height: 10px;
-				    display: block;
-				    margin: 4px 6px;
+                .resultImage:hover,
+                .resultImage:active{
+                    background: url('../images/sprite.png') no-repeat -77px -3px;
+                    width: 40px;
+                    height: 40px;
                 }
                 #columnSearch
                 .containerResult
@@ -322,13 +317,9 @@ body{
                 #columnSearch
                 .containerResult
                 .resultElement
-                .resultImage
-                .imgHome{
-                    background: url('../images/sprite.png') no-repeat -22px 0;
-                    width: 14px;
-                    height: 17px;
-                    display: block;
-                    margin: 11px 13px;
+                .resultImage:hover
+                .image{
+                	display: none;
                 }
                 #columnSearch
                 .containerResult
@@ -448,7 +439,7 @@ body{
         height: 100%;
         float: left;
     }
-@media (max-width: 900px) {
+@media (max-width: 1080px) {
     #columnMap{
         display: none;
     }
@@ -457,10 +448,9 @@ body{
         #columnMap
         .countOwerMap{
             display: block;
-            height: 25px;
+            height: 27px;
             background-color: #ffbb33;
             text-align: center;
-            border-left: 1px solid #ffc95c;
         }
         
             #columnMap
