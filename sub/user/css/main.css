@@ -15,27 +15,27 @@
 	width: 7px;
 	height: 13px;
     display: block;
-    margin: 6px 12px;
+    margin: 5px 12px;
 }
 .imgG{
     background: url('../images/sprite.png') no-repeat -9px -1px;
 	width: 17px;
 	height: 10px;
     display: block;
-    margin: 8px 7px;
+    margin: 7px 7px;
 }
 .imgTwitter{
     background: url('../images/sprite.png') no-repeat -27px -1px;
 	width: 9px;
 	height: 12px;
     display: block;
-    margin: 7px 9px;
+    margin: 6px 10px;
 }
 .imgSearch{
     background: url('../images/sprite.png') no-repeat -38px -1px;
 	width: 16px;
 	height: 17px;
-    top: 9px;
+    top: 10px;
     right: 40px;
     display: block;
     position: absolute;
@@ -47,12 +47,12 @@
 .buttonHover{
     background-color: #ffc95c;
 }
-.ingShare{
-    background: url('../images/sprite.png') no-repeat -56px -1px;
-	width: 18px;
-	height: 18px;
+.imgShare{
+    background: url('../images/sprite.png') no-repeat -55px 0px;
+	width: 16px;
+	height: 16px;
     display: block;
-    margin: 5.5px 4.5px;
+    margin: 5.5px 5px;
 }
 
 ::-webkit-scrollbar {
@@ -60,11 +60,11 @@
 }
  
 ::-webkit-scrollbar-track {
-    background-color: transparent;
+    background-color: #f5f5f5;
 }
  
 ::-webkit-scrollbar-thumb {
-    -webkit-box-shadow: inset 10px 10px 2px rgba(245,245,245,1);
+    -webkit-box-shadow: inset 10px 10px 2px rgba(235,235,235,1);
 }
 
 ::-webkit-scrollbar-thumb:hover{
@@ -101,7 +101,7 @@ body{
         #columnSearch
         .containerForm{
             width: 100%;
-            height: 90px;
+            height: 95px;
             display: block;
             background-color: #ffbb33;
             font-weight: 100;
@@ -110,7 +110,7 @@ body{
             #columnSearch
             .containerForm
             .firstRow{
-                height: 30%;
+                height: 25%;
                 display: block;
             }
                 #columnSearch
@@ -130,7 +130,7 @@ body{
                 .concertian_logo{
                     background: url('../images/sprite.png') no-repeat -123px -1px;
                     width: 173px;
-                    height: 20px;
+                    height: 18px;
                     margin-top: 4px;
                 }
                 #columnSearch
@@ -144,7 +144,7 @@ body{
             #columnSearch
             .containerForm
             .secondRow{
-                height: 30%;
+                height: 35%;
                 display: block;
             }
                 
@@ -164,29 +164,12 @@ body{
                     cursor: pointer;
                     background-color: #FFCF70;
                 }
-                #columnSearch
-                .containerForm
-                .secondRow
-                .textButtonMiddle:hover{
-                    cursor: pointer;
-                    background-color: #ffc95c;
-                    /* Firefox */
-                    width: -moz-calc(34% + 2px);
-                    /* WebKit */
-                    width: -webkit-calc(34% + 2px);
-                    /* Opera */
-                    width: -o-calc(34% + 2px);
-                    /* Standard */
-                    width: calc(34% + 2px);
-                    margin: 0px -1px;
-                }
-                
                     #columnSearch
                     .containerForm
                     .secondRow
                     .text{
                         font-size: 16px;
-                        margin: 5px 0px;
+                        margin: 7px 0px;
                         display: block;
                     }
                     #columnSearch
@@ -299,7 +282,7 @@ body{
                 .resultElement
                 .resultImage:hover,
                 .resultImage:active{
-                    background: url('../images/sprite.png') no-repeat -77px -3px;
+                    background: url('../images/sprite.png') no-repeat -74px -3px;
                     width: 40px;
                     height: 40px;
                 }
@@ -411,7 +394,7 @@ body{
                     .containerResult
                     .resultElement
                     .resultBorder{
-                        border-left: 2px solid #ffc95c;
+                        border-left: 3px solid #ffc95c;
                     }
                     #columnSearch
                     .containerResult
@@ -480,3 +463,51 @@ body{
             min-height: 475px;
             display: block;
         }
+.spinner {
+  margin: 100px auto;
+  width: 40px;
+  height: 40px;
+  position: relative;
+  text-align: center;
+  
+  -webkit-animation: sk-rotate 2.0s infinite linear;
+  animation: sk-rotate 2.0s infinite linear;
+}
+
+.dot1, .dot2 {
+  width: 60%;
+  height: 60%;
+  display: inline-block;
+  position: absolute;
+  top: 0;
+  background-color: #ffbb33;
+  border-radius: 100%;
+  
+  -webkit-animation: sk-bounce 2.0s infinite ease-in-out;
+  animation: sk-bounce 2.0s infinite ease-in-out;
+}
+
+.dot2 {
+  top: auto;
+  bottom: 0;
+  -webkit-animation-delay: -1.0s;
+  animation-delay: -1.0s;
+}
+
+@-webkit-keyframes sk-rotate { 100% { -webkit-transform: rotate(360deg) }}
+@keyframes sk-rotate { 100% { transform: rotate(360deg); -webkit-transform: rotate(360deg) }}
+
+@-webkit-keyframes sk-bounce {
+  0%, 100% { -webkit-transform: scale(0.0) }
+  50% { -webkit-transform: scale(1.0) }
+}
+
+@keyframes sk-bounce {
+  0%, 100% { 
+    transform: scale(0.0);
+    -webkit-transform: scale(0.0);
+  } 50% { 
+    transform: scale(1.0);
+    -webkit-transform: scale(1.0);
+  }
+}

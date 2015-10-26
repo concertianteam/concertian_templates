@@ -42,9 +42,9 @@ $(document).ready(function() {
 	$(".containerResult").scroll(function(){
 			clearTimeout($.data(this, 'scrollTimer'));
 		    $.data(this, 'scrollTimer', setTimeout(function() {
-	        	if($("#spiner").is_on_screen()){
-	        		console.log($("#spiner").length);
-	        		$("#spiner").remove();
+	        	if($("#spinnerActivator").is_on_screen()){
+	        		console.log($("#spinnerActivator").length);
+	        		$("#spinnerActivator").remove();
 	        		
 	        		if(selectLoad == all){
 	        			loadAllConcert('http://api.bandcloud.net/users/events');
@@ -96,41 +96,7 @@ function loadAllConcert(url){
 		 		   },
 	  	  contentType : "application/x-www-form-urlencoded",
 		  'success' : function (json){
-<<<<<<< HEAD
-			  	page++;
-			  	console.log(json.events.length);
-				for(var i = 0; i < json.events.length; i++){
-					var value = json.events[i];
-					var element = '<span class="resultElement">'+
-									  '<a href="mailto:email"><span class="resultImage">'+
-										  '<img src="' + value.urlPhoto + '" alt="venue_img" class="image">'+
-									  '</span></a>'+
-									  '<span class="resultTextContainer">'+
-								  		  '<span class="resultTextFirst">' + shortenText(40, value.eventName) + '</span>'+
-                                          '<span class="resultTextSecond">'+
-                                                '<span class="city">' + value.city + '</span>'+
-                                                '<span class="venueName">' + value.venueName + '</span>'+
-                                          '</span>'+
-                                      '</span>' +
-									  '<span class="resultTextContainer_datetime resultBorder">'+
-										  '<span class="resultTextFirst">' + value.date + '</span>'+
-										  '<span class="resultTextSecond">' + value.time + '</span>'+
-									  '</span>'+
-									  '<span class="resultInfoButton">'+
-									  '<span class="ingShare"></span>'+
-								  '</span>';
-					
-					$(".containerResult").append(element);
-					if(i == json.events.length - 5){
-						$(".containerResult").append('<span id="spiner"></span>');
-					}
-				}
-				
-				$('.bold').empty();
-				$('.bold').append($(".containerResult").children().length-1 + ' results');
-=======
-			  addElements(json);
->>>>>>> origin/master
+          addElements(json);
 	  	},
 	  	'error': function(error){
 	  		console.log('Error. ' + error);
@@ -158,16 +124,16 @@ function loadConcertByCity(city){
 function addElements(json){
 	$(".slim").empty();
 	$(".slim").append($("#cityId").val() + ' <span class="bold"></span>');
-	
+	$(".spinner").remove();
+    
 	var minus = 0;
 	page++;
 	for(var i = 0; i < json.events.length; i++){
 		var value = json.events[i];
 		var element = '<span class="resultElement">'+
-						  '<span class="resultImage">'+
-							  '<a href="mailto:email"><img src="' + value.urlPhoto + '" alt="venue_img" class="image"></a>'+
-							  '<span class="imgHome"></span>'+
-						  '</span>'+
+						  '<a class="resultImage" href="mailto:' + value.venueEmail + '">'+
+							  '<img src="' + value.urlPhoto + '" alt="venue_img" class="image">'+
+						  '</a>'+
 						  '<span class="resultTextContainer">'+
 					  		  '<span class="resultTextFirst">' + shortenText(40, value.eventName) + '</span>'+
                               '<span class="resultTextSecond">'+
@@ -176,19 +142,27 @@ function addElements(json){
                               '</span>'+
                           '</span>' +
 						  '<span class="resultTextContainer_datetime resultBorder">'+
-							  '<span class="resultTextFirst">' + value.date + '</span>'+
-							  '<span class="resultTextSecond">' + value.time + '</span>'+
+							  '<span id="date" class="resultTextFirst">' + value.date + '</span>'+
+							  '<span id="time" class="resultTextSecond">' + value.time + '</span>'+
 						  '</span>'+
 						  '<span class="resultInfoButton">'+
-						  '<span class="ingShare"></span>'+
+						  '<span class="imgShare"></span>'+
 					  '</span>';
 		
 		$(".containerResult").append(element);
-		if(i == json.events.length - 5){
-			$(".containerResult").append('<span id="spiner"></span>');
+		if(json.events.length % 20 == 0 && i == json.events.length - 5){
+			$(".containerResult").append('<span id="spinnerActivator"></span>');
 			minus = 1;
 		}
 	}
+	
+    
+    if(minus == 1){
+        $(".containerResult").append('<div class="spinner">' +
+                                          '<div class="dot1"></div>'+
+                                          '<div class="dot2"></div>'+
+                                    '</div>');
+    }
 	
 	$('.bold').empty();
 	$('.bold').append($(".containerResult").children().length - minus + ' results');
