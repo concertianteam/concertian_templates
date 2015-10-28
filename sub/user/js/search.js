@@ -19,6 +19,16 @@ $(document).ready(function() {
 		}
 	});
 	
+	$("#recent").click(function(){
+		page = 0;
+		selectLoad = recent;
+		$(".containerResult").empty();
+		$("#cityId").val("");
+		
+		
+		loadAllConcert('http://api.bandcloud.net/users/events');
+	});
+	
 	$("#mostViewed").click(function(){
 		page = 0;
 		selectLoad = mostViewed;
@@ -26,24 +36,12 @@ $(document).ready(function() {
 		
 		loadAllConcert('http://api.bandcloud.net/users/events/mostviewed');
 	});
-//	
-//	$(".imgSearch").bind('keyup', function(event){
-//		if(event.keyCode == 13){ 
-//			event.preventDefault();
-//			//$("#buttonSrch").click();
-//			page = 0;
-//			selectLoad = byCity;
-//			loadConcertByCity(this.value);
-//		}
-//	});
-	
 	
 	// Scroll effect
 	$(".containerResult").scroll(function(){
 			clearTimeout($.data(this, 'scrollTimer'));
 		    $.data(this, 'scrollTimer', setTimeout(function() {
 	        	if($("#spinnerActivator").is_on_screen()){
-	        		console.log($("#spinnerActivator").length);
 	        		$("#spinnerActivator").remove();
 	        		
 	        		if(selectLoad == all){
@@ -51,9 +49,9 @@ $(document).ready(function() {
 	        		}else if(selectLoad == byCity){
 	        			loadConcertByCity($("#cityId").val());
 	        		}else if(selectLoad == recent){
-	        			
+	        			loadAllConcert('http://api.bandcloud.net/users/events');
 	        		}else if(selectLoad == mostViewed){
-	        			
+	        			loadAllConcert('http://api.bandcloud.net/users/events/mostviewed');
 	        		}
 	        	}
 		    }, 19));
@@ -70,10 +68,15 @@ $(document).ready(function() {
 	    viewport.bottom = viewport.top + win.height();
 	 
 	    var bounds = this.offset();
-	    bounds.right = bounds.left + this.outerWidth();
-	    bounds.bottom = bounds.top + this.outerHeight();
+	    
+	    if(bounds != null){
+	    	bounds.right = bounds.left + this.outerWidth();
+	    	bounds.bottom = bounds.top + this.outerHeight();
 	 
-	    return (!(viewport.right < bounds.left || viewport.left > bounds.right || viewport.bottom < bounds.top || viewport.top > bounds.bottom));
+	    	return (!(viewport.right < bounds.left || viewport.left > bounds.right || viewport.bottom < bounds.top || viewport.top > bounds.bottom));
+	    }else{
+	    	return false;
+	    }
 	};
 
 	$(".containerResult").empty();
@@ -100,6 +103,7 @@ function loadAllConcert(url){
 	  	},
 	  	'error': function(error){
 	  		console.log('Error. ' + error);
+	  		$(".spinner").remove();
 	  	}
     });
 }
@@ -107,7 +111,7 @@ function loadAllConcert(url){
 function loadConcertByCity(city){
 	$.ajax({ 'url' : 'http://api.bandcloud.net/users/events/city',
 		  'method' : 'POST',
-		  'data' : { 'results' : "10",
+		  'data' : { 'results' : "20",
 			 		 'page' : page,
 			 		 'city' : city
 		 		   },
@@ -117,6 +121,7 @@ function loadConcertByCity(city){
 	  	},
 	  	'error': function(error){
 	  		console.log('Error. ' + error);
+	  		$(".spinner").remove();
 	  	}
     });
 }
@@ -130,6 +135,7 @@ function addElements(json){
 	page++;
 	for(var i = 0; i < json.events.length; i++){
 		var value = json.events[i];
+		
 		var element = '<span class="resultElement">'+
 						  '<a class="resultImage" href="mailto:' + value.venueEmail + '">'+
 							  '<img src="' + value.urlPhoto + '" alt="venue_img" class="image">'+
@@ -155,7 +161,6 @@ function addElements(json){
 			minus = 1;
 		}
 	}
-	
     
     if(minus == 1){
         $(".containerResult").append('<div class="spinner">' +
