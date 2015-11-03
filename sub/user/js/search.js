@@ -1,16 +1,22 @@
-$(document).ready(function() {
-//	// FORM
+function init() {
+//	// FORM after enter press don't reload page
 	$('#form').attr('action', 'javascript:void(0);');
 	
-	// Image Search button
+	// Image Search button hover effect
 	$('.imgSearch').hover(function() {
 		$('.thirdsRow').toggleClass('buttonHover');
 	});
 	
+	// Handler for search button click
 	$(".imgSearch").click(function(){
 		page = 0;
 		selectLoad = byCity;
 		$(".containerResult").empty();
+		
+		for (var i = 0; i < markers.length; i++) {
+		    markers[i].setMap(null);
+		}
+		markers = [];
 		
 		if($("#cityId").val() == ''){
 			loadAllConcert('http://api.bandcloud.net/users/events');
@@ -19,21 +25,32 @@ $(document).ready(function() {
 		}
 	});
 	
+	// Handler for click on button Recent
 	$("#recent").click(function(){
 		page = 0;
 		selectLoad = recent;
 		$(".containerResult").empty();
 		$("#cityId").val("");
-		
+
+		for (var i = 0; i < markers.length; i++) {
+		    markers[i].setMap(null);
+		}
+		markers = [];
 		
 		loadAllConcert('http://api.bandcloud.net/users/events');
 	});
 	
+	// Handler for click on button MostViewed
 	$("#mostViewed").click(function(){
 		page = 0;
 		selectLoad = mostViewed;
 		$(".containerResult").empty();
-		
+
+		for (var i = 0; i < markers.length; i++) {
+		    markers[i].setMap(null);
+		}
+		markers = [];
+	    
 		loadAllConcert('http://api.bandcloud.net/users/events/mostviewed');
 	});
 	
@@ -58,6 +75,7 @@ $(document).ready(function() {
 		}
 	);
 	
+	// Check if scroll is on end
 	$.fn.is_on_screen = function(){
 	    var win = $(window);
 	    var viewport = {
@@ -81,7 +99,7 @@ $(document).ready(function() {
 
 	$(".containerResult").empty();
 	loadAllConcert('http://api.bandcloud.net/users/events');
-});
+}
 
 var page = 0;
 
@@ -90,7 +108,9 @@ var byCity = 1;
 var recent = 2;
 var mostViewed = 3;
 var selectLoad = all;
+var markers = [];
 
+// Load all concert by URL
 function loadAllConcert(url){
 	$.ajax({ 'url' : url,
 		  'method' : 'POST',
@@ -108,6 +128,7 @@ function loadAllConcert(url){
     });
 }
 
+// Load concert by City
 function loadConcertByCity(city){
 	$.ajax({ 'url' : 'http://api.bandcloud.net/users/events/city',
 		  'method' : 'POST',
@@ -126,15 +147,19 @@ function loadConcertByCity(city){
     });
 }
 
+// Add loaded element to container
 function addElements(json){
 	$(".slim").empty();
 	$(".slim").append($("#cityId").val() + ' <span class="bold"></span>');
 	$(".spinner").remove();
-    
+	
 	var minus = 0;
 	page++;
+	var address = [];
 	for(var i = 0; i < json.events.length; i++){
 		var value = json.events[i];
+		
+		address[i] = encodeURIComponent(value.address + " " + value.city);
 		
 		var element = '<span class="resultElement">'+
 						  '<a class="resultImage" href="mailto:' + value.venueEmail + '">'+
@@ -158,11 +183,42 @@ function addElements(json){
 		$(".containerResult").append(element);
 		if(json.events.length % 20 == 0 && i == json.events.length - 5){
 			$(".containerResult").append('<span id="spinnerActivator"></span>');
-			minus = 1;
+			minus = 2;
 		}
 	}
-    
-    if(minus == 1){
+	
+	/**
+	 *	Search location and add markers
+	 */
+	for(var i = 0; i < address.length; i++){
+		$.ajax({ 'url' : 'http://maps.googleapis.com/maps/api/geocode/xml?address=' + address[i] + '&sensor=false?key= AIzaSyABFQjmkcjHWLYzAzibPX5Dp-LKYbC5-Jc',
+			  'method' : 'GET',
+		  	  contentType : "application/x-www-form-urlencoded",
+			  'success' : function (results, status){
+				  if (status == 'success') {
+					  var doc = $.parseXML((new XMLSerializer()).serializeToString(results));
+					  
+					  var location = $($(doc).find('geometry')).find('location');
+					  var lat = parseFloat($(location).find('lat').text());
+					  var lng = parseFloat($(location).find('lng').text());
+					  var title = $(doc).find('formatted_address').text();
+					
+					  var marker = new google.maps.Marker({
+						  position: {lat: lat, lng: lng},
+						  map: map,
+						  title: title
+				      });
+					  
+					  markers.push(marker);
+				  }
+  			   },
+  			   'error': function(error){
+  				   console.log('Error. ' + error);
+  			   }
+	    });
+	}
+	
+    if(minus == 2){
         $(".containerResult").append('<div class="spinner">' +
                                           '<div class="dot1"></div>'+
                                           '<div class="dot2"></div>'+
@@ -173,6 +229,7 @@ function addElements(json){
 	$('.bold').append($(".containerResult").children().length - minus + ' results');
 }
 
+// Edit text length
 function shortenText(maxLength, text){
 	if(text.length > maxLength){
 		var position
