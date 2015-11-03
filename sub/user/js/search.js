@@ -190,6 +190,7 @@ function addElements(json){
 	/**
 	 *	Search location and add markers
 	 */
+	var bounds = new google.maps.LatLngBounds();
 	for(var i = 0; i < address.length; i++){
 		$.ajax({ 'url' : 'http://maps.googleapis.com/maps/api/geocode/xml?address=' + address[i] + '&sensor=false?key= AIzaSyABFQjmkcjHWLYzAzibPX5Dp-LKYbC5-Jc',
 			  'method' : 'GET',
@@ -203,13 +204,18 @@ function addElements(json){
 					  var lng = parseFloat($(location).find('lng').text());
 					  var title = $(doc).find('formatted_address').text();
 					
-					  var marker = new google.maps.Marker({
-						  position: {lat: lat, lng: lng},
-						  map: map,
-						  title: title
-				      });
-					  
-					  markers.push(marker);
+					  if(!isNaN(lat)){
+						  var myLatLng = new google.maps.LatLng(lat, lng);
+						  var marker = new google.maps.Marker({
+							  position: myLatLng,
+							  map: map,
+							  title: title
+					      });
+						  
+						  markers.push(marker);
+						  bounds.extend(myLatLng);
+						  map.fitBounds(bounds);
+					  }
 				  }
   			   },
   			   'error': function(error){
