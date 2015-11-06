@@ -57,6 +57,7 @@ var page = 0;
 var all = 0;
 var byCity = 1;
 var selectLoad = all;
+var chartData = new Array();
 
 function loadAllConcert(url){
 	$.ajax({ 'url' : url,
@@ -92,18 +93,23 @@ function loadConcertByCity(city){
 }
 
 function addElements(json){
-
+	$(".spinner").remove();
+	
 	var minus = 0;
 	page++;
 	for(var i = 0; i < json.events.length; i++){
 		var value = json.events[i];
+		
+		chartData.push(new Array(value.date, value.time, value.urlPhoto,value.venueEmail));
+		
 		var element = '<div class="resultElement">'+
                         '<div class="whenElement">'+
                             '<div class="resultDate">' + value.date + '</div>'+
                             '<div class="resultTime">' + value.time + '</div>'+
                         '</div>'+
                         '<div class="whereElement">'+
-                            '<div class="resultName">' + value.eventName + '</div>'+                                   '<div class="resultVenuename">'+
+                            '<div class="resultName">' + value.eventName + '</div>'+                                   
+								'<div class="resultVenuename">'+
                                 '<div class="city">' + value.city + '</div>'+
                                 '<div calss="venueName">' + value.venueName + '</div>'+
                             '</div>'+
@@ -117,11 +123,47 @@ function addElements(json){
 		
 		$("#resultList").append(element);
 		if(json.events.length % 20 == 0 && i == json.events.length - 5){
-			$(".containerResult").append('<span id="spinnerActivator"></span>');
+			$("#resultList").append('<span id="spinnerActivator"></span>');
 			minus = 1;
 		}
 	}
 	
+	var min = null;
+	var max = null;
+	for (var i = 0; i < chartData.length; i++){
+		if(min == null){
+			min = chartData[i][1];
+			max = chartData[i][1];
+		}else if(chartData[i][1] > max){
+			max = chartData[i][1];
+		}else if(chartData[i][1] < min){
+			min = chartData[i][1];
+		}
+	}
+	
+	/*var minSplit = min.split(":");
+	var minHour = minSplit[0];
+	var minMinute = minSplit[1];
+	var maxSplit = max.split(":");
+	var maxHour = maxSplit[0];
+	var maxMinute = maxSplit[1];*/
+	
+	min = getMinutes(min);
+	max = getMinutes(max);
+	var different = (max - min) / $("#program_part").height();
+	var height = $("#program_part").height();
+	
+	for (var i = 0; i < chartData.length; i++){
+		console.log(different + " - " + (max - getMinutes(chartData[i][1])) + " - " + getMinutes(chartData[i][1])+" - "+height);
+		
+		var element = '<div class="venueImg" style="margin-top: ' + (max - getMinutes(chartData[i][1])) / different + 'px;">'+
+							'<a class="resultImg" href="mailto:' + chartData[i][3] + '">'+
+							'<img src="' + chartData[i][2] + '" alt="venue_img" class="img_result">'+ 
+							'</a>'+
+					  '</div>';
+		
+		$("#program_part").append(element);
+	}
     
     if(minus == 1){
         $("#resultList").append('<div class="spinner">' +
@@ -134,4 +176,10 @@ function addElements(json){
 	$('.bold').append($("#resultList").children().length - minus + ' results');
 }
 
-
+function getMinutes(time){
+	var timeSplit = time.split(":");
+	var hour = timeSplit[0];
+	var minute = timeSplit[1];
+	
+	return (hour * 60) + minute;
+}

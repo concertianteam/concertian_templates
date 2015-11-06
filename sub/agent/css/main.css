@@ -10,6 +10,201 @@ body{
     overflow: visible;
     color: #b7c2cc;
 }
+/*login*/
+#login { 
+    margin: 0;
+    padding: 0;
+    width: 100%;
+    height: 100%;
+    overflow: hidden;
+    font-family: 'Roboto', sans-serif;
+    font-weight: 100;
+    background-attachment: fixed !important;
+/* Permalink - use to edit and share this gradient: http://colorzilla.com/gradient-editor/#ffc95c+0,ffc247+14,ffc247+35,ffbb33+67,ffb41f+93,ffad0a+100 */
+background: #ffc95c; /* Old browsers */
+background: -moz-linear-gradient(45deg,  #ffc95c 0%, #ffc247 14%, #ffc247 35%, #ffbb33 67%, #ffb41f 93%, #ffad0a 100%); /* FF3.6+ */
+background: -webkit-gradient(linear, left bottom, right top, color-stop(0%,#ffc95c), color-stop(14%,#ffc247), color-stop(35%,#ffc247), color-stop(67%,#ffbb33), color-stop(93%,#ffb41f), color-stop(100%,#ffad0a)); /* Chrome,Safari4+ */
+background: -webkit-linear-gradient(45deg,  #ffc95c 0%,#ffc247 14%,#ffc247 35%,#ffbb33 67%,#ffb41f 93%,#ffad0a 100%); /* Chrome10+,Safari5.1+ */
+background: -o-linear-gradient(45deg,  #ffc95c 0%,#ffc247 14%,#ffc247 35%,#ffbb33 67%,#ffb41f 93%,#ffad0a 100%); /* Opera 11.10+ */
+background: -ms-linear-gradient(45deg,  #ffc95c 0%,#ffc247 14%,#ffc247 35%,#ffbb33 67%,#ffb41f 93%,#ffad0a 100%); /* IE10+ */
+background: linear-gradient(45deg,  #ffc95c 0%,#ffc247 14%,#ffc247 35%,#ffbb33 67%,#ffb41f 93%,#ffad0a 100%); /* W3C */
+filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#ffc95c', endColorstr='#ffad0a',GradientType=1 ); /* IE6-9 fallback on horizontal gradient */
+}
+
+div#core{
+    position: absolute;
+    width: 100%;
+    height: 94%;
+}
+div.loginBox{
+    position:relative;
+    top:50%;
+    left:50%;
+    margin:-310px 0 0 -150px;
+    width:300px;
+    height:419px;
+    background:transparent;
+}
+div.loginBox .header{
+    position: relative;
+    margin-left: 50px;
+    background: url('../img/sprite.png') no-repeat -215px -2px;
+	width: 212px;
+	height: 25px;
+}
+div.loginBox .loginBox-area{
+    position:relative;
+}
+div.loginBox .loginBox-area .login_venue_img{
+    width:80px;
+    height:80px;
+    border-radius:90px;
+    border:3px solid #ffdd99;
+    margin:50px 0px 50px 104px;
+}
+div.loginBox .loginBox-area .login_venue_img .venue_img{
+    border-radius:90px;
+    width:80px;
+    height:80px;
+}
+.venue_name{
+    text-align: center;
+    width: 100%;
+    color:#fff;
+    font-weight:100px;
+    font-size: 0.9em;
+    margin-bottom: 20px;
+}
+div.loginBox .loginBox-area label{
+    display:block;
+    margin:0 30px 15px 30px;
+    height:40px;
+    color:#fff;
+    vertical-align:middle;
+    font-size:0.917em;
+}
+div.loginBox .loginBox-area label input[type="text"],
+div.loginBox .loginBox-area label input[type="password"]{
+    appearance: none;
+    background: none;
+    border:none;
+    border-radius:3px;
+    border-bottom: 2px solid #FFCF70;
+    height:38px;
+    width:210px;
+    color:#fff;
+    padding:0 14px;
+}
+div.loginBox .loginBox-area label input[type="text"]:focus,
+div.loginBox .loginBox-area label input[type="password"]:focus{
+    outline: none;
+    appearance: none;
+    border: none;
+}
+div.loginBox .loginBox-area input[type="submit"]{
+    width:240px;
+    height:38px;
+    border-radius:4px;
+    border:none;
+    background:#FFB41F;
+    margin:0 30px 15px 30px;
+    color:#fff;
+    cursor: pointer;
+    font-size: 0.9em;
+}
+.fix{
+    position: relative;
+    height: 40px;
+    margin: 0 30px;
+    color: #FF5C5C;
+}
+div#loginResult{
+    text-align: center;
+    font-size: 0.8em;
+}
+div#bottom_bar{
+    position: absolute;
+    width:100%;
+    bottom: 0;
+    height: 6%;
+    background:#FFB41F;
+    text-align:center;
+}
+div#bottom_bar h2{
+    margin-top: 16px;
+    color:#fff;
+    font-weight:lighter;
+    display:inline-block;
+    font-size: 0.9em;
+}
+div#bottom_bar .send_invitation{
+    display:inline-block;
+    width:400px;
+    margin-left:40px;
+}
+#mc_embed_signup{
+    display: inline-block;
+}
+div#bottom_bar .send_invitation input[type="email"]{
+    display: inline-block;
+    height:25px;
+    line-height: 1.4em;
+    font-size: 0.7em;
+    width:300px;
+    background: none;
+    border: none;
+    border-bottom: 2px solid #ffc95c;
+    padding: 0 20px;
+    margin-right: -30px;
+    color: #fff;
+}
+div#bottom_bar .send_invitation input[type="email"]:focus{
+    outline: none;
+    appearance:none;
+    border: none;
+}
+div#bottom_bar .send_invitation input[type="submit"]{
+    display: inline-block;
+    background: url('../img/sprite.png') no-repeat -191px -2px;
+	width: 22px;
+	height: 13px;
+    border:none;
+}
+@media (max-width: 800px){
+    div#bottom_bar{
+    visibility:hidden;
+    }
+    .header{
+        margin-top: 30%;
+    }
+}
+#login ::-webkit-input-placeholder {
+   color: #fff;
+   line-height: 0.8em;
+   font-size: 1.4em;
+   font-weight: 100;
+}
+
+#login :-moz-placeholder { /* Firefox 18- */
+   color: #fff;
+   line-height: 0.8em;
+   font-size: 1.4em;
+   font-weight: 100;
+}
+
+#login ::-moz-placeholder {  /* Firefox 19+ */
+   color: #fff;
+   line-height: 0.8em;
+   font-size: 1.4em;
+   font-weight: 100;
+}
+
+#login :-ms-input-placeholder {  
+   color: #fff;
+   line-height: 0.8em;
+   font-size: 1.4em;
+   font-weight: 100;
+}
 div#container{
     width: 100%;
     height: 100%;
@@ -171,8 +366,6 @@ div#resultList{
     border: 2.5px solid #ffbb33;
     cursor: pointer;
 }
-        #resultList
-        .resultElement
         .venueImg
         .resultImg:hover,
         .resultImg:active{
@@ -180,8 +373,6 @@ div#resultList{
             width: 42px;
             height: 42px;
         }
-        #resultList
-        .resultElement
         .venueImg
         .resultImg
         .img_result{
@@ -189,8 +380,6 @@ div#resultList{
             height: 42px;
             border-radius: 33px;
         }
-        #resultList
-        .resultElement
         .venueImg
         .resultImg:hover
         .img_result{
