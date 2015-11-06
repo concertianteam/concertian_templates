@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html dir="ltr">
+	<head>
+	<meta charset="utf-8">
+	
+	<title>concertian - for managers</title>
+	
+    <link rel="stylesheet" type="text/css" href="css/main.css">
+     
+    <script src="http://code.jquery.com/jquery-latest.min.js"></script>
+    <link href='https://fonts.googleapis.com/css?family=Open+Sans:300,400,600&subset=latin,latin-ext' rel='stylesheet' type='text/css'>
+    <script type="text/javascript" src="js/search.js"></script>
+    
+    <meta name="author" content="QUAWER">
+	<meta name="robots" content="nofollow, noindex">
+
+    </head>
+    <body>
+        <div id="container">
+            <section id="homePanel">
+                <div class="venue_logo"><img class="logo" src="img/concertian.header.jpg"></div>
+                <div class="upgrade_pro">UPGRADE<br>TO<br><strong>PRO</strong></div>
+                <a href=""><span class="logOff"></span></a>
+            </section>
+            <section id="contentPanel">
+                <section id="searchPanel">
+                    <div class="search">
+                        <form id="form">
+                            <input id="cityId" type="text" name="city" placeholder="Zadajte mesto">
+                            <input id="button" type="submit" name="search_button" value="">
+                        </form>                
+                    </div>
+                    <div id="resultList"></div>
+                </section>
+                <section id="corePanel">
+                    <div id="topPanel">
+                        <div class="header">
+                            <div class="headerText">
+                                <span>Celkom nová úroveň organizovania koncertov</span>
+                                <a href="http://manager.concertian.com/" target="_blank"><button class="discover">Ako to funguje</button></a>
+                            </div>
+                        </div>
+                    </div>
+                    <div id="formPanel">
+                        <div id="form_part">
+                            <div class="form">
+                                <div id="steps">
+                                    <div class="name">Názov</div>
+                                    <div class="date"></div>
+                                    <div class="time"></div>
+                                    <div class="visibility"></div>
+                                </div>
+                                <form id="create_event" action="php/create_event.php" name="form_event" method="post"> 
+                                <input type="text" name="event_name" placeholder="Rockový večer plný rocku">
+                                <input type="text" name="event_date" placeholder="2015-10-21">
+                                <input type="text" name="event_time" placeholder="21:30:00">
+                                <input type="text" name="event_visibility" placeholder="visible">
+                                <input type="submit" name="button" value="">
+                                </form>
+                            </div>
+                            <div class="overview">
+                                <div class="created_concerts">Vaše koncerty:</div>
+                                <div class="program">
+                                    <div class="concert_element">
+                                        <div class="concert_name">Johny a jeho ozrutná kapela vo vlekom štýle</div>
+                                        <div class="concert_date">2015-12-12</div>
+                                        <div class="concert_visibility">v</div>
+                                    </div>
+                                    <div class="concert_element">
+                                        <div class="concert_name">Johny a jeho ozrutná kapela vo vlekom štýle</div>
+                                        <div class="concert_date">2015-12-12</div>
+                                        <div class="concert_visibility">v</div>
+                                    </div>
+                                    <div class="concert_element">
+                                        <div class="concert_name">Johny a jeho ozrutná kapela vo vlekom štýle</div>
+                                        <div class="concert_date">2015-12-12</div>
+                                        <div class="concert_visibility">v</div>
+                                    </div>
+                                    <div class="concert_element">
+                                        <div class="concert_name">Johny a jeho ozrutná kapela vo vlekom štýle</div>
+                                        <div class="concert_date">2015-12-12</div>
+                                        <div class="concert_visibility">v</div>
+                                    </div>
+                                    <div class="concert_element">
+                                        <div class="concert_name">Johny a jeho ozrutná kapela vo vlekom štýle</div>
+                                        <div class="concert_date">2015-12-12</div>
+                                        <div class="concert_visibility">v</div>
+                                    </div>
+                                    <div class="concert_element">
+                                        <div class="concert_name">Johny a jeho ozrutná kapela vo vlekom štýle</div>
+                                        <div class="concert_date">2015-12-12</div>
+                                        <div class="concert_visibility">v</div>
+                                    </div>
+                                    <div class="concert_element">
+                                        <div class="concert_name">Johny a jeho ozrutná kapela vo vlekom štýle</div>
+                                        <div class="concert_date">2015-12-12</div>
+                                        <div class="concert_visibility">v</div>
+                                    </div>
+                                    <div class="concert_element">
+                                        <div class="concert_name">Johny a jeho ozrutná kapela vo vlekom štýle</div>
+                                        <div class="concert_date">2015-12-12</div>
+                                        <div class="concert_visibility">v</div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="program_outer">
+                            <div id="program_part"></div>
+                        </div>
+                    </div>
+                </section>
+            </section>
+        </div>
+    </body>
+</html>

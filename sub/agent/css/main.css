@@ -1,0 +1,578 @@
+body{
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    padding: 0px;
+    margin: 0px;
+    background-color: #253b55;
+    font-family: 'Open Sans', sans-serif;	
+    font-weight: 100px;
+    overflow: visible;
+    color: #b7c2cc;
+}
+div#container{
+    width: 100%;
+    height: 100%;
+    border-spacing: 0px;
+    border-collapse: separate;
+    overflow: hidden;
+}
+section{ 
+    position: relative;
+    float: left;
+    vertical-align: top;
+}
+/* homePanel */
+section#homePanel{
+    position: relative;
+    display: table-cell;
+    float: left;
+    width: 60px;
+    height: 100%;
+    background: #253b55;
+}
+.venue_logo{
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 60px;
+    height: 50px;
+    border-bottom: 6px solid #ffbb33;
+}
+.logo{
+    width: 60px;
+    height: 50px;
+}
+.upgrade_pro{
+    position: fixed;
+    top: 100px;
+    width: 60px;
+    color: #fff;
+    font-size: 0.7em;
+    text-align: center;
+    line-height: 1.6em;
+}
+strong{
+    line-height: 2em;
+    font-size: 1.3em;
+    padding: 0px 10px;
+    background: #ffbb33;
+    border-radius: 2px;
+    font-weight: 100;
+}
+.logOff{
+    position: fixed;
+    background: url('../img/sprite.png') no-repeat -22px -2px;
+	width: 19px;
+	height: 19px;
+    bottom: 20px;
+    left: 23px;
+}
+section#contentPanel{
+    display: table-cell;
+    position: absolute;
+    /* Firefox */
+    width: -moz-calc(100% - 60px);
+    /* WebKit */
+    width: -webkit-calc(100% - 60px);
+    /* Opera */
+    width: -o-calc(100% - 60px);
+    /* Standard */
+    width: calc(100% - 60x);
+    height: 100%;
+    left: 60px;
+}
+/* Search Panel */
+section#searchPanel{
+    position: relative;
+    display: table-cell;
+    float: left;
+    background-color: #1f3147;
+    width: 25%;
+    min-width: 320px;
+    height: 100%;
+}
+.search{
+    margin: 10px 10px;
+    text-align: center;
+}
+#form{
+    margin-top: 20px;
+    height: 40px;
+}
+input[type="text"]{
+    appearance: none;
+    box-shadow: none;
+    background: transparent;
+    border: none;
+}
+input[type="text"]:focus{
+    outline: none;
+    border-bottom: 1px solid #4e5f6f;
+    border-top: none;
+    color: #fff;
+    font-size: 1em;
+    font-weight: 100;
+}
+input[type="submit"]:focus{
+    outline: none;
+}
+input[name="city"]{
+    position: absolute;
+    width: 80%;
+    height: 30px;
+    left: 9%;
+    z-index: 1;
+    text-align: center;
+    font-size: 1em;
+    color: #fff;
+}
+input[name="search_button"]{
+    position: absolute;
+    top: 3.5%;
+    right: 11%;
+    border: none;
+    background: url('../img/sprite.png') no-repeat -2px -2px;
+	width: 18px;
+	height: 19px;
+    z-index: 2;
+}
+div#resultList{
+    position: relative;
+    padding: 0 20px;
+    height: 90%;
+    overflow-y: scroll;
+}
+.resultElement{
+    width: 100%;
+    height: 60px;
+    margin: 30px 0;
+    text-align: left;
+    color: #b7c2cc;
+}
+.venueImg{
+    position: relative;
+    float: right;
+    display: inline-block;
+    vertical-align: middle;
+    width: 10%;
+}
+@media only screen and (max-width: 890px) {
+    .venueImg{
+        display: none;
+    }
+}
+.resultImg{
+    float: right;
+    width: 42px;
+    height: 42px;
+    margin: 5px 0;
+    border-radius: 33px;
+    border: 2.5px solid #ffbb33;
+    cursor: pointer;
+}
+        #resultList
+        .resultElement
+        .venueImg
+        .resultImg:hover,
+        .resultImg:active{
+            background: url('../img/sprite.png') no-repeat -144px -4px;
+            width: 42px;
+            height: 42px;
+        }
+        #resultList
+        .resultElement
+        .venueImg
+        .resultImg
+        .img_result{
+            width: 42px;
+            height: 42px;
+            border-radius: 33px;
+        }
+        #resultList
+        .resultElement
+        .venueImg
+        .resultImg:hover
+        .img_result{
+            display: none;
+        }
+.whenElement{
+    display: inline-block;
+    vertical-align: middle;
+    position: relative;
+    margin-right: 10px;
+    width: 50px;
+    text-align: center;
+}
+.resultDate{
+    position: relative;
+    font-size: 0.8em;
+}
+.resultTime{
+    position: relative;
+    font-size: 0.7em;
+    background: #2c4563;
+    border-radius: 4px;
+}
+.whereElement{
+    position: relative;
+    display: inline-block;
+    vertical-align: middle;
+    width: 60%;
+}
+.resultName{
+    line-height: 1em;
+    height: 2em;
+    font-size: 0.9em;
+    overflow: hidden;
+    color: #fff;
+}
+.resultVenuename{
+    overflow: hidden;
+    font-size: 0.8em;
+    line-height: 1.1em;
+}
+.city{
+    display: inline-block;
+    float: left;
+    border-right: 2px solid #4e5f6f;
+    padding-right: 4px;
+    margin-right: 4px;
+}
+.venueName{
+    display: inline-block;
+    float: right;
+}
+/* corePanel */
+section#corePanel{
+    position: relative;
+    display: table-cell;
+    width: 75%;
+    height: 100%;
+}
+@media only screen and (max-width: 1300px) {
+    section#corePanel{
+        position: absolute;
+        margin-left: 320px;
+        width: 70%;
+    }
+}
+/* topPanel */
+#topPanel{
+    position: relative;
+    width: 100%;
+    height: 80px;
+    background: url('../img/concertian.header.jpg') no-repeat;
+    background-size: cover;
+    text-align: center;
+}
+.headerText{
+    display: inline-block;
+    vertical-align: middle;
+    margin-top: 20px;
+    color: #fff;
+    font-size: 1.5em;
+}
+@media only screen and (max-width: 900px) {
+    .headerText{
+        font-size: 0.9em;
+    }
+}
+@media only screen and (max-width: 1200px) {
+    .headerText{
+        font-size: 1.2em;
+    }
+}
+button.discover{
+    display: inline-block;
+    vertical-align: middle;
+    margin-left: 10px;
+    height: 30px;
+    padding: 0 15px;
+    background: #ffbb33;
+    color: #fff;
+    border: none;
+    border-radius: 4px;
+    font-size: 0.6em;
+}
+@media only screen and (max-width: 929px) {
+    button.discover{
+        font-size: 0.3em;
+        height: 15px;
+    }
+}
+@media only screen and (min-width: 930px, max-width: 1200px) {
+    button.discover{
+        font-size: 0.6em;
+        height: 30px;
+    }
+}
+/* formPanel */
+#formPanel{
+    position: relative;
+    width: 100%;
+     /* Firefox */
+    height: -moz-calc(100% - 80px);
+    /* WebKit */
+    height: -webkit-calc(100% - 80px);
+    /* Opera */
+    height: -o-calc(100% - 80px);
+    /* Standard */
+    height: calc(100% - 80px);
+}
+/* form */
+#form_part{
+    position: relative;
+    width: 100%;
+    height: 55%;
+    text-align: center;
+    background: #253b55;
+}
+.form{
+    position: relative;
+    display: inline-block;
+    width: 45%;
+    height: 100%;
+    float: left;
+}
+#steps{
+    position: relative;
+    display: inline-block;
+    float: left;
+    width: 20%;
+    height: 100%;
+}
+.name{
+    margin-top: 30px;
+    margin-bottom: 50%;
+    color: #fff;
+    font-size: 0.9em;
+}
+#create_event input[type="text"]{
+    height: 35px;
+    border-bottom: 1px solid #4e5f6f;
+    
+}
+input[name="event_name"]{
+    width: 100%;
+    margin-top: 20px;
+    margin-bottom: 7%;
+    float: left;
+}
+input[name="event_date"]{
+    width: 100%;
+    margin-bottom: 7%;
+    float: left;
+}
+input[name="event_time"]{
+    width: 100%;
+    margin-bottom: 7%;
+    float: left;
+}
+input[name="event_visibility"]{
+    width: 100%;
+    margin-bottom: 12%;
+    float: left;
+}
+input[name="button"]{
+    background: url('../img/sprite.png') no-repeat -105px -2px;
+    width: 18px;
+    height: 19px;
+    appearance: none;
+    box-shadow: none;
+    border: none;
+    margin-right: 18%;
+}
+.date{
+    position: relative;
+    margin-bottom: 45%;
+    background: url('../img/sprite.png') no-repeat -43px -2px;
+	width: 19px;
+	height: 19px;
+    margin-left: 42%;
+}
+.time{
+    position: relative;
+    margin-bottom: 45%;
+    background: url('../img/sprite.png') no-repeat -63px -2px;
+	width: 19px;
+	height: 19px;
+    margin-left: 42%;
+}
+.visibility{
+    position: relative;
+    margin-bottom: 80px;
+    background: url('../img/sprite.png') no-repeat -84px -5px;
+	width: 19px;
+	height: 13px;
+    margin-left: 42%;
+}
+
+#create_event{
+    position: relative;
+    display: inline-block;
+    float: right;
+    width: 80%;
+    height: 100%;
+}
+::-webkit-input-placeholder {
+   color: #b7c2cc;
+   line-height: 1em;
+   font-size: 1em;
+   font-weight: 100;
+}
+
+:-moz-placeholder { /* Firefox 18- */
+   color: #b7c2cc;
+   line-height: 1.5em;
+   font-size: 1.4em;
+   overflow: visible;
+   font-weight: 100;
+}
+
+::-moz-placeholder {  /* Firefox 19+ */
+   color: #b7c2cc;
+   line-height: 1.5em;
+   font-size: 1.4em;
+   overflow: visible;
+   font-weight: 100;
+}
+
+:-ms-input-placeholder {  
+   color: #b7c2cc;
+   line-height: 1.5em;
+   font-size: 1.4em;
+   overflow: visible;
+   font-weight: 100;
+}
+.overview{
+    position: relative;
+    display: inline-block;
+    width: 55%;
+    height: 100%;
+    float: right;
+}
+.created_concerts{
+    text-align: left;
+    margin: 20px 40px;;
+}
+.program{
+    width: 90%;
+    height: 80%;
+    margin-left: 40px;
+    overflow-y: scroll;
+}
+.concert_element{
+    width: 100%;
+    height: 50px;
+    margin: 10px 0;
+}
+.concert_name{
+    width: 50%;
+    display: inline-block;
+    vertical-align: middle;
+    float: left;
+    color: #fff;
+    text-align: left;
+    font-size: 0.9em;
+    line-height: 1em;
+    height: 2em;
+    font-weight: 100;
+}
+.concert_date{
+    width: 25%;
+    display: inline-block;
+    vertical-align: middle;
+    float: left;
+    font-size: 0.9em;
+}
+.concert_visibility{
+    display: inline-block;
+    vertical-align: middle;
+    width: 30px;
+    line-height: 28px;
+    height: 30px;
+    border-radius: 90px;
+    background: #ffbb33;
+    color: #fff;
+    margin-top: -5px;
+}
+/* program */
+.program_outer{
+    position: relative;
+    width: 100%;
+    height: 45%;
+    background: #2c4563;
+}
+#program_part{
+    width: 98%;
+    margin-left: 1%;
+    height: 98%;
+    overflow-x: scroll;
+}
+
+/* scrollbar */
+::-webkit-scrollbar {
+    width: 6px;
+}
+ 
+::-webkit-scrollbar-track {
+    background-color: transparent;
+}
+ 
+::-webkit-scrollbar-thumb {
+    -webkit-box-shadow: inset 10px 10px 2px rgba(78,95,111,1);
+}
+
+::-webkit-scrollbar-thumb:hover{
+    cursor: pointer;
+    -webkit-box-shadow: inset 10px 10px 2px rgba(183,194,204,1);
+}
+.spinner {
+  margin: 100px auto;
+  width: 40px;
+  height: 40px;
+  position: relative;
+  text-align: center;
+  
+  -webkit-animation: sk-rotate 2.0s infinite linear;
+  animation: sk-rotate 2.0s infinite linear;
+}
+
+.dot1, .dot2 {
+  width: 60%;
+  height: 60%;
+  display: inline-block;
+  position: absolute;
+  top: 0;
+  background-color: #fff;
+  border-radius: 100%;
+  
+  -webkit-animation: sk-bounce 2.0s infinite ease-in-out;
+  animation: sk-bounce 2.0s infinite ease-in-out;
+}
+
+.dot2 {
+  top: auto;
+  bottom: 0;
+  -webkit-animation-delay: -1.0s;
+  animation-delay: -1.0s;
+}
+
+@-webkit-keyframes sk-rotate { 100% { -webkit-transform: rotate(360deg) }}
+@keyframes sk-rotate { 100% { transform: rotate(360deg); -webkit-transform: rotate(360deg) }}
+
+@-webkit-keyframes sk-bounce {
+  0%, 100% { -webkit-transform: scale(0.0) }
+  50% { -webkit-transform: scale(1.0) }
+}
+
+@keyframes sk-bounce {
+  0%, 100% { 
+    transform: scale(0.0);
+    -webkit-transform: scale(0.0);
+  } 50% { 
+    transform: scale(1.0);
+    -webkit-transform: scale(1.0);
+  }
+}
