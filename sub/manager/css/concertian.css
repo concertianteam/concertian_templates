@@ -34,8 +34,8 @@ h4{font-size:20px;margin:10px 0;}
 h5{font-size:28px;font-weight:600;margin:15px 0;color:#384047;}
 h6{font-size:16px;font-weight:600;margin:10px 0;color:#384047;}
 
-a{color:#5173bd;}
-a:hover,a:focus{color:#5173bd;}
+a{color:#fff;}
+a:hover,a:focus{color:#fff; text-decoration: none;}
 
 .preloader{
 	background-color:#FFF;
@@ -199,10 +199,11 @@ to {
 	margin:5px 10px;
 }
 .btn-success {
-	background-color: #FFC95C;
+	background-color: #FFB41F;
 	background-image:none;
 	border: 0;
 	line-height: 1.8;
+    text-align: center;
 }
 .btn-success:hover, .btn-success:focus, .btn-success:active {
 	background-color: #FFC95C;
@@ -214,7 +215,7 @@ to {
     color: #FFF;
 	background-image:none;
 	border: 0;
-	line-height: 1.8;
+	font-size: 1.45em !important;
     width: 100%;
     display: block;
 }
@@ -462,13 +463,24 @@ to {
 }
 /*========== 6. PLANS AND PRICING ==============*/
 
+@media only screen and (max-width : 768px) {
+    .margin-20{
+        margin-bottom: 30px;
+    }
+}
+@media only screen and (max-width : 992px) {
+    .margin-20{
+    margin-bottom: 30px;
+    }
+}
 .pricing {
 	padding:25px;
 	color:#FFF;
 	text-align:center;
-	-webkit-border-radius:5px;
-	-moz-border-radius:5px;
-	border-radius:5px;
+	-webkit-border-top-right-radius:5px;
+	-moz-border-top-left-radius:5px;
+	border-top-right-radius:5px;
+	border-top-left-radius:5px;
 }
 .pricing .planname {
 	text-transform: uppercase;
@@ -478,7 +490,6 @@ to {
     display: inline-block;
 	text-transform: uppercase;
 	font-weight:600;
-    margin-left: px;
 }
 .pricing .price {
 	font-size:52px;
@@ -516,10 +527,10 @@ to {
 	vertical-align: baseline;
 }
 .color1 {
-	background-color:#FFBB33;
+	background-color:#FFB41F;
 }
 .color2 {
-	background-color:#FFC95C;
+	background-color:#FFBB33;
 }
 /* Animation */
 
@@ -538,7 +549,43 @@ to {
 	transform:scale(1.05);
 	z-index:2;
 }
+.comparison_table{
+    width: 100%;
+    position: relative;
+    background: #ffc95c;
+    color: #fff;
+    text-transform: uppercase;
+    border-bottom-right-radius: 4px;
+    border-bottom-left-radius: 4px;
+}
+.comparison_table tr {
+    height: 40px;
+    padding: 20px 20px;
+    font-size: 1.0em;
+    font-weight: 600;
+    border-bottom: 1px solid #ffbb33;
 
+}
+.comparison_table td{
+    padding-right: 10px;
+}
+.comparison_table th{
+    padding-left: 10px;
+    text-align: center;
+}
+.table_head{
+    padding-top: 5px;
+    text-align: center;
+    font-size: 1.3em !important;
+    font-weight: 100 !important; 
+}
+.light{
+    border-bottom: none !important;
+}
+
+.glyphicon_remove{
+    color: #ffbb33;
+}
 /*========== 7. FAQ ==============*/
 
 .faq p {
@@ -1414,6 +1461,54 @@ video {
     font-size: 16px;
     text-align: center;
 }
+/************email.verification***************/
+#verification_form{
+	width: 100%;
+    position: relative;
+    margin-top: 30%;
+    text-align: center;
+    border-left: 2px solid #ffc95c;
+}
+#verify label{
+    width: 100%;
+}
+.verification_header{
+    width: 100%;
+    margin-bottom: 20px;
+    color: #fff;
+    font-size: 1.6em;
+    font-weight: 100;
+    padding: 0 25px;
+    text-align: left;
+}
+#verify input[type="email"]{
+    position: relative;
+    width: 90%;
+    height: 40px;
+    border: none;
+    border-radius: 4px;
+    padding: 0 20px;
+    color: #667a8f;
+    margin-bottom: 20px;
+}
+#verify input[type="submit"]{
+    position: relative;
+    width: 90%;
+    height: 40px;
+    border: none;
+    border-radius: 4px;
+    background-color: #ffc95c;
+    color: #fff;
+    font-size: 1.4em;
+    font-weight: 100;
+}
+div#response{
+	position: relative;
+	width: 100%;
+	text-align: center;
+	font-size: 1.2em;
+	color: crimson;
+}
 /************* REGISTRATION.HTML **************/
 
 #registration{
@@ -1421,6 +1516,12 @@ video {
     background-color: #ffbb33;
     height: 100%;
     width: 100%;
+    overflow-y: scroll;
+}
+@media only screen and (max-width : 800px) {
+    #registration{
+        padding-bottom: 200px;
+    }
 }
 .heading{
     position: relative;
@@ -1446,28 +1547,60 @@ video {
 }
 #registration_form{
     position: relative;
+    width: 100%;
     display: inline-block;
-    margin-top: 50px;
+    margin-top: 30px;
     text-align: center;
+    border-left: 2px solid #ffc95c;
 } 
+#response1{
+	position: relative;
+	width: 100%;
+    text-align: center;
+    padding-left: 9%;
+    padding-right: 9%;
+	font-size: 1.1em !important;
+	color: #fff !important;
+}
+#response2{
+	position: relative;
+	width: 100%;
+    text-align: center;
+    padding-left: 9%;
+    padding-right: 9%;
+	font-size: 1.3em !important;
+	color: #fff !important;
+}
+form#registration_form label{
+    width: 100%;
+}
 #registration_form label input[type="text"]{
-    width: 400px;
+    width: 80%;
     height: 35px;
     border: none;
     border-radius: 4px;
-    margin: 2px 10px;
+    margin: 0px 10px;
+    padding: 0 20px;
+    color: #667a8f;
+}
+#registration_form label input[type="password"]{
+    width: 80%;
+    height: 35px;
+    border: none;
+    border-radius: 4px;
+    margin: 0px 10px;
     padding: 0 20px;
     color: #667a8f;
 }
 #registration_form label input[type="submit"]{
-    width: 400px;
+    width: 80%;
     height: 38px;
     margin: 0px 10px;
     border: none;
     border-radius: 4px;
     background-color: #ffc95c;
     color: #fff;
-    font-size: 1.2em;
+    font-size: 1.4em;
     font-weight: 100;
 }
 ::-webkit-input-placeholder {
@@ -1490,11 +1623,10 @@ video {
     height: 20px;
     background: #fff;
     border: none;
-    border-radius: 90px;
 }
 .checkbox{
-    width: 400px;
-    margin-left: 62px;
+    width: 80%;
+    margin-left: 10%;
 }
 .checkbox_text{
     color: #fff;
@@ -1504,8 +1636,9 @@ video {
     margin-left: 20px;
 }
 .input_mark{
-    margin-left: 60px;
+    width: 100%;
     text-align: left;
+    padding-left: 9%;
 }
 .input_number{
     display: inline-block;

@@ -70,22 +70,22 @@
 </div>
     
 <div class="col-lg-6 col-md-6 col-sm-6">
-    <form id="registration_form" action="registrate.php" name="registrate_form" method="post">
+    <form id="registration_form" action="registrate.php" name="registrate_form" method="post" onsubmit="if(document.getElementById('agree').checked) { return true; } else { alert('Pro pokračování je nutné, abyste potvrdil Váš souhlas obchodními podmínkami a ochranou osobních údajů.'); return false; }">
         <div class="input_mark">
             <img class="input_number" src="images/step.1.png">
+            <h6 class="input_title">Mailová adresa</h6>
+        </div>
+        <label><input type="text" name="email" placeholder="concertian@club.com"></label>
+		<div class="input_mark">
+            <img class="input_number" src="images/step.2.png">
             <h6 class="input_title">Název provozu</h6>
         </div>
         <label><input type="text" name="venue_name" placeholder="concertian music club"></label>
         <div class="input_mark">
-            <img class="input_number" src="images/step.2.png">
-            <h6 class="input_title">Mailová adresa</h6>
-        </div>
-        <label><input type="text" name="email" placeholder="concertian@club.com"></label>
-        <div class="input_mark">
             <img class="input_number" src="images/step.3.png">
             <h6 class="input_title">Heslo</h6>
         </div>
-        <label><input type="text" name="password" placeholder="**********"></label>
+        <label><input type="password" name="password" placeholder="**********"></label>
         <div class="input_mark">
             <img class="input_number" src="images/step.4.png">
             <h6 class="input_title">Adresa Vašeho klubu</h6>
@@ -94,7 +94,7 @@
         <label><input type="text" name="city" placeholder="City"></label>
         <label><input type="text" name="address" placeholder="Address"></label>
         <div class="checkbox">
-            <label><input type="checkbox" name="checkbox" class="checkbox"></label>
+            <label><input id="agree" type="checkbox" name="checkbox" class="checkbox"></label>
             <h6 class="checkbox_text">Souhlasím s <a class="color" href="terms&services.cz.html">obchodními podmínkami</a> platnými pro tuto službu</h6>
         </div>
             
