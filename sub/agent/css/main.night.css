@@ -4,11 +4,11 @@ body{
     height: 100%;
     padding: 0px;
     margin: 0px;
-    background-color: #fff;
+    background-color: #253b55;
     font-family: 'Open Sans', sans-serif;	
     font-weight: normal;
     overflow: hidden;
-    color: #C3CBD9;
+    color: #b7c2cc;
 }
 /*login*/
 #login { 
@@ -246,7 +246,7 @@ section#homePanel{
     float: left;
     width: 60px;
     height: 100%;
-    background: #ffbb33;
+    background: #253b55;
 }
 .venue_logo{
     position: fixed;
@@ -254,7 +254,7 @@ section#homePanel{
     left: 0;
     width: 60px;
     height: 50px;
-    border-bottom: 6px solid #ffc95c;
+    border-bottom: 6px solid #ffbb33;
 }
 .logo{
     width: 60px;
@@ -273,7 +273,7 @@ strong{
     line-height: 2em;
     font-size: 1.3em;
     padding: 0px 10px;
-    background: #ffc95c;
+    background: #ffbb33;
     border-radius: 2px;
     font-weight: 100;
 }
@@ -341,7 +341,7 @@ section#searchPanel{
     position: relative;
     display: table-cell;
     float: left;
-    background-color: #fff;
+    background-color: #1f3147;
     width: 25%;
     min-width: 320px;
     height: 100%;
@@ -363,7 +363,7 @@ section#searchPanel{
 }
 #searchPanel input[type="text"]:focus{
     outline: none;
-    border-bottom: 1px solid #F3F4F7;
+    border-bottom: 1px solid #4e5f6f;
     border-top: none;
     color: #A8B3C7;
     font-size: 1em;
@@ -405,7 +405,7 @@ div#resultList{
     height: 60px;
     margin: 30px 0;
     text-align: left;
-    color: #C3CBD9;
+    color: #b7c2cc;
 }
 .venueImg{
     position: relative;
@@ -469,7 +469,7 @@ div#resultList{
     position: relative;
     font-size: 0.7em;
     color: #fff;
-    background: #ffc95c;
+    background: #2c4563;
     border-radius: 4px;
 }
 .whereElement{
@@ -484,7 +484,7 @@ div#resultList{
     font-size: 0.9em;
     overflow: hidden;
     font-weight: bold;
-    color: #A8B3C7;
+    color: #fff;
 }
 .resultVenuename{
     overflow: hidden;
@@ -494,7 +494,7 @@ div#resultList{
 .city{
     display: inline-block;
     float: left;
-    border-right: 2px solid #C3CBD9;
+    border-right: 2px solid #4e5f6f;
     padding-right: 4px;
     margin-right: 4px;
 }
@@ -585,7 +585,7 @@ button.discover{
     width: 100%;
     height: 55%;
     text-align: center;
-    background: #F3F4F7;
+    background: #1f3147;
 }
 .form{
     position: relative;
@@ -597,14 +597,14 @@ button.discover{
 .outer_form{
     width: 98%;
     height: 94%;
-    background: #fff;
+    background: #253b55;
     border-radius: 4px;
     margin-left: 2%;
     margin-top: 2.5%;
     overflow-y: scroll;
 }
 .create_concert{
-    color: #ffc95c;
+    color: #fff;
     text-align: left;
     padding: 20px 40px;
 }
@@ -624,7 +624,7 @@ button.discover{
     font-size: 1em;
     font-weight: bold;
     font-weight: 100;
-    color: #ffc95c;
+    color: #fff;
 }
 input[name="eventName"]{
     display: inline-block;
@@ -651,7 +651,7 @@ input[name="visibility"]{
     height: 35px;
     border: none;
     border-radius: 4px;
-    background: #ffc95c;
+    background: #ffbb33;
     color: #fff;
     font-size: 0.9em;
     margin-top: 1%;
@@ -685,11 +685,11 @@ input[name="visibility"]{
     margin-top: 2%;
     width: 96%;
     height: 94%;
-    background: #fff;
+    background: #253b55;
     border-radius: 4px;
 }
 .created_concerts{
-    color: #ffc95c;
+    color: #fff;
     text-align: left;
     padding: 20px 40px;
 }
@@ -709,7 +709,7 @@ input[name="visibility"]{
     display: inline-block;
     vertical-align: middle;
     float: left;
-    color: #A8B3C7;
+    color: #fff;
     text-align: left;
     font-size: 0.9em;
     line-height: 1em;
@@ -743,7 +743,7 @@ input[name="visibility"]{
 	height: 19px;
 }
 #program_part{
-    background: #fff;
+    background: #253b55;
     border-radius: 4px;
     width: 98%;
     margin-left: 1%;
@@ -754,10 +754,10 @@ input[name="visibility"]{
     position: relative;
     width: 100%;
     height: 45%;
-    background: #F3F4F7;
+    background: #1f3147;
 }
 .statistics{
-    color: #ffc95c;
+    color: #fff;
     text-align: left;
     padding: 20px 40px;
 }

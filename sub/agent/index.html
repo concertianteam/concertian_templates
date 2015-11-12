@@ -9,7 +9,6 @@
 	<link rel="stylesheet" type="text/css" href="css/main.css">
     <script src="//code.jquery.com/jquery-1.11.3.min.js"></script>
     <script src="//code.jquery.com/jquery-migrate-1.2.1.min.js"></script>
-    <script type="text/javascript" src="js/log_in.js"></script>
 	
 	<meta name="author" content="QUAWER">
 	<meta name="robots" content="nofollow, noindex">
@@ -21,15 +20,14 @@
     
     <div class="header"></div>
 
-	<form id="log_inForm" class="loginBox-area" name="log_inForm" >
+	<form id="log_inForm" action="php/log_in.php" class="loginBox-area" name="log_inForm" method="post">
         <div class="login_venue_img"><img class="venue_img" src="img/concertian.header.jpg"></div>
         <div class="venue_name">Wienerkoncerthouse</div>
 
-		<label><input id="username" type="text" name="email" value="" placeholder="name@email.com" required></label>
+		<label><input id="email" type="text" name="email" value="" placeholder="name@email.com" required></label>
 		<label><input id="password" type="password" name="password" value="" placeholder="********" autocomplete="off" required ></label>
 		<label><input type="checkbox" name="login[remember]" value="1">&nbsp;&nbsp;Remember me</label>
-
-		<input type="submit" name="button" value="Prihlásiť">
+		<input type="submit" name="submit" value="Prihlásiť">
 	</form>
 	<div class="fix">
         <div id="loginResult"></div>

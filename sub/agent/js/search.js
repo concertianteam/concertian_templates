@@ -127,7 +127,7 @@ function addElements(json){
 			minus = 1;
 		}
 	}
-	
+	/*
 	var min = null;
 	var max = null;
 	for (var i = 0; i < chartData.length; i++){
@@ -147,7 +147,7 @@ function addElements(json){
 	var maxSplit = max.split(":");
 	var maxHour = maxSplit[0];
 	var maxMinute = maxSplit[1];*/
-	
+	/*
 	min = getMinutes(min);
 	max = getMinutes(max);
 	var different = (max - min) / $("#program_part").height();
@@ -163,7 +163,7 @@ function addElements(json){
 					  '</div>';
 		
 		$("#program_part").append(element);
-	}
+	}*/
     
     if(minus == 1){
         $("#resultList").append('<div class="spinner">' +
@@ -175,11 +175,11 @@ function addElements(json){
 	$('.bold').empty();
 	$('.bold').append($("#resultList").children().length - minus + ' results');
 }
-
+/*
 function getMinutes(time){
 	var timeSplit = time.split(":");
 	var hour = timeSplit[0];
 	var minute = timeSplit[1];
 	
 	return (hour * 60) + minute;
-}
+}*/

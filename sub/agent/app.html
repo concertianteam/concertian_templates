@@ -5,12 +5,18 @@
 	
 	<title>concertian - for managers</title>
 	
-    <link rel="stylesheet" type="text/css" href="css/main.css">
+    <link rel="stylesheet" type="text/css" href="css/main.night.css">
      
-    <script src="http://code.jquery.com/jquery-latest.min.js"></script>
+    <script src="//code.jquery.com/jquery-1.11.3.min.js"></script>
+    <script src="//code.jquery.com/jquery-migrate-1.2.1.min.js"></script>
     <link href='https://fonts.googleapis.com/css?family=Open+Sans:300,400,600&subset=latin,latin-ext' rel='stylesheet' type='text/css'>
     <script type="text/javascript" src="js/search.js"></script>
-    
+	<script src="js/js.cookie.js"></script>
+	<script src="js/cookie_loader.js"></script>
+        
+    <link rel="stylesheet" type="text/css" href="css/jquery.timepicker.css">
+    <link rel="stylesheet" type="text/css" href="css/jquery.ui.autocomplete.css">
+        
     <meta name="author" content="QUAWER">
 	<meta name="robots" content="nofollow, noindex">
 
@@ -20,6 +26,10 @@
             <section id="homePanel">
                 <div class="venue_logo"><img class="logo" src="img/concertian.header.jpg"></div>
                 <div class="upgrade_pro">UPGRADE<br>TO<br><strong>PRO</strong></div>
+                <div class="color_mode">
+                    <div id="normal"><a ></a></div>
+                    <div id="night"></div>
+                THEME</div>
                 <a href=""><span class="logOff"></span></a>
             </section>
             <section id="contentPanel">
@@ -44,72 +54,74 @@
                     <div id="formPanel">
                         <div id="form_part">
                             <div class="form">
-                                <div id="steps">
-                                    <div class="name">Názov</div>
-                                    <div class="date"></div>
-                                    <div class="time"></div>
-                                    <div class="visibility"></div>
-                                </div>
+                                <div class="outer_form">
+                                    <div class="create_concert">Založte koncert:</div>
                                 <form id="create_event" action="php/create_event.php" name="form_event" method="post"> 
-                                <input type="text" name="event_name" placeholder="Rockový večer plný rocku">
-                                <input type="text" name="event_date" placeholder="2015-10-21">
-                                <input type="text" name="event_time" placeholder="21:30:00">
-                                <input type="text" name="event_visibility" placeholder="visible">
-                                <input type="submit" name="button" value="">
+								<input type="hidden" name="idVenue" value="" id="idVenue">
+                                <span class="input">Názov</span>
+                                <input type="text" class="eventName" name="eventName" placeholder="Názov koncertu">
+                                    <span class="input">Dátum</span>
+                                <input id="datepicker" type="text" class="Date" name="Date" placeholder="dátum YYYY-MM-dd">
+                                    <span class="input">Čas</span>
+                                <input id="timepicker" data-time-format="H:i:s" type="text" class="Time" name="Time" placeholder="čas HH:mm:ss">
+                                    <span class="input">Stav</span>
+                                <input type="text" class="visibility" name="visibility" placeholder="">
+                                <input type="submit" name="button" value="Vytvoriť koncert">
+                                
                                 </form>
+                                </div>
                             </div>
                             <div class="overview">
+                                <div class="outer">
                                 <div class="created_concerts">Vaše koncerty:</div>
                                 <div class="program">
                                     <div class="concert_element">
                                         <div class="concert_name">Johny a jeho ozrutná kapela vo vlekom štýle</div>
                                         <div class="concert_date">2015-12-12</div>
-                                        <div class="concert_visibility">v</div>
+                                        <div class="concert_visibility">visible</div>
+									<div class="action"></div>
                                     </div>
-                                    <div class="concert_element">
-                                        <div class="concert_name">Johny a jeho ozrutná kapela vo vlekom štýle</div>
-                                        <div class="concert_date">2015-12-12</div>
-                                        <div class="concert_visibility">v</div>
-                                    </div>
-                                    <div class="concert_element">
-                                        <div class="concert_name">Johny a jeho ozrutná kapela vo vlekom štýle</div>
-                                        <div class="concert_date">2015-12-12</div>
-                                        <div class="concert_visibility">v</div>
-                                    </div>
-                                    <div class="concert_element">
-                                        <div class="concert_name">Johny a jeho ozrutná kapela vo vlekom štýle</div>
-                                        <div class="concert_date">2015-12-12</div>
-                                        <div class="concert_visibility">v</div>
-                                    </div>
-                                    <div class="concert_element">
-                                        <div class="concert_name">Johny a jeho ozrutná kapela vo vlekom štýle</div>
-                                        <div class="concert_date">2015-12-12</div>
-                                        <div class="concert_visibility">v</div>
-                                    </div>
-                                    <div class="concert_element">
-                                        <div class="concert_name">Johny a jeho ozrutná kapela vo vlekom štýle</div>
-                                        <div class="concert_date">2015-12-12</div>
-                                        <div class="concert_visibility">v</div>
-                                    </div>
-                                    <div class="concert_element">
-                                        <div class="concert_name">Johny a jeho ozrutná kapela vo vlekom štýle</div>
-                                        <div class="concert_date">2015-12-12</div>
-                                        <div class="concert_visibility">v</div>
-                                    </div>
-                                    <div class="concert_element">
-                                        <div class="concert_name">Johny a jeho ozrutná kapela vo vlekom štýle</div>
-                                        <div class="concert_date">2015-12-12</div>
-                                        <div class="concert_visibility">v</div>
-                                    </div>
+                                </div>
                                 </div>
                             </div>
                         </div>
                         <div class="program_outer">
-                            <div id="program_part"></div>
+                            <div id="program_part">
+                                <div class="statistics">Prehľad podujatí v okolí:</div>
+                                <div class="graph">
+                    
+                                </div>
+                                <div class="legend">
+                                    <ul class="legend_description">
+                                        <li><span class="dot_yellow"></span>1-2 koncerty</li>
+                                        <li><span class="dot_blue"></span>3-5 koncertov</li>
+                                        <li><span class="dot_red"></span>6-8 koncertov</li>
+                                    </ul>
+                                </div>
+                            </div>
                         </div>
                     </div>
                 </section>
             </section>
         </div>
+<script>
+  $(function() {
+    $( "#datepicker" ).datepicker();
+      $('#timepicker').timepicker();
+  });
+</script>  
+<script type="text/javascript" src="js/jquery.timepicker.min.js"></script>
+<script src="js/jquery-ui.js"></script>
+<!-- ClickDesk Live Chat Service for websites -->
+<script type='text/javascript'>
+var _glc =_glc || []; _glc.push('all_ag9zfmNsaWNrZGVza2NoYXRyDwsSBXVzZXJzGKOPt9UMDA');
+var glcpath = (('https:' == document.location.protocol) ? 'https://my.clickdesk.com/clickdesk-ui/browser/' : 
+'http://my.clickdesk.com/clickdesk-ui/browser/');
+var glcp = (('https:' == document.location.protocol) ? 'https://' : 'http://');
+var glcspt = document.createElement('script'); glcspt.type = 'text/javascript'; 
+glcspt.async = true; glcspt.src = glcpath + 'livechat-new.js';
+var s = document.getElementsByTagName('script')[0];s.parentNode.insertBefore(glcspt, s);
+</script>
+<!-- End of ClickDesk -->
     </body>
 </html>
