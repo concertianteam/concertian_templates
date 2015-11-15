@@ -6,13 +6,16 @@
 	<title>concertian - for managers</title>
 	
     <link rel="stylesheet" type="text/css" href="css/main.night.css">
+    <link rel="stylesheet" type="text/css" href="css/main.css">
      
     <script src="//code.jquery.com/jquery-1.11.3.min.js"></script>
     <script src="//code.jquery.com/jquery-migrate-1.2.1.min.js"></script>
-    <link href='https://fonts.googleapis.com/css?family=Open+Sans:300,400,600&subset=latin,latin-ext' rel='stylesheet' type='text/css'>
-    <script type="text/javascript" src="js/search.js"></script>
 	<script src="js/js.cookie.js"></script>
 	<script src="js/cookie_loader.js"></script>
+    <link href='https://fonts.googleapis.com/css?family=Open+Sans:300,400,600&subset=latin,latin-ext' rel='stylesheet' type='text/css'>
+    <script type="text/javascript" src="js/search.js"></script>
+	<script src="js/restSearch.js"></script>
+	<script src="js/logout.js"></script>
         
     <link rel="stylesheet" type="text/css" href="css/jquery.timepicker.css">
     <link rel="stylesheet" type="text/css" href="css/jquery.ui.autocomplete.css">
@@ -24,13 +27,13 @@
     <body>
         <div id="container">
             <section id="homePanel">
-                <div class="venue_logo"><img class="logo" src="img/concertian.header.jpg"></div>
+                <div id="venue_logo"></div>
                 <div class="upgrade_pro">UPGRADE<br>TO<br><strong>PRO</strong></div>
-                <div class="color_mode">
-                    <div id="normal"><a ></a></div>
-                    <div id="night"></div>
+				<div class="color_mode">
+					<button id="normal">DAY</button>
+					<button id="night">NIGHT</button>
                 THEME</div>
-                <a href=""><span class="logOff"></span></a>
+                <a id="logOff"></a>
             </section>
             <section id="contentPanel">
                 <section id="searchPanel">
@@ -54,33 +57,35 @@
                     <div id="formPanel">
                         <div id="form_part">
                             <div class="form">
-                                <div class="outer_form">
+                                <div id="outer_form">
                                     <div class="create_concert">Založte koncert:</div>
                                 <form id="create_event" action="php/create_event.php" name="form_event" method="post"> 
-								<input type="hidden" name="idVenue" value="" id="idVenue">
+								<input type="hidden" name="apiKey" id="apiKey">
+								<input type="hidden" name="idVenue" id="idVenue">
                                 <span class="input">Názov</span>
-                                <input type="text" class="eventName" name="eventName" placeholder="Názov koncertu">
+                                <input type="text" class="eventName" name="eventName" placeholder="Názov koncertu" required>
                                     <span class="input">Dátum</span>
-                                <input id="datepicker" type="text" class="Date" name="Date" placeholder="dátum YYYY-MM-dd">
+                                <input id="datepicker" type="text" name="eventDate" name="Date" placeholder="dátum YYYY-MM-dd" required>
                                     <span class="input">Čas</span>
-                                <input id="timepicker" data-time-format="H:i:s" type="text" class="Time" name="Time" placeholder="čas HH:mm:ss">
+                                <input id="timepicker" data-time-format="H:i:s" type="text" name="eventTime" placeholder="čas HH:mm:ss" required>
                                     <span class="input">Stav</span>
-                                <input type="text" class="visibility" name="visibility" placeholder="">
-                                <input type="submit" name="button" value="Vytvoriť koncert">
+                                <select id="visibility" name="visibility" placeholder="" required>
+								<option value=""></option>	
+								<option value="1">Visible</option>	
+								<option value="0">Hidden</option>	
+								</select>
+								<input type="hidden" name="status" value="1">
+                                <input type="submit" name="submit" value="Vytvoriť koncert">
                                 
                                 </form>
                                 </div>
                             </div>
                             <div class="overview">
                                 <div class="outer">
-                                <div class="created_concerts">Vaše koncerty:</div>
-                                <div class="program">
-                                    <div class="concert_element">
-                                        <div class="concert_name">Johny a jeho ozrutná kapela vo vlekom štýle</div>
-                                        <div class="concert_date">2015-12-12</div>
-                                        <div class="concert_visibility">visible</div>
-									<div class="action"></div>
-                                    </div>
+                                <div id="created_concerts">
+									<span></span>
+								</div>
+                                <div id="program">
                                 </div>
                                 </div>
                             </div>
@@ -88,7 +93,7 @@
                         <div class="program_outer">
                             <div id="program_part">
                                 <div class="statistics">Prehľad podujatí v okolí:</div>
-                                <div class="graph">
+                                <div id="graph">
                     
                                 </div>
                                 <div class="legend">
@@ -104,13 +109,39 @@
                 </section>
             </section>
         </div>
+<script> 
+$(function(){
+      $('#resultList').slimscroll({
+		  height: '93.5%',
+      });
+		$('#create_event').slimscroll({
+			height: '87%',
+      	});
+			$('#program').slimscroll({
+				height: '87%',
+      		});
+				$('#graph').slimscroll({
+					width: '90%',
+      			});
+    });		
+</script>
 <script>
   $(function() {
     $( "#datepicker" ).datepicker();
       $('#timepicker').timepicker();
+	  $( "#visibility" ).selectmenu();
   });
-</script>  
+</script>
+<script>
+		$('button#night').click(function (){
+   $('link[href="css/main.css"]').attr('href','css/main.night.css');
+});
+		$('button#normal').click(function (){
+   $('link[href="css/main.night.css"]').attr('href','css/main.css');
+});
+</script>
 <script type="text/javascript" src="js/jquery.timepicker.min.js"></script>
+<script type="text/javascript" src="js/jquery.slimscroll.min.js"></script>
 <script src="js/jquery-ui.js"></script>
 <!-- ClickDesk Live Chat Service for websites -->
 <script type='text/javascript'>
