@@ -22,7 +22,7 @@ jQuery(document).ready(function() {
             $("#program").append('<div class="concert_element">'+
                             '<div class="concert_name">'+events[event].eventName+'</div>'+
                             '<div class="concert_date">'+events[event].date+'</div>'+
-							'<div class="concert_visibility">'+events[event].visible+'</div>'+
+							'<div class="concert_visibility">'+(events[event].visible == 1 ? "Visible" : "Hidden")+'</div>'+
                     '</div>');
       
         },

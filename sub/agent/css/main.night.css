@@ -274,6 +274,10 @@ section#homePanel{
     text-align: center;
     line-height: 1.6em;
 }
+.pro_text{
+	text-decoration: none;
+	color: #fff;
+}
 strong{
     line-height: 2em;
     font-size: 1.3em;

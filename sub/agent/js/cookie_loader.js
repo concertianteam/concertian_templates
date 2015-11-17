@@ -11,7 +11,7 @@ jQuery(document).ready(function() {
 	$('#idVenue').val(idVenue);
 	$('#apiKey').val(apiKey);
 	$('#venue_logo').append('<img class="logo" src="' + urlPhoto + '">');
-	$('#created_concerts').append('<span>Vaše koncerty: ' + name + '</span>');
+	$('#created_concerts').append('<span>Vaše koncerty: <b>' + name + '</b></span>');
 	}
 			
 });
