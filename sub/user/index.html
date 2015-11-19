@@ -1,13 +1,15 @@
 <!DOCTYPE html>
-<html>
+<html dir="ltr">
     <head>
-        <meta charset="UTF-8">
+        <meta charset="utf-8">
         <title>concertian - local concert search engine</title>
 
         <link rel="stylesheet" type="text/css" href="css/main.css">
+        <link href='https://fonts.googleapis.com/css?family=Open+Sans:300,400,600&subset=latin,latin-ext' rel='stylesheet' type='text/css'>
         
-        <script type="text/javascript" src="js/jquery-1.11.3.min.js?v=1.11.3"></script>
-        <script type="text/javascript" src="js/search.js"></script>
+        <script src="//code.jquery.com/jquery-1.11.3.min.js"></script>
+        <script src="//code.jquery.com/jquery-migrate-1.2.1.min.js"></script>
+        <script type="text/javascript" src="js/search.j"></script>
         
         <script>
         	map = null;
@@ -42,22 +44,52 @@
                         <span class="imgBorder"><span class="imgTwitter"></span></span>
                     </span>
                 </span>
-                <span class="secondRow borderBottom">
+                <span class="secondRow">
                     <span class="textButton">
-                        <span id="recent" class="text borderRight">Recent</span>
+                        <span id="categories" class="text border_right">CATEGORIES</span>
                     </span>
                     <span class="textButton">
-                        <span id="mostViewed" class="text">Most viewed</span>
+                        <span id="city" class="text border_right">CITY</span>
+                    </span>
+                    <span class="textButton">
+                        <span id="club" class="text">CLUB</span>
                     </span>
                 </span>
                 <div class="thirdsRow">
                     <form id="form">
-                        <input id="cityId" type="text" name="city" autofocus="autofocus">
+                        <input id="cityId" type="text" name="city" placeholder="V akom meste hľadáme?">
                         <input class="imgSearch" type="submit">
                     </form>
                 </div>
             </div>
             <span class="containerResult">
+                <span id="landing_banner">
+                    <span class="thick"><span class="thick_mark"><span class="imgThick"></span></span></span>
+                    <span class="header_text">Zviditelnite Vaše koncerty jednoducho a efektívne s<br><strong>concertian for managers</strong> teraz <strong>na 15 dní zadarmo</strong></span>
+                    <span class="tryit_button"><a href=""><button class="tryIt">VYSKÚŠAŤ TERAZ</button></a></span>
+                    <span id="close"><span class="imgClose"></span></span>
+                </span>
+                <span id="category_list">
+                        <span class="category_card">
+                            <span class="categoryImg">
+                
+                            </span>
+                            <span class="categoryHeader">
+                                    <a class="city_text">Bratislava</a>
+                            </span>
+                            <span class="categoryCounter">
+                                    <a class="counter_number">142</a><a class="counter_text">koncertov</a>
+                            </span>
+                        </span>
+                        <span class="category_card">
+                            <span class="categoryImg">
+                                <span class="categoryHeader"><a class="city_text">Praha</a></span>
+                                <span class="categoryCounter">
+                                        <a class="counter_number">142</a><a class="counter_text">koncertov</a>
+                                </span>
+                            </span>
+                        </span>
+                </span>
             </span>
         </div>
         <div id="columnMap">
@@ -65,6 +97,21 @@
                 <span class="slim"><span class="bold"></span></span>
             </span>
             <span id="map"></span>
+                <span class="banner_text">Stiahnite si appku<br><strong>do smartphonu</strong></span>
+                <span class="google_badge">
+                    <a href="https://play.google.com/store/apps/details?id=com.facebook.orca&utm_source=global_co&utm_medium=prtnr&utm_content=Mar2515&utm_campaign=PartBadge&pcampaignid=MKT-AC-global-none-all-co-pr-py-PartBadges-Oct1515-1"><img class="google" alt="Get it on Google Play" src="https://play.google.com/intl/en_us/badges/images/apps/en-play-badge.png" /></a>
+                </span>
         </div>
     </body>
+    <script type="text/javascript" src="js/jquery.slimscroll.min.js"></script>
+    <script>
+    $(function(){
+      $('#results_list').slimscroll({
+		  height: '100%',
+      }); 
+        $('#category_list').slimscroll({
+		  height: '100%',
+        });
+    });
+    </script>
 </html>

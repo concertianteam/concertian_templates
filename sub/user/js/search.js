@@ -1,4 +1,31 @@
+arrayCity = new Array();
+arrayVenueName = new Array();
+limitWidth = 620;
+
 function init() {
+    var rtime = 0;
+    var timeout = false;
+    var delta = 200;
+    setNormal = false;
+    disabled = false;
+$(window).resize(function() {
+    if (timeout === false){
+        rtime = new Date();
+        timeout = true;
+    }else if( (new Date() - rtime) > delta && !disabled && $(window).width() < limitWidth) {
+        setNormal = false;
+        timeout = false;
+        disabled = true;
+        console.log ($( window ).width());
+        repaindTextSecond();
+    }else if ( $(window).width() > limitWidth){
+        disabled = false;
+        setNormal = true;
+        restore();
+    }
+});
+
+
 //	// FORM after enter press don't reload page
 	$('#form').attr('action', 'javascript:void(0);');
 	
@@ -11,7 +38,7 @@ function init() {
 	$(".imgSearch").click(function(){
 		page = 0;
 		selectLoad = byCity;
-		$(".containerResult").empty();
+		$("#results_list").empty();
 		
 		for (var i = 0; i < markers.length; i++) {
 		    markers[i].setMap(null);
@@ -29,7 +56,7 @@ function init() {
 	$("#recent").click(function(){
 		page = 0;
 		selectLoad = recent;
-		$(".containerResult").empty();
+		$("#results_list").empty();
 		$("#cityId").val("");
 
 		for (var i = 0; i < markers.length; i++) {
@@ -44,7 +71,7 @@ function init() {
 	$("#mostViewed").click(function(){
 		page = 0;
 		selectLoad = mostViewed;
-		$(".containerResult").empty();
+		$("#results_list").empty();
 
 		for (var i = 0; i < markers.length; i++) {
 		    markers[i].setMap(null);
@@ -55,7 +82,7 @@ function init() {
 	});
 	
 	// Scroll effect
-	$(".containerResult").scroll(function(){
+	$("#results_list").scroll(function(){
 			clearTimeout($.data(this, 'scrollTimer'));
 		    $.data(this, 'scrollTimer', setTimeout(function() {
 	        	if($("#spinnerActivator").is_on_screen()){
@@ -97,8 +124,40 @@ function init() {
 	    }
 	};
 
-	$(".containerResult").empty();
+	$("#results_list").empty();
 	loadAllConcert('http://api.bandcloud.net/users/events');
+}
+
+function repaindTextSecond (){
+    for(var i = 0; i < $("#results_list").children().length; i++){
+       if(!disabled){
+           return false;
+       }
+    var textCity = $("#results_list").children().eq(i).children(".resultTextContainer").children(".resultTextSecond").children(".city").text();
+     var textVenueName= $("#results_list").children().eq(i).children(".resultTextContainer").children(".resultTextSecond").children(".venueName").text();
+        
+        arrayCity.push(textCity);
+        arrayVenueName.push(textVenueName);
+        $("#results_list").children().eq(i).children(".resultTextContainer").children(".resultTextSecond").children(".city").text(shortenTextWithoutSpace(textCity, 20));
+        
+$("#results_list").children().eq(i).children(".resultTextContainer").children(".resultTextSecond").children(".venueName").text(shortenTextWithoutSpace(textVenueName, 20));
+    }
+}
+
+function restore(){
+    for(var i = 0; i < arrayCity.length; i++){
+        if(!setNormal){
+            return false;
+        }
+ $("#results_list").children().eq(i).children(".resultTextContainer").children(".resultTextSecond").children(".city").text(arrayCity[i]);
+    }
+    
+    for(var i = 0; i < arrayVenueName.length; i++){
+        if(!setNormal){
+            return false;
+        }
+ $("#results_list").children().eq(i).children(".resultTextContainer").children(".resultTextSecond").children(".venueName").text(arrayVenueName[i]);
+    }
 }
 
 var page = 0;
@@ -166,9 +225,9 @@ function addElements(json){
 							  '<img src="' + value.urlPhoto + '" alt="venue_img" class="image">'+
 						  '</a>'+
 						  '<span class="resultTextContainer">'+
-					  		  '<span class="resultTextFirst">' + shortenText(40, value.eventName) + '</span>'+
+					  		  '<span class="resultTextFirst">' + shortenText( value.eventName, 40) + '</span>'+
                               '<span class="resultTextSecond">'+
-                                    '<span class="city">' + value.city + '</span>'+
+                                    '<span class="city">' + ($(window).width()<limitWidth? shortenText(value.city, 15) : value.city) + '</span>'+
                                     '<span class="venueName">' + value.venueName + '</span>'+
                               '</span>'+
                           '</span>' +
@@ -176,13 +235,16 @@ function addElements(json){
 							  '<span id="date" class="resultTextFirst">' + value.date + '</span>'+
 							  '<span id="time" class="resultTextSecond">' + value.time + '</span>'+
 						  '</span>'+
-						  '<span class="resultInfoButton">'+
-						  '<span class="imgShare"></span>'+
+                          '<span class="resultInfoButton">'+						                                   '<span class="imgInfo"></span>'+ 
+                          '</span>'+
+						  '<span class="resultShareButton">'+
+                            '<span class="imgShare"></span>'+ 
+                          '</span>'+
 					  '</span>';
 		
-		$(".containerResult").append(element);
+		$("#results_list").append(element);
 		if(json.events.length % 20 == 0 && i == json.events.length - 5){
-			$(".containerResult").append('<span id="spinnerActivator"></span>');
+			$("#results_list").append('<span id="spinnerActivator"></span>');
 			minus = 2;
 		}
 	}
@@ -225,28 +287,35 @@ function addElements(json){
 	}
 	
     if(minus == 2){
-        $(".containerResult").append('<div class="spinner">' +
+        $("#results_list").append('<div class="spinner">' +
                                           '<div class="dot1"></div>'+
                                           '<div class="dot2"></div>'+
                                     '</div>');
     }
 	
 	$('.bold').empty();
-	$('.bold').append($(".containerResult").children().length - minus + ' results');
+	$('.bold').append($("#results_list").children().length - minus + ' results');
 }
 
 // Edit text length
-function shortenText(maxLength, text){
+function shortenText(text, maxLength){
 	if(text.length > maxLength){
 		var position
-		if((position = text.substr(0,maxLength).lastIndexOf(" ")) != -1 ){
+		if((position = text.substr(0,maxLength - 3).lastIndexOf(" ")) != -1 ){
 			return text.substr(0,position) + "...";
 		}else{
-			return value.eventName.substr(0,maxLength) + "...";
+			return text.substr(0,maxLength - 3) + "...";
 		}
 	}else{
 		return text;
 	}
 }
 
-
+// Edit text length
+function shortenTextWithoutSpace(text, maxLength){
+	if(text.length > maxLength){
+        return text.substr(0,maxLength - 3) + "...";
+	}else{
+		return text;
+	}
+}
