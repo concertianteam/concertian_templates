@@ -100,7 +100,7 @@ function addElements(json){
 	for(var i = 0; i < json.events.length; i++){
 		var value = json.events[i];
 		
-		chartData.push(new Array(value.date, value.time, value.urlPhoto,value.venueEmail));
+		chartData.push(new Array(value.date, value.time, value.urlPhoto));
 		
 		var element = '<div class="resultElement">'+
                         '<div class="whenElement">'+
@@ -127,7 +127,7 @@ function addElements(json){
 			minus = 1;
 		}
 	}
-	/*
+	
 	var min = null;
 	var max = null;
 	for (var i = 0; i < chartData.length; i++){
@@ -137,33 +137,39 @@ function addElements(json){
 		}else if(chartData[i][1] > max){
 			max = chartData[i][1];
 		}else if(chartData[i][1] < min){
-			min = chartData[i][1];
 		}
 	}
 	
-	/*var minSplit = min.split(":");
+	var minSplit = min.split(":");
 	var minHour = minSplit[0];
 	var minMinute = minSplit[1];
 	var maxSplit = max.split(":");
 	var maxHour = maxSplit[0];
-	var maxMinute = maxSplit[1];*/
-	/*
+	var maxMinute = maxSplit[1];
+	
 	min = getMinutes(min);
 	max = getMinutes(max);
-	var different = (max - min) / $("#program_part").height();
-	var height = $("#program_part").height();
+	var different = (max - min) / $("#graph").height();
+	var height = $("#graph").height();
+	var distanceLeft = 10;
 	
 	for (var i = 0; i < chartData.length; i++){
-		console.log(different + " - " + (max - getMinutes(chartData[i][1])) + " - " + getMinutes(chartData[i][1])+" - "+height);
+		console.log(different + " - " + (max - getMinutes(chartData[i][1])) + " - " + getMinutes(chartData[i][1]) + " - " + height);
 		
-		var element = '<div class="venueImg" style="margin-top: ' + (max - getMinutes(chartData[i][1])) / different + 'px;">'+
-							'<a class="resultImg" href="mailto:' + chartData[i][3] + '">'+
-							'<img src="' + chartData[i][2] + '" alt="venue_img" class="img_result">'+ 
-							'</a>'+
+		if(i > 0 && ((max - getMinutes(chartData[i][1])) / different) == ((max - getMinutes(chartData[i-1][1])) / different)){
+			distanceLeft = distanceLeft + 10;
+		}else{
+			distanceLeft = distanceLeft + 55;
+		}
+		
+		var element = '<div class="venueImg" style="left: ' + distanceLeft + 'px; top: ' + (max - getMinutes(chartData[i][1])) / different + 'px;">'+
+							'<span class="resultImg" >'+
+								'<img src="' + chartData[i][2] + '" alt="venue_img" class="img_result">'+ 
+							'</span>'+
 					  '</div>';
 		
-		$("#program_part").append(element);
-	}*/
+		$("#graph").append(element);
+	}
     
     if(minus == 1){
         $("#resultList").append('<div class="spinner">' +
@@ -175,11 +181,11 @@ function addElements(json){
 	$('.bold').empty();
 	$('.bold').append($("#resultList").children().length - minus + ' results');
 }
-/*
+
 function getMinutes(time){
 	var timeSplit = time.split(":");
 	var hour = timeSplit[0];
 	var minute = timeSplit[1];
 	
 	return (hour * 60) + minute;
-}*/
+}
