@@ -10,11 +10,11 @@ jQuery(document).ready(function() {
         data: apiKey,
         success: function(data){ 
 			if (data.error) { // script returned error
-			window.location = '../index.html';
+			window.location = 'http://localhost/sub/agent/index.html';
             $('div#loginResult').text("data.error: " + data.error);
           } // if
           else { // login was successful
-			window.location = '../index.html';
+			window.location = 'http://localhost/sub/agent/index.html';
             $('div#loginResult').append('<div class="loged_out">Boli ste úspešne dohlásený</div>');
           } //else
         } // success

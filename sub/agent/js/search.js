@@ -3,11 +3,12 @@ $(document).ready(function() {
 	$('#form').attr('action', 'javascript:void(0);');
 	
 	$("#button").click(function(){
+		console.log("LOAD");
 		page = 0;
 		selectLoad = byCity;
 		$("#resultList").empty();
 		
-		if($("#cityId").val() == ''){
+		if($("#cityId").val() === ''){
 			loadAllConcert('http://api.bandcloud.net/users/events');
 		}else{
 			loadConcertByCity($("#cityId").val());
@@ -57,7 +58,7 @@ var page = 0;
 var all = 0;
 var byCity = 1;
 var selectLoad = all;
-var chartData = new Array();
+var chartData = [];
 
 function loadAllConcert(url){
 	$.ajax({ 'url' : url,
@@ -100,7 +101,7 @@ function addElements(json){
 	for(var i = 0; i < json.events.length; i++){
 		var value = json.events[i];
 		
-		chartData.push(new Array(value.date, value.time, value.urlPhoto));
+		chartData.push(new Array(value.date, value.time, value.urlPhoto,value.venueEmail));
 		
 		var element = '<div class="resultElement">'+
                         '<div class="whenElement">'+
@@ -122,13 +123,13 @@ function addElements(json){
                     '</div>';
 		
 		$("#resultList").append(element);
-		if(json.events.length % 20 == 0 && i == json.events.length - 5){
+		if(json.events.length % 20 === 0 && i == json.events.length - 5){
 			$("#resultList").append('<span id="spinnerActivator"></span>');
 			minus = 1;
 		}
 	}
 	
-	var min = null;
+	/*var min = null;
 	var max = null;
 	for (var i = 0; i < chartData.length; i++){
 		if(min == null){
@@ -137,6 +138,7 @@ function addElements(json){
 		}else if(chartData[i][1] > max){
 			max = chartData[i][1];
 		}else if(chartData[i][1] < min){
+			min = chartData[i][1];
 		}
 	}
 	
@@ -148,27 +150,19 @@ function addElements(json){
 	var maxMinute = maxSplit[1];
 	
 	min = getMinutes(min);
-	max = getMinutes(max);
-	var different = (max - min) / $("#graph").height();
-	var height = $("#graph").height();
-	var distanceLeft = 10;
+	var different = (max - min) / $("#program_part").height();
+	var height = $("#program_part").height();
 	
 	for (var i = 0; i < chartData.length; i++){
-		console.log(different + " - " + (max - getMinutes(chartData[i][1])) + " - " + getMinutes(chartData[i][1]) + " - " + height);
+		console.log(different + " - " + (max - getMinutes(chartData[i][1])) + " - " + getMinutes(chartData[i][1])+" - "+height);
 		
-		if(i > 0 && ((max - getMinutes(chartData[i][1])) / different) == ((max - getMinutes(chartData[i-1][1])) / different)){
-			distanceLeft = distanceLeft + 10;
-		}else{
-			distanceLeft = distanceLeft + 55;
-		}
-		
-		var element = '<div class="venueImg" style="left: ' + distanceLeft + 'px; top: ' + (max - getMinutes(chartData[i][1])) / different + 'px;">'+
-							'<span class="resultImg" >'+
-								'<img src="' + chartData[i][2] + '" alt="venue_img" class="img_result">'+ 
-							'</span>'+
+		var element = '<div class="venueImg" style="margin-top: ' + (max - getMinutes(chartData[i][1])) / different + 'px;">'+
+							'<a class="resultImg" href="mailto:' + chartData[i][3] + '">'+
+							'<img src="' + chartData[i][2] + '" alt="venue_img" class="img_result">'+ 
+							'</a>'+
 					  '</div>';
 		
-		$("#graph").append(element);
+		$("#program_part").append(element);
 	}
     
     if(minus == 1){
@@ -179,13 +173,13 @@ function addElements(json){
     }
 	
 	$('.bold').empty();
-	$('.bold').append($("#resultList").children().length - minus + ' results');
+	$('.bold').append($("#resultList").children().length - minus + ' results');*/
 }
-
+/*
 function getMinutes(time){
 	var timeSplit = time.split(":");
 	var hour = timeSplit[0];
 	var minute = timeSplit[1];
 	
 	return (hour * 60) + minute;
-}
+}*/

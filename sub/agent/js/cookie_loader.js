@@ -1,6 +1,6 @@
 jQuery(document).ready(function() {
 	if (Cookies.get('apiKey') === undefined) {
-			window.location = '../index.html';
+			window.location = 'http://localhost/sub/agent/index.html';
     	}
 	else{
 	  var apiKey = Cookies.get('apiKey');
