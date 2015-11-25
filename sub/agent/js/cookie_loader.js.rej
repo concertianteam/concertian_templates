@@ -1,9 +1,0 @@
-diff a/sub/agent/js/cookie_loader.js b/sub/agent/js/cookie_loader.js	(rejected hunks)
-@@ -1,6 +1,6 @@
- jQuery(document).ready(function() {
- 	if (Cookies.get('apiKey') === undefined) {
--			window.location = '../index.html';
-+			window.location = 'http://localhost/sub/agent/index.html';
-     	}
- 	else{
- 	  var apiKey = Cookies.get('apiKey');
