@@ -99,12 +99,16 @@ function addElements(json){
 	page++;
 	for(var i = 0; i < json.events.length; i++){
 		var value = json.events[i];
+        
+        var data = (value.stringDate);
+        var arr = data.split('-');
+        $('.resultDate').html("<span>"+arr[2]+arr[1]+"</span><br>"+arr[0]);
 		
-		chartData.push(new Array(value.date, value.time, value.urlPhoto));
-		
+		chartData.push(new Array(value.stringDate, value.time, value.urlPhoto));
+        
 		var element = '<div class="resultElement">'+
                         '<div class="whenElement">'+
-                            '<div class="resultDate">' + value.date + '</div>'+
+                            '<div class="resultDate">' + value.stringDate + '</div>'+
                             '<div class="resultTime">' + value.time + '</div>'+
                         '</div>'+
                         '<div class="whereElement">'+

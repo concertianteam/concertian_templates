@@ -10,12 +10,18 @@
      
     <script src="//code.jquery.com/jquery-1.11.3.min.js"></script>
     <script src="//code.jquery.com/jquery-migrate-1.2.1.min.js"></script>
+    <script type="text/javascript">
+	if (typeof jQuery == 'undefined')
+		document.write(unescape("%3Cscript src='js/jquery-1.9.js'" + 
+															"type='text/javascript'%3E%3C/script%3E"))
+    </script>
 	<script src="js/js.cookie.js"></script>
 	<script src="js/cookie_loader.js"></script>
     <link href='https://fonts.googleapis.com/css?family=Open+Sans:300,400,600&subset=latin,latin-ext' rel='stylesheet' type='text/css'>
     <script type="text/javascript" src="js/search.js"></script>
 	<script src="js/restSearch.js"></script>
 	<script src="js/logout.js"></script>
+    <script src="js/trunk.js"></script>
         
     <link rel="stylesheet" type="text/css" href="css/jquery.timepicker.css">
     <link rel="stylesheet" type="text/css" href="css/jquery.ui.autocomplete.css">
@@ -26,18 +32,22 @@
     </head>
     <body>
         <div id="container">
-            <section id="homePanel">
+            <header id="homePanel" class="slide slideRight">
                 <div id="venue_logo"></div>
                 <div class="upgrade_pro">UPGRADE<br>TO<br>
-					<a class="pro_text" href="http://manager.concertian.com/"><strong>PRO</strong></a></div>
+					<a class="pro_text" href="http://manager.concertian.com/"><strong>PRO</strong></a>
+                </div>
+                    <ul id="navToggle" class="burger slide">
+                            <li></li><li></li><li></li>
+		              </ul>
 				<div class="color_mode">
 					<button id="normal">DAY</button>
 					<button id="night">NIGHT</button>
-                THEME</div>
+                </div>
                 <a id="logOff"></a>
-            </section>
+            </header>
             <section id="contentPanel">
-                <section id="searchPanel">
+                <section id="searchPanel" class="content slide slideRight">
                     <div class="search">
                         <form id="form">
                             <input id="cityId" type="text" name="city" placeholder="Zadajte mesto">
@@ -46,7 +56,7 @@
                     </div>
                     <div id="resultList"></div>
                 </section>
-                <section id="corePanel">
+                <section id="corePanel" class="slide">
                     <div id="topPanel">
                         <div class="header">
                             <div class="headerText">
@@ -112,7 +122,7 @@ $(function(){
 			height: '87%',
       	});
 			$('#program').slimscroll({
-				height: '87%',
+				height: '77%',
       		});
 				$('#graph').slimscroll({
 					width: '100%',

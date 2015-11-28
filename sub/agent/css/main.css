@@ -245,7 +245,8 @@ section{
     vertical-align: top;
 }
 /* homePanel */
-section#homePanel{
+/* -------------- LEFT BANNER --------- */
+header#homePanel{
     position: relative;
     display: table-cell;
     float: left;
@@ -259,7 +260,7 @@ section#homePanel{
     left: 0;
     width: 60px;
     height: 50px;
-    border-bottom: 6px solid #ffc95c;
+    border-bottom: 10px solid #ffc95c;
 }
 .logo{
     width: 60px;
@@ -285,6 +286,23 @@ strong{
     background: #ffc95c;
     border-radius: 2px;
     font-weight: 100;
+}
+.burger {
+	position: absolute;
+	float: left;
+	padding: 0px;
+	top: -2px;
+	left: 10px;
+	
+	display: none;
+}
+.burger li {
+    display: block;
+	width: 30px;
+	height: 4px;
+	background-color: #fff;
+	border-radius: 3px;
+	margin: 5px 0;
 }
 .color_mode{
     position: fixed;
@@ -335,6 +353,7 @@ strong{
     font-size: 0.8em;
     text-align: center;
 }
+/* -------------------- BODY PANEL ---------------- */
 section#contentPanel{
     display: table-cell;
     position: absolute;
@@ -429,11 +448,6 @@ div#resultList{
 .venueImg:hover{
     z-index: 33;
 }
-@media only screen and (max-width: 890px) {
-    .venueImg{
-        display: none;
-    }
-}
 .resultImg{
 	position: absolute;
 	top: 0px;
@@ -524,9 +538,17 @@ section#corePanel{
 }
 @media only screen and (max-width: 1300px) {
     section#corePanel{
-        position: absolute;
-        margin-left: 320px;
-        width: 70%;
+        position: relative;
+        box-sizing: border-box;
+        width: 100%;
+         /* Firefox */
+        width: -moz-calc(100% - 320px);
+        /* WebKit */
+        width: -webkit-calc(100% - 320px);
+        /* Opera */
+        width: -o-calc(100% - 320px);
+        /* Standard */
+        width: calc(100% - 320px);
     }
 }
 /* topPanel */
@@ -545,11 +567,6 @@ section#corePanel{
     color: #fff;
     font-size: 1.5em;
 }
-@media only screen and (max-width: 900px) {
-    .headerText{
-        font-size: 0.9em;
-    }
-}
 @media only screen and (max-width: 1200px) {
     .headerText{
         font-size: 1.2em;
@@ -566,12 +583,6 @@ button.discover{
     border: none;
     border-radius: 4px;
     font-size: 0.6em;
-}
-@media only screen and (max-width: 929px) {
-    button.discover{
-        font-size: 0.3em;
-        height: 15px;
-    }
 }
 @media only screen and (min-width: 930px, max-width: 1200px) {
     button.discover{
@@ -829,4 +840,304 @@ select[name="visibility"]{
     transform: scale(1.0);
     -webkit-transform: scale(1.0);
   }
+}
+/* ------------ Adaptive layout (media queries) TABLET------------
+------------------------------------------------------------*/
+@media only screen and (max-width: 1080px){
+    header#homePanel{
+        position: relative;
+        display: block;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 60px;
+    }
+    .upgrade_pro{
+        top: 2px;
+        left: 80px;
+        font-size: 0.6em;
+    }
+    .color_mode{
+        position: relative;
+        float: right;
+        margin-right: 2%;
+        top: 10px;
+        width: 100px;
+        height: 60px;
+    }
+    .color_mode button{
+        display: inline-block;
+    }
+    #logOff{
+        position: relative;
+        display: block;
+        right: 100px; 
+        top: 18px;
+    }
+    section#contentPanel{
+        position: relative;
+        width: 100%;
+        display: block;
+        height: 100%;
+        height: -moz-calc(100% - 60px);
+        /* WebKit */
+        height: -webkit-calc(100% - 60px);
+        /* Opera */
+        height: -o-calc(100% - 60px);
+        /* Standard */
+        height: calc(100% - 60px);
+        left: 0;
+    }
+    section#searchPanel{
+        position: relative;
+        display: inline-block;
+        width: 320px;
+        float: left;
+    }
+    #topPanel{
+        display: none;
+    }
+    #formPanel{
+        height: 100%;
+        width: 100%;
+        box-sizing: border-box;
+    }
+    #form_part{
+        height: 65%;
+        width: 100%;
+        text-align: center;
+    }
+     .form{
+        display: block;
+        width: 100%;
+        height: 60%;
+    }
+    #outer_form{
+        width: 96%;
+        box-sizing: border-box;
+        padding: 10px 20px;
+    }
+    .create_concert{
+        padding: 10px 12px;
+    }
+    #form_part input[name="eventName"]{
+        width: 70%;
+        margin: 0;
+    }
+    .input{
+        width: 16%;
+    }
+    #form_part input{
+        width: 20%;
+        margin: 0;
+    }
+    #form_part select{
+        width: 78%;
+    }
+    .overview{
+        display: block;
+        box-sizing: border-box;
+        width: 100%;
+        height: 40%;
+    }
+    .program_outer{
+        display: block;
+        width: 100%;
+        height: 35%;
+        padding-top: 2%;
+    }
+    #program_part{
+        width: 96%;
+        margin-left: 2%;
+        height: 90%;
+    }
+}
+/* ------------ Adaptive layout (media queries) SMARTPHONE ------------
+------------------------------------------------------------*/
+@media only screen and (max-width: 749px){
+    .container{
+/*  Prevents Flickering  */
+	-webkit-backface-visibility: hidden;
+	-moz-backface-visibility: hidden;
+	-ms-backface-visibility: hidden;
+    }
+    section#searchPanel{
+        position: absolute;
+        display: block;
+        z-index: 2;
+        width: 100% !important;
+        height: 100%;
+    }
+    .whereElement{
+        width: 75%;
+    }
+    section#corePanel{
+        position: relative;
+    }
+    section#corePanel{
+        position: fixed;
+        display: block;
+        z-index: 1;
+        width: 80% !important;
+        height: 100%;
+        margin: 0 ;
+        left: 0;
+        top: 0;
+        opacity: 0;
+        -webkit-transform: translate3d(5%,0,0)scale(.97);
+        -moz-transform: translate3d(5%,0,0)scale(.97);
+        transform: translate3d(5%,0,0)scale(.97);
+    }
+    section#corePanel.open{  
+        opacity: 1;
+        -webkit-transform: translate3d(0,0,0)scale(1);
+        -webkit-animation: slideIn .35s ease-in-out;
+
+        -moz-transform: translate3d(0,0,0)scale(1);
+        -moz-animation: slideIn .35s ease-in-out;
+
+        transform: translate3d(0,0,0)scale(1);
+        animation: slideIn .35s ease-in-out;
+    }
+    @-webkit-keyframes slideIn {
+	0%       {opacity: .3;
+				-webkit-transform: translate3d(5%,0,0)scale(.97);}
+	100%  {opacity: 1;
+				-webkit-transform: translate3d(0,0,0)scale(1);}
+    }
+    @-moz-keyframes slideIn {
+        0%      {opacity: .3;
+                    -moz-transform: translate3d(5%,0,0)scale(.97);}
+        100%  {opacity: 1;
+                    -moz-transform: translate3d(0,0,0)scale(1);}
+    }
+    @keyframes slideIn {
+        0%      {opacity: .3;
+                    transform: translate3d(5%,0,0)scale(.97);}
+        100%  {opacity: 1;
+                    transform: translate3d(0,0,0)scale(1);}
+    }
+    section#corePanel.close{
+        opacity: 0;
+        -webkit-transform: translate3d(5%,0,0)scale(.97);
+        -webkit-animation: slideOut .3s ease-in-out;
+
+        -moz-transform: translate3d(5%,0,0)scale(.97);
+        -moz-animation: slideOut .3s ease-in-out;
+
+        transform: translate3d(5%,0,0)scale(.97);
+        animation: slideOut .3s ease-in-out;
+    }
+    @-webkit-keyframes slideOut {
+	0%      {opacity: 1;
+				-webkit-transform: translate3d(0,0,0)scale(1);}
+	100%  {opacity: .3;
+				-webkit-transform: translate3d(5%,0,0)scale(.97);}
+    }
+    @-moz-keyframes slideOut {
+        0%      {opacity: 1;
+                    -moz-transform: translate3d(0,0,0)scale(1);}
+        100%  {opacity: .3;
+                    -moz-transform: translate3d(5%,0,0)scale(.97);}
+    }
+    @keyframes slideOut {
+        0%      {opacity: 1;
+                    transform: translate3d(0,0,0)scale(1);}
+        100%  {opacity: .3;
+                    transform: translate3d(5%,0,0)scale(.97);}
+    }
+    #homePanel{
+        position: fixed;
+        top: 0;
+        right: 0;
+        left: 0;
+        z-index: 2;
+    -webkit-transform: translate3d(0,0,0);
+	-moz-transform: translate3d(0,0,0);
+	transform: translate3d(0,0,0); 
+    }
+    #venue_logo{
+        margin-left: 55px;
+    }
+    .upgrade_pro{
+        margin-left: 55px;
+    }
+    #logOff{
+        margin-left: 55px;
+    }
+    .burger{
+        display: inline-block;
+    }
+    .content {
+	/* starting point */
+	-webkit-transform: translate3d(0,0,0);
+	-moz-transform: translate3d(0,0,0);
+	transform: translate3d(0,0,0);
+	z-index: 1;
+    }
+    #homePanel.open,
+    .content.open{
+    margin-left: 35%;
+    -webkit-transform: translate3d(240px,0,0);
+	-webkit-animation: open .5s ease-in-out;
+	
+	-moz-transform: translate3d(240px,0,0);
+	-moz-animation: open .5s ease-in-out;
+	
+	transform: translate3d(240px,0,0);
+	animation: open .5s ease-in-out;
+    }
+    @-webkit-keyframes open {
+        0%      {-webkit-transform: translate3d(0,0,0);}
+        70%    {-webkit-transform: translate3d(260px,0,0);}
+        100%  {-webkit-transform: translate3d(240px,0,0);}
+    }
+    @-moz-keyframes open {
+        0%      {-moz-transform: translate3d(0,0,0);}
+        70%    {-moz-transform: translate3d(260px,0,0);}
+        100%  {-moz-transform: translate3d(240px,0,0);}
+    }
+    @keyframes open {
+        0%      {transform: translate3d(0,0,0);}
+        70%    {transform: translate3d(260px,0,0);}
+        100%  {transform: translate3d(240px,0,0);}
+    }
+#homePanel.close,
+.content.close{
+	-webkit-transform: translate3d(0,0,0);
+	-webkit-animation: close .3s ease-in-out;
+	
+	-moz-transform: translate3d(0,0,0);
+	-moz-animation: close .3s ease-in-out;
+	
+	transform: translate3d(0,0,0);
+	animation: close .3s ease-in-out;
+}
+@-webkit-keyframes close {
+	0%      {-webkit-transform: translate3d(240px,0,0);}
+	100%  {-webkit-transform: translate3d(0,0,0);}
+}
+@-moz-keyframes close {
+	0%       {-moz-transform: translate3d(240px,0,0);}
+	100%  {-moz-transform: translate3d(0,0,0);}
+}
+@keyframes close {
+	0%       {transform: translate3d(240px,0,0);}
+	100%  {transform: translate3d(0,0,0);}
+}
+    .concert_visibility{
+        display: none !important;
+    }
+    .concert_name{
+        width: 70% !important;
+    }
+    .concert_date{
+        width: 30% !important;
+    }
+    .input{
+        display: none !important;
+    }
+    #form_part input{
+        width:  25%;
+    }
 }
