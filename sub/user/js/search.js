@@ -24,8 +24,6 @@ $(window).resize(function() {
         restore();
     }
 });
-
-
 //	// FORM after enter press don't reload page
 	$('#form').attr('action', 'javascript:void(0);');
 	
@@ -33,52 +31,90 @@ $(window).resize(function() {
 	$('.imgSearch').hover(function() {
 		$('.thirdsRow').toggleClass('buttonHover');
 	});
-	
+    
 	// Handler for search button click
 	$(".imgSearch").click(function(){
-		page = 0;
-		selectLoad = byCity;
-		$("#results_list").empty();
-		
-		for (var i = 0; i < markers.length; i++) {
-		    markers[i].setMap(null);
-		}
-		markers = [];
-		
-		if($("#cityId").val() == ''){
-			loadAllConcert('http://api.bandcloud.net/users/events');
-		}else{
-			loadConcertByCity($("#cityId").val());
-		}
+        if(selectLoad != byCategories){
+            page = 0;
+            //selectLoad = byCity;
+            $("#results_list").empty();
+
+            for (var i = 0; i < markers.length; i++) {
+                markers[i].setMap(null);
+            }
+            markers = [];
+
+            if($("#cityId").val() == ''){
+                loadAllConcert();
+            }else{
+                if(selectLoad == byCity){
+                    loadConcertByCity($("#cityId").val());
+                }else if(selectLoad == club){
+                    loadConcertByClub($("#cityId").val());
+                }
+            }
+        }
 	});
 	
-	// Handler for click on button Recent
-	$("#recent").click(function(){
-		page = 0;
-		selectLoad = recent;
+	// Handler for click on button Categories
+	$("#categories").click(function(){
+		selectLoad = byCategories;
 		$("#results_list").empty();
-		$("#cityId").val("");
+        $("#form").css('visibility', 'hidden');
 
 		for (var i = 0; i < markers.length; i++) {
 		    markers[i].setMap(null);
 		}
 		markers = [];
 		
-		loadAllConcert('http://api.bandcloud.net/users/events');
+		loadlandingCards();
 	});
 	
-	// Handler for click on button MostViewed
-	$("#mostViewed").click(function(){
+	// Handler for click on button City
+	$("#city").click(function(){
+        $("#form").css('visibility', 'visible');
 		page = 0;
-		selectLoad = mostViewed;
+		selectLoad = byCity;
 		$("#results_list").empty();
+        $("#results_list").append('<div class="spinner">' +
+                                          '<div class="dot1"></div>'+
+                                          '<div class="dot2"></div>'+
+                                    '</div>');
 
 		for (var i = 0; i < markers.length; i++) {
 		    markers[i].setMap(null);
 		}
 		markers = [];
 	    
-		loadAllConcert('http://api.bandcloud.net/users/events/mostviewed');
+        if($("#cityId").val().length == 0){
+            loadAllConcert();
+        }else{
+            loadConcertByCity($("#cityId").val());
+        }
+	});
+    
+	// Handler for click on button Club
+	$("#club").click(function(){
+        $("#form").css('visibility', 'visible');
+		page = 0;
+		selectLoad = byClub;
+		$("#results_list").empty();
+        $("#cityId").val("");
+        $("#results_list").append('<div class="spinner">' +
+                                          '<div class="dot1"></div>'+
+                                          '<div class="dot2"></div>'+
+                                    '</div>');
+
+		for (var i = 0; i < markers.length; i++) {
+		    markers[i].setMap(null);
+		}
+		markers = [];
+	    
+        if($("#cityId").val().length < 1){
+            loadAllConcert();
+        }else{
+            loadConcertByClub($("#cityId").val());
+        }
 	});
 	
 	// Scroll effect
@@ -89,13 +125,11 @@ $(window).resize(function() {
 	        		$("#spinnerActivator").remove();
 	        		
 	        		if(selectLoad == all){
-	        			loadAllConcert('http://api.bandcloud.net/users/events');
+	        			loadAllConcert();
 	        		}else if(selectLoad == byCity){
 	        			loadConcertByCity($("#cityId").val());
-	        		}else if(selectLoad == recent){
-	        			loadAllConcert('http://api.bandcloud.net/users/events');
-	        		}else if(selectLoad == mostViewed){
-	        			loadAllConcert('http://api.bandcloud.net/users/events/mostviewed');
+	        		}else if(selectLoad == byClub){
+	        			loadConcertByClub();
 	        		}
 	        	}
 		    }, 19));
@@ -125,7 +159,8 @@ $(window).resize(function() {
 	};
 
 	$("#results_list").empty();
-	loadAllConcert('http://api.bandcloud.net/users/events');
+    $("#form").css('visibility', 'hidden');
+	loadlandingCards();
 }
 
 function repaindTextSecond (){
@@ -164,14 +199,14 @@ var page = 0;
 
 var all = 0;
 var byCity = 1;
-var recent = 2;
-var mostViewed = 3;
-var selectLoad = all;
+var byCategories = 2;
+var byClub = 3;
+var selectLoad = byCategories;
 var markers = [];
 
-// Load all concert by URL
-function loadAllConcert(url){
-	$.ajax({ 'url' : url,
+// Load all concert
+function loadAllConcert(){
+	$.ajax({ 'url' : 'http://api.bandcloud.net/users/events',
 		  'method' : 'POST',
 		  'data' : { 'results' : "20",
 			 		 'page' : page
@@ -183,6 +218,20 @@ function loadAllConcert(url){
 	  	'error': function(error){
 	  		console.log('Error. ' + error);
 	  		$(".spinner").remove();
+	  	}
+    });
+}
+
+// Load Landing Cards
+function loadlandingCards(){
+	$.ajax({ 'url' : 'http://api.bandcloud.net/users/cards',
+		  'method' : 'GET',
+	  	  contentType : "application/x-www-form-urlencoded",
+		  'success' : function (json){
+          addCategories(json);
+	  	},
+	  	'error': function(error){
+	  		console.log('Error. ' + error);
 	  	}
     });
 }
@@ -206,6 +255,47 @@ function loadConcertByCity(city){
     });
 }
 
+function loadConcertByClub(club){
+    $.ajax({ 'url': 'http://api.bandcloud.net/agents/venues/name',
+        'method': 'POST',
+        'data': {'startsWith': club},
+        'success': function (data) {
+            response($.map(data, function(d) {
+                return {
+                    fields: getFields(d)
+                }
+            }));
+        },
+        'error': function () {
+            alert('Váš podnik neevidujeme. Napravíme to, hneď ako nám zašlete emailovú adresu nižšie. Ďakujeme.');
+        }
+    });
+}
+
+function addCategories(json){
+    $(".slim").empty();
+	$(".slim").append($("#cityId").val() + ' <span class="bold"></span>');
+	$(".spinner").remove();
+   
+    for(var i = 0; i < json.cards.length; i++){
+        var value = json.cards[i];
+      
+        var element = '<span class="category_card">'+
+                            '<span class="categoryImg">'+
+                                '<img class="category_img" src="' + value.urlImage + '">'+
+                                        '<span class="categoryHeader">'+
+                                '<a class="city_text">' + value.name + '</a>'+
+                                        '</span><span class="categoryCounter">'+
+                                '<a class="counter_number">142</a>'+
+                                '<a class="counter_text">koncertov</a>'+
+                                        '</span>'+
+                            '</span>'+
+                        '</span>';
+        
+        $("#results_list").append(element);
+        }
+}
+
 // Add loaded element to container
 function addElements(json){
 	$(".slim").empty();
@@ -217,7 +307,8 @@ function addElements(json){
 	var address = [];
 	for(var i = 0; i < json.events.length; i++){
 		var value = json.events[i];
-		
+        var arr = value.stringDate.split('-');
+        
 		address[i] = encodeURIComponent(value.address + " " + value.city);
 		
 		var element = '<span class="resultElement">'+
@@ -232,8 +323,12 @@ function addElements(json){
                               '</span>'+
                           '</span>' +
 						  '<span class="resultTextContainer_datetime resultBorder">'+
-							  '<span id="date" class="resultTextFirst">' + value.date + '</span>'+
-							  '<span id="time" class="resultTextSecond">' + value.time + '</span>'+
+							  '<span id="date" class="date_formated">'+
+                                '<span>'+arr[2]+' '+arr[1]+
+                                    ' <strong>'+arr[0]+'</strong>'+
+                                '</span>'+
+                            '</span>'+
+                          '<span id="time" class="resultTextSecond">' + value.time + '</span>'+
 						  '</span>'+
                           '<span class="resultInfoButton">'+						                                   '<span class="imgInfo"></span>'+ 
                           '</span>'+
@@ -300,7 +395,7 @@ function addElements(json){
 // Edit text length
 function shortenText(text, maxLength){
 	if(text.length > maxLength){
-		var position
+		var position;
 		if((position = text.substr(0,maxLength - 3).lastIndexOf(" ")) != -1 ){
 			return text.substr(0,position) + "...";
 		}else{

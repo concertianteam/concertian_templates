@@ -69,7 +69,7 @@ body{
     width: 100%;
     height: 100%;
     min-height: 500px;
-    margin: 0px auto;
+    margin: 0px;
     padding: 0px;
     position: absolute;
     background-color: #ffffff;
@@ -80,7 +80,7 @@ body{
     overflow: hidden;
 }
 strong{
-    font-weight: 500;
+    font-weight: 100;
 }
 
     #columnSearch{
@@ -222,7 +222,7 @@ strong{
                 input[type="text"]:focus{
                     outline: none;
                 }
-            div#columnSearch ::-webkit-input-placeholder {
+            div#columnSearch :-webkit-input-placeholder {
                color: #fff;
                line-height: 1.7em;
                font-size: 0.8em;
@@ -234,7 +234,7 @@ strong{
                font-size: 0.8em;
             }
 
-            div#columnSearch ::-moz-placeholder {  /* Firefox 19+ */
+            div#columnSearch :-moz-placeholder {  /* Firefox 19+ */
                color: #fff;
                line-height: 1.7em;
                font-size: 0.8em;
@@ -250,24 +250,17 @@ strong{
             display: block;
             width: 100%;
             /* Firefox */
-            height: -moz-calc(100% - 92px);
+            height: -moz-calc(100% - 110px);
             /* WebKit */
-            height: -webkit-calc(100% - 92px);
+            height: -webkit-calc(100% - 110px);
             /* Opera */
-            height: -o-calc(100% - 92px);
+            height: -o-calc(100% - 110px);
             /* Standard */
-            height: calc(100% - 92px);
-            min-height: 413px;
-            padding-top: 8px;
+            height: calc(100% - 110px);
+            box-sizing: border-box;
+            padding-top: 7px;
         }
 /*------------- Category List -------------*/    
-#category_list{
-    display: block;
-    height: 100%;
-    width: 100%;
-    overflow-y: scroll;
-    margin-top: 7px;
-}
 .category_card{
     display: inline-block;
     box-sizing: border-box;
@@ -276,55 +269,59 @@ strong{
     height: 240px;
     background: #fff;
     text-align: center;
+    margin-top: 2%;
 }
 @media (max-width: 650px) {
     .category_card{
         width: 100%;
     }
 }
-.category_img{
-    display: block;
-    width: 100%;
-    height: 100%;
-    background-size: contain;
-}
 .categoryImg{
+    position: relative;
     display: inline-block;
-    margin-top: 20px;
     width: 350px;
     height: 180px;
     border-radius: 4px;
     background: #ffbb33;
 }
+.category_img{
+    position: absolute;
+    display: block;
+    width: 350px;
+    height: 180px;
+}
 .categoryCounter{
-    display: inline-block;
-    margin-top: 120px;
-    margin-left: 250px;
+    position: absolute;
+    display: block;
     width: 60px;
     height: 60px;
     border-radius: 30px;
     background: #ffc95c;
     box-sizing: border-box;
     padding: 10px 0;
+    bottom: -30px;
+    right: 20px;
 }
 .counter_number{
+    position: relative;
     display: block;
     text-align: center;
     font-size: 1.5em;
 }
 .counter_text{
     display: block;
-    font-size: 0.8em;
+    font-size: 0.75em;
 }
 .categoryHeader{
-    display: inline-block;
-    width: auto;
+    position: absolute;
+    display: block;
+    width: 50px;
     padding: 0 20px;
     height: 30px;
     border-radius: 4px;
     background: #ffc95c;
-    margin-top: -10px;
-    margin-left: 270px;
+    right: -10px;
+    top: -10px;
 }
 .city_text{
     text-align: left;
@@ -339,6 +336,7 @@ strong{
     height: 80px;
     background: #FFD685;
     border-radius: 4px;
+    margin-bottom: 7px;
 }
 #close{
     position: relative;
@@ -452,12 +450,18 @@ strong{
 /* ---------  Search list ---------*/
         #results_list{
             display: block;
-            height: 100%;
+            /* Firefox */
+            height: -moz-calc(100% - 87px);
+            /* WebKit */
+            height: -webkit-calc(100% - 87px);
+            /* Opera */
+            height: -o-calc(100% - 87px);
+            /* Standard */
+            height: calc(100% - 87px);
             overflow-y: scroll;
-            margin-top: 7px;
         }
             #columnSearch
-            .results_list
+            #results_list
             .resultElement{
                 display: block;
                 height: 70px;
@@ -470,13 +474,13 @@ strong{
                 }
             }
             #columnSearch
-            .results_list
+            #results_list
             .resultElement:hover{
                 border-top: 1px solid #eeeeee;
                 border-bottom: 1px solid #eeeeee;
             }
                 #columnSearch
-                .results_list
+                #results_list
                 .resultElement
                 .resultImage{
                     float: left;
@@ -488,7 +492,7 @@ strong{
                     cursor: pointer;
                 }
                 #columnSearch
-                .results_list
+                #results_list
                 .resultElement
                 .resultImage:hover,
                 .resultImage:active{
@@ -497,7 +501,7 @@ strong{
                     height: 40px;
                 }
                 #columnSearch
-                .results_list
+                #results_list
                 .resultElement
                 .resultImage
                 .image{
@@ -508,14 +512,14 @@ strong{
                     color: transparent;
                 }
                 #columnSearch
-                .results_list
+                #results_list
                 .resultElement
                 .resultImage:hover
                 .image{
                 	display: none;
                 }
                 #columnSearch
-                .results_list
+                #results_list
                 .resultElement
                 .resultTextContainer{
                     float: left;
@@ -530,7 +534,7 @@ strong{
                     }
                 }
                     #columnSearch
-                    .results_list
+                    #results_list
                     .resultElement
                     .resultTextContainer
                     .resultTextFirst{
@@ -551,7 +555,7 @@ strong{
                 }
 
                     #columnSearch
-                    .results_list
+                    #results_list
                     .resultElement
                     .resultTextContainer
                     .resultTextSecond{
@@ -564,7 +568,7 @@ strong{
                         color: #8998a5;
                     }
                         #columnSearch
-                        .results_list
+                        #results_list
                         .resultElement
                         .resultTextContainer
                         .resultTextSecond
@@ -583,7 +587,7 @@ strong{
                             }
                         }
                         #columnSearch
-                        .results_list
+                        #results_list
                         .resultElement
                         .resultTextContainer
                         .resultTextSecond
@@ -601,7 +605,7 @@ strong{
                             }
                         }
                 #columnSearch
-                .results_list
+                #results_list
                 .resultElement
                 .resultTextContainer_datetime{
                     float: left;
@@ -622,7 +626,7 @@ strong{
                     }
                 }
                     #columnSearch
-                    .results_list
+                    #results_list
                     .resultElement
                     .resultTextContainer_datetime
                     .resultTextFirst{
@@ -632,7 +636,17 @@ strong{
                         color: #4e5f6f;
                     }
                     #columnSearch
-                    .results_list
+                    #results_list
+                    .resultElement
+                    .resultTextContainer_datetime
+                    .date_formated{
+                        display: block;
+                        text-align: left;
+                        font-size: 17px;
+                        color: #4e5f6f;
+                    }
+                    #columnSearch
+                    #results_list
                     .resultElement
                     .resultTextContainer_datetime
                     .resultTextSecond{
@@ -641,13 +655,13 @@ strong{
                         color: #8998a5;
                     }
                     #columnSearch
-                    .results_list
+                    #results_list
                     .resultElement
                     .resultBorder{
                         border-left: 3px solid #ffc95c;
                     }
                     #columnSearch
-                    .results_list
+                    #results_list
                     .resultElement
                     .resultShareButton{
                         display: inline-block;
@@ -659,7 +673,7 @@ strong{
                         background-color: #ffc95c;
                     }
                     #columnSearch
-                    .results_list
+                    #results_list
                     .resultElement
                     .resultShareButton:hover{
                         cursor: pointer;
@@ -672,7 +686,7 @@ strong{
                         margin-left: 5% !important;
                     }
                     #columnSearch
-                    .results_list
+                    #results_list
                     .resultElement
                     .resultInfoButton{
                         display: inline-block;
@@ -683,7 +697,7 @@ strong{
                         border-radius: 33px;
                     }
                     #columnSearch
-                    .results_list
+                    #results_list
                     .resultElement
                     .resultInfoButton:hover{
                         border-radius: 1px solid #ffc95c;
@@ -734,13 +748,13 @@ strong{
         #map{
             width: 100%;
             /* Firefox */
-            height: -moz-(100% - 25px);
+            height: -moz-(100% - 27px);
             /* WebKit */
-            height: -webkit-calc(100% - 25px);
+            height: -webkit-calc(100% - 27px);
             /* Opera */
-            height: -o-calc(100% - 25px);
+            height: -o-calc(100% - 27px);
             /* Standard */
-            height: calc(100% - 25px);
+            height: calc(100% - 27px);
             min-height: 475px;
             display: block;
         }

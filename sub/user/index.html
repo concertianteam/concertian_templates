@@ -9,7 +9,7 @@
         
         <script src="//code.jquery.com/jquery-1.11.3.min.js"></script>
         <script src="//code.jquery.com/jquery-migrate-1.2.1.min.js"></script>
-        <script type="text/javascript" src="js/search.j"></script>
+        <script type="text/javascript" src="js/search.js"></script>
         
         <script>
         	map = null;
@@ -69,27 +69,7 @@
                     <span class="tryit_button"><a href=""><button class="tryIt">VYSKÚŠAŤ TERAZ</button></a></span>
                     <span id="close"><span class="imgClose"></span></span>
                 </span>
-                <span id="category_list">
-                        <span class="category_card">
-                            <span class="categoryImg">
-                
-                            </span>
-                            <span class="categoryHeader">
-                                    <a class="city_text">Bratislava</a>
-                            </span>
-                            <span class="categoryCounter">
-                                    <a class="counter_number">142</a><a class="counter_text">koncertov</a>
-                            </span>
-                        </span>
-                        <span class="category_card">
-                            <span class="categoryImg">
-                                <span class="categoryHeader"><a class="city_text">Praha</a></span>
-                                <span class="categoryCounter">
-                                        <a class="counter_number">142</a><a class="counter_text">koncertov</a>
-                                </span>
-                            </span>
-                        </span>
-                </span>
+                <span id="results_list"></span>
             </span>
         </div>
         <div id="columnMap">
@@ -105,13 +85,15 @@
     </body>
     <script type="text/javascript" src="js/jquery.slimscroll.min.js"></script>
     <script>
+        $("#close").click(function(){
+        $("#landing_banner").hide(800);
+        });
+    </script>
+    <script>
     $(function(){
       $('#results_list').slimscroll({
-		  height: '100%',
+		  height: '92%',
       }); 
-        $('#category_list').slimscroll({
-		  height: '100%',
-        });
     });
     </script>
 </html>
