@@ -293,7 +293,14 @@ function addCategories(json){
                         '</span>';
         
         $("#results_list").append(element);
-        }
+    }
+    
+//	category_card
+	
+	$(".categoryImg").on( "click", function() {
+		$("#cityId").val($(this).find(".city_text").text());
+		$("#city").click();
+	});
 }
 
 // Add loaded element to container

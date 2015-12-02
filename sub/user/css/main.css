@@ -284,6 +284,9 @@ strong{
     border-radius: 4px;
     background: #ffbb33;
 }
+.categoryImg:hover{
+    cursor: pointer;
+}
 .category_img{
     position: absolute;
     display: block;
