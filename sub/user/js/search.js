@@ -26,31 +26,22 @@ $(window).resize(function() {
 });
 //	// FORM after enter press don't reload page
 	$('#form').attr('action', 'javascript:void(0);');
-	
-	// Image Search button hover effect
-	$('.imgSearch').hover(function() {
-		$('.thirdsRow').toggleClass('buttonHover');
-	});
     
 	// Handler for search button click
 	$(".imgSearch").click(function(){
         if(selectLoad != byCategories){
             page = 0;
             //selectLoad = byCity;
-            $("#results_list").empty();
+			emptyContainerAddSpinner();
+            removeAllMarkers();
 
-            for (var i = 0; i < markers.length; i++) {
-                markers[i].setMap(null);
-            }
-            markers = [];
-
-            if($("#cityId").val() == ''){
+            if(!$("#search_input").val()){
                 loadAllConcert();
             }else{
                 if(selectLoad == byCity){
-                    loadConcertByCity($("#cityId").val());
-                }else if(selectLoad == club){
-                    loadConcertByClub($("#cityId").val());
+                    loadConcertByCity();
+                }else if(selectLoad == byClub){
+                    loadConcertByClub();
                 }
             }
         }
@@ -59,13 +50,10 @@ $(window).resize(function() {
 	// Handler for click on button Categories
 	$("#categories").click(function(){
 		selectLoad = byCategories;
-		$("#results_list").empty();
         $("#form").css('visibility', 'hidden');
 
-		for (var i = 0; i < markers.length; i++) {
-		    markers[i].setMap(null);
-		}
-		markers = [];
+		emptyContainerAddSpinner();
+		removeAllMarkers();
 		
 		loadlandingCards();
 	});
@@ -74,22 +62,19 @@ $(window).resize(function() {
 	$("#city").click(function(){
         $("#form").css('visibility', 'visible');
 		page = 0;
-		selectLoad = byCity;
-		$("#results_list").empty();
-        $("#results_list").append('<div class="spinner">' +
-                                          '<div class="dot1"></div>'+
-                                          '<div class="dot2"></div>'+
-                                    '</div>');
-
-		for (var i = 0; i < markers.length; i++) {
-		    markers[i].setMap(null);
+		
+		if(selectLoad == byClub){
+			$("#search_input").val("");
 		}
-		markers = [];
+		selectLoad = byCity;
+		
+		emptyContainerAddSpinner();
+		removeAllMarkers();
 	    
-        if($("#cityId").val().length == 0){
+        if(!$("#search_input").val()){
             loadAllConcert();
         }else{
-            loadConcertByCity($("#cityId").val());
+            loadConcertByCity();
         }
 	});
     
@@ -98,26 +83,57 @@ $(window).resize(function() {
         $("#form").css('visibility', 'visible');
 		page = 0;
 		selectLoad = byClub;
-		$("#results_list").empty();
-        $("#cityId").val("");
-        $("#results_list").append('<div class="spinner">' +
-                                          '<div class="dot1"></div>'+
-                                          '<div class="dot2"></div>'+
-                                    '</div>');
-
-		for (var i = 0; i < markers.length; i++) {
-		    markers[i].setMap(null);
-		}
-		markers = [];
+        $("#search_input").val("");
+		
+        emptyContainerAddSpinner();
+		removeAllMarkers();
 	    
-        if($("#cityId").val().length < 1){
-            loadAllConcert();
-        }else{
-            loadConcertByClub($("#cityId").val());
-        }
+        loadAllConcert();
 	});
+
+	// AUTOCOMPLETE
+	function getFields(results) {
+    	return results;
+	}
 	
-	// Scroll effect
+    var autocomplete = $("#search_input").autocomplete({
+        minLength: 2,
+        source: function (request, response) {
+			if(selectLoad == byClub){
+				$.ajax({
+					'url': 'http://api.bandcloud.net/agents/venues/name',
+					'method': 'POST',
+					'data': {'startsWith': request.term},
+					'success': function (data) {
+						response($.map(data, function(d) {
+							return {
+								fields: getFields(d)
+							};
+						}));
+					},
+					'error': function () {
+						alert('Tento podnik neevidujeme. Buďte súčasťou concertian a napíšte nám o pridanie clubu v chate. Ďakujeme.');
+					}
+				});
+			}
+        },
+		
+      select: function fillValues( event, ui ) {
+		selectedClubId = ui.item.fields.idVenue;
+        $("#search_input").val(ui.item.fields.name);
+        $("#clubId").val(selectedClubId);
+		  	page=0;
+		  	emptyContainerAddSpinner();
+			removeAllMarkers();
+            loadConcertByClub();
+        },
+        appendTo: $('#menu-container')
+    }).data("uiAutocomplete")._renderItem = function (ul, item) {
+            return $("<li>").append('<a>' + item.fields.name + '</a>')
+                .appendTo(ul);
+    };
+		
+  	// Scroll effect
 	$("#results_list").scroll(function(){
 			clearTimeout($.data(this, 'scrollTimer'));
 		    $.data(this, 'scrollTimer', setTimeout(function() {
@@ -127,7 +143,7 @@ $(window).resize(function() {
 	        		if(selectLoad == all){
 	        			loadAllConcert();
 	        		}else if(selectLoad == byCity){
-	        			loadConcertByCity($("#cityId").val());
+	        			loadConcertByCity();
 	        		}else if(selectLoad == byClub){
 	        			loadConcertByClub();
 	        		}
@@ -202,7 +218,23 @@ var byCity = 1;
 var byCategories = 2;
 var byClub = 3;
 var selectLoad = byCategories;
+var selectedClubId;
 var markers = [];
+
+function emptyContainerAddSpinner(){
+	$("#results_list").empty();
+	$("#results_list").append('<div class="spinner">' +
+									  '<div class="dot1"></div>'+
+									  '<div class="dot2"></div>'+
+								'</div>');
+}
+
+function removeAllMarkers(){
+	for (var i = 0; i < markers.length; i++) {
+		markers[i].setMap(null);
+	}
+	markers = [];
+}
 
 // Load all concert
 function loadAllConcert(){
@@ -237,12 +269,12 @@ function loadlandingCards(){
 }
 
 // Load concert by City
-function loadConcertByCity(city){
+function loadConcertByCity(){
 	$.ajax({ 'url' : 'http://api.bandcloud.net/users/events/city',
 		  'method' : 'POST',
 		  'data' : { 'results' : "20",
 			 		 'page' : page,
-			 		 'city' : city
+			 		 'city' : $("#search_input").val()
 		 		   },
 	  	  contentType : "application/x-www-form-urlencoded",
 		  'success' : function (json){
@@ -255,26 +287,28 @@ function loadConcertByCity(city){
     });
 }
 
-function loadConcertByClub(club){
-    $.ajax({ 'url': 'http://api.bandcloud.net/agents/venues/name',
-        'method': 'POST',
-        'data': {'startsWith': club},
-        'success': function (data) {
-            response($.map(data, function(d) {
-                return {
-                    fields: getFields(d)
-                }
-            }));
-        },
-        'error': function () {
-            alert('Váš podnik neevidujeme. Napravíme to, hneď ako nám zašlete emailovú adresu nižšie. Ďakujeme.');
-        }
-    });
+// Load concert by Club
+function loadConcertByClub(){
+	$.ajax({ 'url' : 'http://api.bandcloud.net/users/events/venue',
+		  'method' : 'POST',
+		  'data' : { 'results' : "20",
+					 'page' : page,
+					 'idVenue' : selectedClubId
+				   },
+		  contentType : "application/x-www-form-urlencoded",
+		  'success' : function (json){
+			  addElements(json);
+		},
+		'error': function(error){
+			console.log('Error. ' + error);
+			$(".spinner").remove();
+		}
+	});
 }
-
+	
 function addCategories(json){
     $(".slim").empty();
-	$(".slim").append($("#cityId").val() + ' <span class="bold"></span>');
+	$(".slim").append($("#search_input").val() + ' <span class="bold"></span>');
 	$(".spinner").remove();
    
     for(var i = 0; i < json.cards.length; i++){
@@ -286,7 +320,7 @@ function addCategories(json){
                                         '<span class="categoryHeader">'+
                                 '<a class="city_text">' + value.name + '</a>'+
                                         '</span><span class="categoryCounter">'+
-                                '<a class="counter_number">142</a>'+
+                                '<a class="counter_number">' + value.count + '</a>'+
                                 '<a class="counter_text">koncertov</a>'+
                                         '</span>'+
                             '</span>'+
@@ -298,7 +332,7 @@ function addCategories(json){
 //	category_card
 	
 	$(".categoryImg").on( "click", function() {
-		$("#cityId").val($(this).find(".city_text").text());
+		$("#search_input").val($(this).find(".city_text").text());
 		$("#city").click();
 	});
 }
@@ -306,7 +340,7 @@ function addCategories(json){
 // Add loaded element to container
 function addElements(json){
 	$(".slim").empty();
-	$(".slim").append($("#cityId").val() + ' <span class="bold"></span>');
+	$(".slim").append($("#search_input").val() + ' <span class="bold"></span>');
 	$(".spinner").remove();
 	
 	var minus = 0;

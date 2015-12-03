@@ -222,7 +222,7 @@ strong{
                 input[type="text"]:focus{
                     outline: none;
                 }
-            div#columnSearch :-webkit-input-placeholder {
+            div#columnSearch ::-webkit-input-placeholder {
                color: #fff;
                line-height: 1.7em;
                font-size: 0.8em;
@@ -292,6 +292,7 @@ strong{
     display: block;
     width: 350px;
     height: 180px;
+	border-radius: 4px;
 }
 .categoryCounter{
     position: absolute;
@@ -318,7 +319,7 @@ strong{
 .categoryHeader{
     position: absolute;
     display: block;
-    width: 50px;
+    width: auto;
     padding: 0 20px;
     height: 30px;
     border-radius: 4px;
