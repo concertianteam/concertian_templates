@@ -453,7 +453,7 @@ strong{
 }
 /* ---------  Search list ---------*/
         #results_list{
-            display: none;
+            display: block;
             /* Firefox */
             height: -moz-calc(100% - 87px);
             /* WebKit */
