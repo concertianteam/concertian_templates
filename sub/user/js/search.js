@@ -220,6 +220,7 @@ var byClub = 3;
 var selectLoad = byCategories;
 var selectedClubId;
 var markers = [];
+var results = [];
 
 function emptyContainerAddSpinner(){
 	$("#results_list").empty();
@@ -310,7 +311,7 @@ function addCategories(json){
     $(".slim").empty();
 	$(".slim").append($("#search_input").val() + ' <span class="bold"></span>');
 	$(".spinner").remove();
-   
+    
     for(var i = 0; i < json.cards.length; i++){
         var value = json.cards[i];
       
@@ -346,11 +347,14 @@ function addElements(json){
 	var minus = 0;
 	page++;
 	var address = [];
+    var length = results.length;
+    
 	for(var i = 0; i < json.events.length; i++){
 		var value = json.events[i];
         var arr = value.stringDate.split('-');
         
 		address[i] = encodeURIComponent(value.address + " " + value.city);
+        results[length + i] = value;
 		
 		var element = '<span class="resultElement">'+
 						  '<a class="resultImage" href="mailto:' + value.venueEmail + '">'+
@@ -371,20 +375,56 @@ function addElements(json){
                             '</span>'+
                           '<span id="time" class="resultTextSecond">' + value.time + '</span>'+
 						  '</span>'+
-                          '<span class="resultInfoButton">'+						                                   '<span class="imgInfo"></span>'+ 
+                          '<span class="resultInfoButton">'+						                                   '<span class="imgInfo" style="font-size: 0px;">' + (length + i) + '</span>'+ 
                           '</span>'+
 						  '<span class="resultShareButton">'+
                             '<span class="imgShare"></span>'+ 
                           '</span>'+
 					  '</span>';
-		
+        
 		$("#results_list").append(element);
 		if(json.events.length % 20 == 0 && i == json.events.length - 5){
 			$("#results_list").append('<span id="spinnerActivator"></span>');
 			minus = 2;
 		}
-	}
-	
+	} 
+    
+	$(".resultInfoButton").on("click", function() {
+        $("#results_list_sm").empty();
+        $(".containerForm").addClass("overlay");
+        $("#landing_banner").addClass("overlay");
+        $("#results_list").addClass("overlay");
+        
+        var value = results[$(this).find(".imgInfo").text()];
+        var element = '<span class="top">'+
+                            '<span class="header_img"><img class="img" src="' + value.urlPhoto + '"></span>'+
+                                '<span class="top_text">'+
+                                    '<span class="header_name">' + value.venueName + '</span>'+
+                                    '<span class="header_city">'+value.city+'</span>'+
+                                    '</span>'+
+                                '<span id="close_details"><span class="detail_close"></span></span>'+
+                                '</span>'+
+                                '<span class="body">'+
+                                '<span class="details_list">'+
+                                    '<span class="eventDate">'+value.stringDate+'</span>'+
+                                    '<span class="eventTime">' + value.time + '</span>'+
+                                    '<span class="eventName">'+value.eventName+'</span>'+
+                                '</span>'+
+                                '<span class="detail_cta_buttons"><span><a  class="imgMessage" href="mailto:' + value.venueEmail + '"></a></span><span><a class="imgSocial"></a></span><span><a class="imgAdress"></a></span>'+    
+                                '</span>'+
+                            '</span>';
+    $("#results_list_sm").append(element);
+    $("#results_list_sm").fadeIn(200);
+        
+    $("#close_details").on("click", function() {
+        $("#results_list_sm").hide();
+        $(".containerForm").removeClass("overlay");
+        $("#landing_banner").removeClass("overlay");
+        $("#results_list").removeClass("overlay");
+    });
+	});
+    
+    
 	/**
 	 *	Search location and add markers
 	 */
