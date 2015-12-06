@@ -534,7 +534,12 @@ strong{
                     min-width: 120px;
                     margin-top: 15px;
                     padding-left: 15px;
+					cursor: pointer;
                 }
+						.wrapper_text{
+							font-size: 0;
+							visibility: hidden;
+						}
                 @media (max-width: 650px) {
                     .resultTextContainer{
                         width: 40% !important;
@@ -839,6 +844,10 @@ strong{
 }
 /* -------------- Event details Smartphone -------------- */
 #results_list_sm{
+	display: none;
+}
+@media (max-width: 550px) {
+#results_list_sm{
     position: absolute;
     z-index: 100;
     top: 150px;
@@ -990,6 +999,7 @@ strong{
 	height: 15px;
     margin: 12px 12px;
 }
+}
 /* ------------ Autocomplete ------------ */
 /* Overlays */
 .ui-widget-overlay {
@@ -1001,6 +1011,7 @@ strong{
 }
 .ui-autocomplete {
 	position: absolute;
+	z-index: 100000;
 	top: 0;
 	left: 0;
 	cursor: default;

@@ -81,6 +81,7 @@ $(window).resize(function() {
 	// Handler for click on button Club
 	$("#club").click(function(){
         $("#form").css('visibility', 'visible');
+		$("#search_input").attr("placeholder", "Aký club hľadáme?");
 		page = 0;
 		selectLoad = byClub;
         $("#search_input").val("");
@@ -101,7 +102,7 @@ $(window).resize(function() {
         source: function (request, response) {
 			if(selectLoad == byClub){
 				$.ajax({
-					'url': 'http://api.bandcloud.net/agents/venues/name',
+					'url': 'https://api.bandcloud.net/agents/venues/name',
 					'method': 'POST',
 					'data': {'startsWith': request.term},
 					'success': function (data) {
@@ -239,7 +240,7 @@ function removeAllMarkers(){
 
 // Load all concert
 function loadAllConcert(){
-	$.ajax({ 'url' : 'http://api.bandcloud.net/users/events',
+	$.ajax({ 'url' : 'https://api.bandcloud.net/users/events',
 		  'method' : 'POST',
 		  'data' : { 'results' : "20",
 			 		 'page' : page
@@ -257,7 +258,7 @@ function loadAllConcert(){
 
 // Load Landing Cards
 function loadlandingCards(){
-	$.ajax({ 'url' : 'http://api.bandcloud.net/users/cards',
+	$.ajax({ 'url' : 'https://api.bandcloud.net/users/cards',
 		  'method' : 'GET',
 	  	  contentType : "application/x-www-form-urlencoded",
 		  'success' : function (json){
@@ -271,7 +272,7 @@ function loadlandingCards(){
 
 // Load concert by City
 function loadConcertByCity(){
-	$.ajax({ 'url' : 'http://api.bandcloud.net/users/events/city',
+	$.ajax({ 'url' : 'https://api.bandcloud.net/users/events/city',
 		  'method' : 'POST',
 		  'data' : { 'results' : "20",
 			 		 'page' : page,
@@ -290,7 +291,7 @@ function loadConcertByCity(){
 
 // Load concert by Club
 function loadConcertByClub(){
-	$.ajax({ 'url' : 'http://api.bandcloud.net/users/events/venue',
+	$.ajax({ 'url' : 'https://api.bandcloud.net/users/events/venue',
 		  'method' : 'POST',
 		  'data' : { 'results' : "20",
 					 'page' : page,
@@ -306,7 +307,26 @@ function loadConcertByClub(){
 		}
 	});
 }
-	
+// Load concerts for Club (on club click)
+function loadConcertForClub(clickedClubId){
+	$("#results_list").empty();
+	$.ajax({ 'url' : 'https://api.bandcloud.net/users/events/venue',
+		  'method' : 'POST',
+		  'data' : { 'results' : "20",
+					 'page' : 0,
+					 'idVenue' : clickedClubId
+				   },
+		  contentType : "application/x-www-form-urlencoded",
+		  'success' : function (json){
+			  addElements(json);
+		},
+		'error': function(error){
+			console.log('Error. ' + error);
+			$(".spinner").remove();
+		}
+	});
+}
+
 function addCategories(json){
     $(".slim").empty();
 	$(".slim").append($("#search_input").val() + ' <span class="bold"></span>');
@@ -357,28 +377,31 @@ function addElements(json){
         results[length + i] = value;
 		
 		var element = '<span class="resultElement">'+
-						  '<a class="resultImage" href="mailto:' + value.venueEmail + '">'+
-							  '<img src="' + value.urlPhoto + '" alt="venue_img" class="image">'+
+						  '<a class="resultImage" href="mailto:' + value.venueEmail + '"><img src="' + value.urlPhoto + '" alt="venue_img" class="image">'+
 						  '</a>'+
+						'<span class="wrapper">'+
+						  '<span class="wrapper_text">' + (length + i) + '</span>'+
 						  '<span class="resultTextContainer">'+
 					  		  '<span class="resultTextFirst">' + shortenText( value.eventName, 40) + '</span>'+
                               '<span class="resultTextSecond">'+
                                     '<span class="city">' + ($(window).width()<limitWidth? shortenText(value.city, 15) : value.city) + '</span>'+
                                     '<span class="venueName">' + value.venueName + '</span>'+
+			'<input type="hidden" class="idVenue" val="' + value.venueId + '">'+ 
                               '</span>'+
                           '</span>' +
 						  '<span class="resultTextContainer_datetime resultBorder">'+
-							  '<span id="date" class="date_formated">'+
-                                '<span>'+arr[2]+' '+arr[1]+
-                                    ' <strong>'+arr[0]+'</strong>'+
-                                '</span>'+
-                            '</span>'+
-                          '<span id="time" class="resultTextSecond">' + value.time + '</span>'+
+						   '<span id="date" class="date_formated">'+
+                              '<span>'+arr[2]+' '+arr[1]+
+                                    '<strong>'+arr[0]+'</strong>'+
+                              '</span>'+
+                              '</span>'+
+                          	  '<span id="time" class="resultTextSecond">' + value.time + '</span>'+
 						  '</span>'+
-                          '<span class="resultInfoButton">'+						                                   '<span class="imgInfo" style="font-size: 0px;">' + (length + i) + '</span>'+ 
+			'</span>'+
+                          '<span class="resultInfoButton">'+						                          '<span class="imgInfo" style="font-size: 0px;">' + (length + i) + '</span>'+ 
                           '</span>'+
 						  '<span class="resultShareButton">'+
-                            '<span class="imgShare"></span>'+ 
+                            '<span class="imgShare"></span>'+
                           '</span>'+
 					  '</span>';
         
@@ -389,6 +412,13 @@ function addElements(json){
 		}
 	} 
     
+	$(".wrapper").on( "click", function() {
+        var value = results[$(this).find(".wrapper_text").text()];
+		var clickedClubId = value.venueId;
+			loadConcertForClub(clickedClubId);
+	});
+
+	
 	$(".resultInfoButton").on("click", function() {
         $("#results_list_sm").empty();
         $(".containerForm").addClass("overlay");
@@ -396,6 +426,7 @@ function addElements(json){
         $("#results_list").addClass("overlay");
         
         var value = results[$(this).find(".imgInfo").text()];
+		console.log(value);
         var element = '<span class="top">'+
                             '<span class="header_img"><img class="img" src="' + value.urlPhoto + '"></span>'+
                                 '<span class="top_text">'+
