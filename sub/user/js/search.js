@@ -61,6 +61,7 @@ $(window).resize(function() {
 	// Handler for click on button City
 	$("#city").click(function(){
         $("#form").css('visibility', 'visible');
+		$("#search_input").attr("placeholder", "V akom meste hľadáme?");
 		page = 0;
 		
 		if(selectLoad == byClub){
