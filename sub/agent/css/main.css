@@ -448,6 +448,15 @@ div#resultList{
 .venueImg:hover{
     z-index: 33;
 }
+.venueImgChart{
+    position: absolute;
+    display: inline-block;
+    vertical-align: middle;
+    width: 10%;
+}
+.venueImgChart:hover{
+    z-index: 33;
+}
 .resultImg{
 	position: absolute;
 	top: 0px;
@@ -459,7 +468,6 @@ div#resultList{
     cursor: pointer;
 }
         .venueImg
-        p
         .resultImg:hover,
         .resultImg:active{
             background: url('../img/sprite.png') no-repeat -63px -4px;
@@ -467,7 +475,6 @@ div#resultList{
 			height: 42px;
         }
         
-        .venueImg
         .resultImg
         .img_result{
             width: 42px;
@@ -475,7 +482,6 @@ div#resultList{
             border-radius: 33px;
         }
         .venueImg
-        p
         .resultImg:hover
         .img_result{
             display: none;
@@ -790,8 +796,26 @@ select[name="visibility"]{
     padding: 20px 40px;
 }
 #graph{
-	position: relative;
+	height: calc(100% - 63px);
+	height: -webkit-calc(100% - (63px));
+	height: calc(100% - (63px));
     overflow-x: scroll !important;
+}
+table{
+	width: 100%;
+	height: 100%;
+}
+#concertsDate{
+	bottom:0px;
+	height:50px;	
+}
+.graphColumn{
+	position: relative;
+	height: 100%;
+}
+.graphColumnDate{
+	position: absolute;
+	bottom: 0px;
 }
 .spinner {
   margin: 100px auto;
