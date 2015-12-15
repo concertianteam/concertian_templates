@@ -55,6 +55,9 @@ div.loginBox .header{
 div.loginBox .loginBox-area{
     position:relative;
 }
+div.loginBox .paddingtop{
+    padding-top: 25%;
+}
 div.loginBox .loginBox-area .login_venue_img{
     width:80px;
     height:80px;
@@ -71,8 +74,8 @@ div.loginBox .loginBox-area .login_venue_img .venue_img{
     text-align: center;
     width: 100%;
     color:#fff;
-    font-weight:100px;
-    font-size: 0.9em;
+    font-weight: 100px;
+    font-size: 1.2em;
     margin-bottom: 20px;
 }
 div.loginBox .loginBox-area label{
@@ -100,7 +103,7 @@ div.loginBox .loginBox-area label input[type="password"]:focus{
     appearance: none;
     border: none;
 }
-div.loginBox .loginBox-area input[type="submit"]{
+button#submit{
     width:240px;
     height:38px;
     border-radius:4px;
@@ -111,7 +114,7 @@ div.loginBox .loginBox-area input[type="submit"]{
     cursor: pointer;
     font-size: 0.9em;
 }
-div.loginBox .loginBox-area input[type="submit"]:hover{
+button#submit:hover{
 	background: #ffc95c;
 }
 .fix{
@@ -352,6 +355,7 @@ strong{
     color: #fff;
     font-size: 0.8em;
     text-align: center;
+	cursor: pointer;
 }
 /* -------------------- BODY PANEL ---------------- */
 section#contentPanel{
@@ -459,7 +463,6 @@ div#resultList{
     cursor: pointer;
 }
         .venueImg
-        p
         .resultImg:hover,
         .resultImg:active{
             background: url('../img/sprite.png') no-repeat -63px -4px;
@@ -475,7 +478,6 @@ div#resultList{
             border-radius: 33px;
         }
         .venueImg
-        p
         .resultImg:hover
         .img_result{
             display: none;
@@ -626,6 +628,45 @@ button.discover{
     margin-left: 2%;
     margin-top: 2.5%;
 }
+/* -------- response ------- */
+.response_sign{
+    display: block;
+    width: 100%;
+    box-sizing: border-box;
+    padding-left: 40%;
+    padding-top: 15%;
+    height: auto;
+}
+.response_img_success{
+    display: block;
+    background: url('../img/sprite.png') no-repeat -290px -1px;
+	width: 97px;
+	height: 98px;
+}
+.response_img_error{
+    display: block;
+    background: url('../img/sprite.png') no-repeat -389px -1px;
+    width: 82px;
+    height: 98px;
+}
+.response_text{
+    margin-top: 10%;
+    display: block;
+    font-size: 1.5em;
+}
+.form_button{
+    background: #ffbb33;
+    font-size: 1em;
+    padding: 10px 40px;
+    border: none;
+    border-radius: 4px;
+    color: #fff;
+    margin-top: 2%;
+    cursor: pointer;
+}
+.form_button:hover{
+    background: #ffc95c;
+}
 #create_event{
 	height: 100%;
 	overflow-y: scroll;	
@@ -669,13 +710,14 @@ input[name="eventTime"]{
     display: inline-block;
     width: 70%;
     height: 40px;
+	margin-bottom: 2% !important;
 }
 select[name="visibility"]{
     display: inline-block;
     width: 80%;
     height: 40px;
 }
-#form_part input[type="submit"]{
+#form_part button[type="submit"]{
     width: 96%;
     height: 35px;
     border: none;
@@ -684,6 +726,7 @@ select[name="visibility"]{
     color: #fff;
     font-size: 0.9em;
     margin-top: 1%;
+	cursor: pointer;
 }
 ::-webkit-placeholder {
     color: #A8B3C7;
@@ -816,7 +859,28 @@ select[name="visibility"]{
   -webkit-animation: sk-bounce 2.0s infinite ease-in-out;
   animation: sk-bounce 2.0s infinite ease-in-out;
 }
-
+.dot1_login, .dot2_login {
+  width: 60%;
+  height: 60%;
+  display: inline-block;
+  position: absolute;
+  top: 0;
+  background-color: #fff;
+  border-radius: 100%;
+  
+  -webkit-animation: sk-bounce 2.0s infinite ease-in-out;
+  animation: sk-bounce 2.0s infinite ease-in-out;
+}
+.success{
+	margin-top: 20%;
+	display: block;	
+	text-align: center;
+	font-size: 2em;
+	color: #fff;
+}
+.error{
+	color: #FF4444;
+}
 .dot2 {
   top: auto;
   bottom: 0;
@@ -924,6 +988,9 @@ select[name="visibility"]{
         width: 70%;
         margin: 0;
     }
+	#form_part input[name="eventTime"]{
+		margin-bottom: 0 !important;
+	}
     .input{
         width: 16%;
     }
@@ -950,6 +1017,31 @@ select[name="visibility"]{
         width: 96%;
         margin-left: 2%;
         height: 90%;
+    }
+    .response_sign{
+        display: block;
+        width: 100%;
+        box-sizing: border-box;
+        padding-left: 40%;
+        padding-top: 3%;
+        height: auto;
+    }
+    .response_img_success{
+        display: block;
+        background: url('../img/sprite.png') no-repeat -290px -1px;
+        width: 97px;
+        height: 98px;
+    }
+    .response_img_error{
+        display: block;
+        background: url('../img/sprite.png') no-repeat -389px -1px;
+        width: 82px;
+        height: 98px;
+    }
+    .response_text{
+        margin-top: 2%;
+        display: block;
+        font-size: 1.5em;
     }
 }
 /* ------------ Adaptive layout (media queries) SMARTPHONE ------------
@@ -1140,4 +1232,141 @@ select[name="visibility"]{
     #form_part input{
         width:  25%;
     }
+	#form_part select{
+		width: 82%;
+	}
 }
+/* ----------------- TIMEPICKER ------------------*/
+.ui-timepicker-wrapper {
+	overflow-y: auto;
+	height: 150px;
+	width: 24.5%;
+	background: #fff;
+	outline: none;
+	z-index: 10001;
+	margin: 0;
+    border: 1px solid #f5f5f5;
+}
+
+.ui-timepicker-wrapper.ui-timepicker-with-duration {
+	width: 13em;
+}
+
+.ui-timepicker-wrapper.ui-timepicker-with-duration.ui-timepicker-step-30,
+.ui-timepicker-wrapper.ui-timepicker-with-duration.ui-timepicker-step-60 {
+	width: 11em;
+}
+
+.ui-timepicker-list {
+	margin: 0;
+	padding: 0;
+	list-style: none;
+}
+
+.ui-timepicker-duration {
+	margin-left: 5px; color: #888;
+}
+
+.ui-timepicker-list:hover .ui-timepicker-duration {
+	color: #888;
+}
+
+.ui-timepicker-list li {
+    width: 100%;
+    text-align: center;
+	cursor: pointer;
+	white-space: nowrap;
+	color: #c3cbd9;
+    padding: 5px 0;
+	list-style: none;
+	margin: 0;
+}
+
+.ui-timepicker-list:hover .ui-timepicker-selected {
+	background: #fff; color: #000;
+}
+
+li.ui-timepicker-selected,
+.ui-timepicker-list li:hover,
+.ui-timepicker-list .ui-timepicker-selected:hover {
+	background: #ffc95c; color: #fff;
+}
+
+li.ui-timepicker-selected .ui-timepicker-duration,
+.ui-timepicker-list li:hover .ui-timepicker-duration {
+	color: #ccc;
+}
+
+.ui-timepicker-list li.ui-timepicker-disabled,
+.ui-timepicker-list li.ui-timepicker-disabled:hover,
+.ui-timepicker-list li.ui-timepicker-selected.ui-timepicker-disabled {
+	color: #888;
+	cursor: default;
+}
+
+.ui-timepicker-list li.ui-timepicker-disabled:hover,
+.ui-timepicker-list li.ui-timepicker-selected.ui-timepicker-disabled {
+	background: #f2f2f2;
+}
+/* ----------------- SELECT MENU ------------------*/
+/* right-aligned */
+.ui-menu .ui-menu-icon {
+	left: auto;
+	right: 0;
+}
+.ui-selectmenu-menu {
+	padding: 0;
+	margin: 0;
+	position: absolute;
+	top: 0;
+	left: 0;
+	display: none;
+}
+.ui-selectmenu-menu .ui-menu {
+	overflow: auto;
+	/* Support: IE7 */
+	overflow-x: hidden;
+	padding-bottom: 1px;
+	text-align: center !important;
+
+}
+.ui-selectmenu-menu .ui-menu .ui-selectmenu-optgroup {
+	font-size: 1em;
+	font-weight: bold;
+	line-height: 1.5;
+	padding: 2px 0.4em;
+	margin: 1em 0 0 0;
+	height: auto;
+	border: 0;
+}
+.ui-selectmenu-open {
+	display: block;
+}
+.ui-selectmenu-button {
+	display: inline-block;
+	vertical-align: middle;
+	overflow: hidden;
+	position: relative;
+	text-decoration: none;
+	cursor: pointer;
+	border-radius: 4px !important;
+	background: #f5f5f5 !important;
+	font-size: 0.9em !important;
+}
+.ui-selectmenu-button span.ui-icon {
+	right: 0.5em;
+	left: auto;
+	margin-top: -8px;
+	position: absolute;
+	top: 50%;
+}
+.ui-selectmenu-button span.ui-selectmenu-text {
+	text-align: left;
+	padding: 0.6em 2.4em 0.6em 1.6em;
+	display: block;
+	line-height: 1.4em;
+	overflow: hidden;
+	text-overflow: ellipsis;
+	white-space: nowrap;
+}
+

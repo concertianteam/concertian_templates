@@ -5,10 +5,11 @@
 	
 	<title>concertian</title>
 	
-	<link rel="stylesheet" type="text/css" href="http://fonts.googleapis.com/css?family=Roboto:700,500&amp;subset=latin,latin-ext">
+	<link rel="stylesheet" type="text/css" href="https://fonts.googleapis.com/css?family=Roboto:700,500&amp;subset=latin,latin-ext">
 	<link rel="stylesheet" type="text/css" href="css/main.css">
-    <script src="//code.jquery.com/jquery-1.11.3.min.js"></script>
-    <script src="//code.jquery.com/jquery-migrate-1.2.1.min.js"></script>
+    <script src="js/jquery-1.11.3.min.js"></script>
+	<script src="js/log_in.js"></script>
+	<script src="js/js.cookie.js"></script>
 	
 	<meta name="author" content="QUAWER">
 	<meta name="robots" content="nofollow, noindex">
@@ -20,14 +21,14 @@
     
     <div class="header"></div>
 
-	<form id="log_inForm" action="php/log_in.php" class="loginBox-area" name="log_inForm" method="post">
-        <div class="login_venue_img"><img class="venue_img" src="img/concertian.header.jpg"></div>
-        <div class="venue_name">Wienerkoncerthouse</div>
+	<form id="log_inForm" class="loginBox-area">
+        <div class="login_venue_img"></div>
+        <div class="venue_name"></div>
 
 		<label><input id="email" type="text" name="email" value="" placeholder="name@email.com" required></label>
 		<label><input id="password" type="password" name="password" value="" placeholder="********" autocomplete="off" required ></label>
-		<label><input type="checkbox" name="login[remember]" value="1">&nbsp;&nbsp;Remember me</label>
-		<input type="submit" name="submit" value="Prihlásiť">
+		<label id="hide"><input type="checkbox" name="login[remember]" value="1">&nbsp;&nbsp;Remember me</label>
+		<button type="submit" id="submit" name="submit">PRIHLÁSIŤ</button>
 	</form>
 	<div class="fix">
         <div id="loginResult"></div>

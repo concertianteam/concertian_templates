@@ -8,23 +8,13 @@
     <link rel="stylesheet" type="text/css" href="css/main.night.css">
     <link rel="stylesheet" type="text/css" href="css/main.css">
      
-    <script src="//code.jquery.com/jquery-1.11.3.min.js"></script>
-    <script src="//code.jquery.com/jquery-migrate-1.2.1.min.js"></script>
-    <script type="text/javascript">
-	if (typeof jQuery == 'undefined')
-		document.write(unescape("%3Cscript src='js/jquery-1.9.js'" + 
-															"type='text/javascript'%3E%3C/script%3E"))
-    </script>
+    <script src="js/jquery-1.11.3.min.js"></script>
+	<link href='https://fonts.googleapis.com/css?family=Open+Sans:300,400,600&subset=latin,latin-ext' rel='stylesheet' type='text/css'>
+	<script type="text/javascript" src="js/search_agent.js"></script>
 	<script src="js/js.cookie.js"></script>
-	<script src="js/cookie_loader.js"></script>
-    <link href='https://fonts.googleapis.com/css?family=Open+Sans:300,400,600&subset=latin,latin-ext' rel='stylesheet' type='text/css'>
-    <script type="text/javascript" src="js/search.js"></script>
-	<script src="js/restSearch.js"></script>
-	<script src="js/logout.js"></script>
-    <script src="js/trunk.js"></script>
-        
-    <link rel="stylesheet" type="text/css" href="css/jquery.timepicker.css">
-    <link rel="stylesheet" type="text/css" href="css/jquery.ui.autocomplete.css">
+	<script src="js/jquery-ui.js"></script>
+     
+	<link rel="stylesheet" type="text/css" href="css/jquery.ui.autocomplete.css">
         
     <meta name="author" content="QUAWER">
 	<meta name="robots" content="nofollow, noindex">
@@ -70,7 +60,7 @@
                             <div class="form">
                                 <div id="outer_form">
                                     <div class="create_concert">Založte koncert:</div>
-                                <form id="create_event" action="php/create_event.php" name="form_event" method="post"> 
+                                <form id="create_event" name="form_event"> 
 								<input type="hidden" name="apiKey" id="apiKey">
 								<input type="hidden" name="idVenue" id="idVenue">
                                 <span class="input">Názov</span>
@@ -81,12 +71,11 @@
                                 <input id="timepicker" data-time-format="H:i:s" type="text" name="eventTime" placeholder="čas HH:mm:ss" required>
                                     <span class="input">Stav</span>
                                 <select id="visibility" name="visibility" placeholder="" required>
-								<option value=""></option>	
 								<option value="1">Visible</option>	
 								<option value="0">Hidden</option>	
 								</select>
 								<input type="hidden" name="status" value="1">
-                                <input type="submit" name="submit" value="Vytvoriť koncert">
+								<button type="submit" id="submit_button" name="submit">Vytvoriť koncert</button>
                                 
                                 </form>
                                 </div>
@@ -113,40 +102,8 @@
                 </section>
             </section>
         </div>
-<script> 
-$(function(){
-      $('#resultList').slimscroll({
-		  height: '93.5%',
-      });
-		$('#create_event').slimscroll({
-			height: '87%',
-      	});
-			$('#program').slimscroll({
-				height: '77%',
-      		});
-				$('#graph').slimscroll({
-					width: '100%',
-      			});
-    });		
-</script>
-<script>
-  $(function() {
-    $( "#datepicker" ).datepicker();
-      $('#timepicker').timepicker();
-	  $( "#visibility" ).selectmenu();
-  });
-</script>
-<script>
-		$('button#night').click(function (){
-   $('link[href="css/main.css"]').attr('href','css/main.night.css');
-});
-		$('button#normal').click(function (){
-   $('link[href="css/main.night.css"]').attr('href','css/main.css');
-});
-</script>
-<script type="text/javascript" src="js/jquery.timepicker.min.js"></script>
 <script type="text/javascript" src="js/jquery.slimscroll.min.js"></script>
-<script src="js/jquery-ui.js"></script>
+<script type="text/javascript" src="js/jquery.timepicker.min.js"></script>
 <!-- ClickDesk Live Chat Service for websites -->
 <script type='text/javascript'>
 var _glc =_glc || []; _glc.push('all_ag9zfmNsaWNrZGVza2NoYXRyDwsSBXVzZXJzGKOPt9UMDA');
