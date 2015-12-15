@@ -228,6 +228,7 @@ var all = 0;
 var byCity = 1;
 var selectLoad = all;
 var chartData = new Array();
+var results = [];
 
 function loadAllConcert(url){
 	$.ajax({ 'url' : url,
@@ -262,6 +263,26 @@ function loadConcertByCity(city){
     });
 }
 
+// Load concerts for Club (on club click)
+function loadConcertForClub(clickedClubId){
+	$("#results_list").empty();
+	$.ajax({ 'url' : 'https://api.bandcloud.net/users/events/venue',
+		  'method' : 'POST',
+		  'data' : { 'results' : "20",
+					 'page' : 0,
+					 'idVenue' : clickedClubId
+				   },
+		  contentType : "application/x-www-form-urlencoded",
+		  'success' : function (json){
+			  addElements(json);
+		},
+		'error': function(error){
+			console.log('Error. ' + error);
+			$(".spinner").remove();
+		}
+	});
+}
+
 function addElements(json){
 	$(".spinner").remove();
 	
@@ -269,30 +290,32 @@ function addElements(json){
 	page++;
 	for(var i = 0; i < json.events.length; i++){
 		var value = json.events[i];
-        
-        var data = (value.stringDate);
-        var arr = data.split('-');
-        $('.resultDate').html("<span>"+arr[2]+arr[1]+"</span><br>"+arr[0]);
+        var arr = value.stringDate.split('-');
 		
 		chartData.push(new Array(value.stringDate, value.time, value.urlPhoto));
+        results[length + i] = value;
         
 		var element = '<div class="resultElement">'+
-                        '<div class="whenElement">'+
-                            '<div class="resultDate">' + value.stringDate + '</div>'+
-                            '<div class="resultTime">' + value.time + '</div>'+
-                        '</div>'+
-                        '<div class="whereElement">'+
-                            '<div class="resultName">' + value.eventName + '</div>'+                                   
-								'<div class="resultVenuename">'+
-                                '<div class="city">' + value.city + '</div>'+
-                                '<div calss="venueName">' + value.venueName + '</div>'+
+                        '<div class="wrapper">'+
+						    /*'<div class="wrapper_text">' + (length + i) + '</div>'+*/
+                            '<input type="hidden" value="' + value.venueId  + '">'+
+                            '<div class="whenElement">'+
+                                '<div class="resultDate">'  + arr[2] + ' ' + arr[1] + "</span><br>" + arr[0] + '</div>'+
+                                '<div class="resultTime">' + value.time + '</div>'+
                             '</div>'+
-                        '</div>'+    
+                            '<div class="whereElement">'+
+                                '<div class="resultName">' + value.eventName + '</div>'+                                   
+                                    '<div class="resultVenuename">'+
+                                    '<div class="city">' + value.city + '</div>'+
+                                    '<div calss="venueName">' + value.venueName + '</div>'+
+                                '</div>'+
+                            '</div>'+   
                         '<div class="venueImg">'+
                             '<a class="resultImg" href="mailto:' + value.venueEmail + '">'+
 				            '<img src="' + value.urlPhoto + '" alt="venue_img" class="img_result">'+ 
                             '</a>'+
                         '</div>'+
+                      '</div>'+
                     '</div>';
 		
 		$("#resultList").append(element);
@@ -301,6 +324,12 @@ function addElements(json){
 			minus = 1;
 		}
 	}
+    /*
+    $(".wrapper").on( "click", function() {
+        var value = results[$(this).find(".wrapper_text").text()];
+		var clickedClubId = value.venueId;
+			loadConcertForClub(clickedClubId);
+	});*/
 	
 	var min = null;
 	var max = null;
@@ -323,26 +352,42 @@ function addElements(json){
 	
 	min = getMinutes(min);
 	max = getMinutes(max);
-	var different = (max - min) / $("#graph").height();
+//	var different = (max - min) / $("#graph").height();
 	var height = $("#graph").height();
+	var different = max / height;
 	var distanceLeft = 10;
+
+	var datePreviev = null;
+	var width = 0;
+	var element = '<td>';
 	
 	for (var i = 0; i < chartData.length; i++){
-		console.log(different + " - " + (max - getMinutes(chartData[i][1])) + " - " + getMinutes(chartData[i][1]) + " - " + height);
-		
-		if(i > 0 && ((max - getMinutes(chartData[i][1])) / different) == ((max - getMinutes(chartData[i-1][1])) / different)){
-			distanceLeft = distanceLeft + 10;
-		}else{
-			distanceLeft = distanceLeft + 55;
+		if(i > 0 && (getMinutes(chartData[i][1]) / different) == (getMinutes(chartData[i-1][1]) / different)){
+			distanceLeft = distanceLeft + 15;
+			width = width + 57;
+		}else if (datePreviev = chartData[i][0]){
+			distanceLeft = distanceLeft + 150;
+			width = width + 192;
 		}
 		
-		var element = '<div class="venueImg" style="left: ' + distanceLeft + 'px; top: ' + (max - getMinutes(chartData[i][1])) / different + 'px;">'+
-							'<span class="resultImg" >'+
-								'<img src="' + chartData[i][2] + '" alt="venue_img" class="img_result">'+ 
-							'</span>'+
-					  '</div>';
+		element = element + '<span class="venueImgChart" style="left: ' + distanceLeft + 'px; top: ' + (max - getMinutes(chartData[i][1])) / different + 'px;">'+
+								'<span class="resultImg" >'+
+									'<img src="' + chartData[i][2] + '" alt="venue_img" class="img_result">'+ 
+								'</span>'+
+								(((i + 1 < chartData.length) && chartData[i][1] != chartData[i+1][1]) || i + 1 == chartData.length ? '<span style="position: absolute; right: -15px; top: 15px;">' + chartData[i][1] + '</span>' : '')+
+						    '</span>';
+		if(((i + 1 < chartData.length) && chartData[i][1] != chartData[i+1][1]) || i + 1 == chartData.length){
+			width = width + 65;
+		}
 		
-		$("#graph").append(element);
+		if(((i + 1 < chartData.length) && chartData[i][0] != chartData[i+1][0]) || i + 1 == chartData.length){
+			$("#concerts").append(element + "</td>");
+			console.log(width);
+			$("#concertsDate").append('<td style="width:' + width + 'px;">' + chartData[i][0] + '</td>');
+			width = 0;
+		}else{
+			$("#graph").append(element);
+		}
 	}
     
     if(minus == 1){
@@ -363,7 +408,6 @@ function getMinutes(time){
 	
 	return (hour * 60) + minute;
 }
-
 
 // SMARTPHONE RESPONSIVITY
 $(function() {

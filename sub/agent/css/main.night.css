@@ -52,6 +52,9 @@ div.loginBox .header{
 	width: 155px;
 	height: 18px;
 }
+.paddingtop{
+    padding-top: 25%;
+}
 div.loginBox .loginBox-area{
     position:relative;
 }
@@ -100,7 +103,7 @@ div.loginBox .loginBox-area label input[type="password"]:focus{
     appearance: none;
     border: none;
 }
-div.loginBox .loginBox-area #submit{
+button#submit{
     width:240px;
     height:38px;
     border-radius:4px;
@@ -111,7 +114,7 @@ div.loginBox .loginBox-area #submit{
     cursor: pointer;
     font-size: 0.9em;
 }
-div.loginBox .loginBox-area #submit:hover{
+button#submit:hover{
 	background: #ffc95c;
 }
 .fix{
@@ -405,7 +408,7 @@ section#searchPanel{
 #searchPanel input[type="submit"]:focus{
     outline: none;
 }
-input[name="city"]{no-repeat -61px -2px;
+input[name="city"]{
 	width: 46px;
 	height: 46px;
     position: absolute;
@@ -447,6 +450,15 @@ div#resultList{
     width: 10%;
 }
 .venueImg:hover{
+    z-index: 33;
+}
+.venueImgChart{
+    position: absolute;
+    display: inline-block;
+    vertical-align: middle;
+    width: 10%;
+}
+.venueImgChart:hover{
     z-index: 33;
 }
 .resultImg{
@@ -625,6 +637,45 @@ button.discover{
     margin-left: 2%;
     margin-top: 2.5%;
 }
+/* -------- response ------- */
+.response_sign{
+    display: block;
+    width: 100%;
+    box-sizing: border-box;
+    padding-left: 40%;
+    padding-top: 15%;
+    height: auto;
+}
+.response_img_success{
+    display: block;
+    background: url('../img/sprite.png') no-repeat -290px -1px;
+	width: 97px;
+	height: 98px;
+}
+.response_img_error{
+    display: block;
+    background: url('../img/sprite.png') no-repeat -389px -1px;
+    width: 82px;
+    height: 98px;
+}
+.response_text{
+    margin-top: 10%;
+    display: block;
+    font-size: 1.5em;
+}
+.form_button{
+    background: #ffbb33;
+    font-size: 1em;
+    padding: 10px 40px;
+    border: none;
+    border-radius: 4px;
+    color: #fff;
+    margin-top: 2%;
+    cursor: pointer;
+}
+.form_button:hover{
+    background: #ffc95c;
+}
 #create_event{
 	height: 100%;
 	overflow-y: scroll;	
@@ -790,8 +841,26 @@ select[name="visibility"]{
     padding: 20px 40px;
 }
 #graph{
-	position: relative;
+	height: calc(100% - 63px);
+	height: -webkit-calc(100% - (63px));
+	height: calc(100% - (63px));
     overflow-x: scroll !important;
+}
+table{
+	width: 100%;
+	height: 100%;
+}
+#concertsDate{
+	bottom:0px;
+	height:50px;	
+}
+.graphColumn{
+	position: relative;
+	height: 100%;
+}
+.graphColumnDate{
+	position: absolute;
+	bottom: 0px;
 }
 .spinner {
   margin: 100px auto;
@@ -835,7 +904,6 @@ select[name="visibility"]{
 	font-size: 2em;
 	color: #fff;
 }
-
 .dot2 {
   top: auto;
   bottom: 0;
@@ -943,6 +1011,9 @@ select[name="visibility"]{
         width: 70%;
         margin: 0;
     }
+    #form_part input[name="eventTime"]{
+		margin-bottom: 0 !important;
+	}
     .input{
         width: 16%;
     }
@@ -969,6 +1040,31 @@ select[name="visibility"]{
         width: 96%;
         margin-left: 2%;
         height: 90%;
+    }
+    .response_sign{
+        display: block;
+        width: 100%;
+        box-sizing: border-box;
+        padding-left: 40%;
+        padding-top: 3%;
+        height: auto;
+    }
+    .response_img_success{
+        display: block;
+        background: url('../img/sprite.png') no-repeat -290px -1px;
+        width: 97px;
+        height: 98px;
+    }
+    .response_img_error{
+        display: block;
+        background: url('../img/sprite.png') no-repeat -389px -1px;
+        width: 82px;
+        height: 98px;
+    }
+    .response_text{
+        margin-top: 2%;
+        display: block;
+        font-size: 1.5em;
     }
 }
 /* ------------ Adaptive layout (media queries) SMARTPHONE ------------
@@ -1159,6 +1255,9 @@ select[name="visibility"]{
     #form_part input{
         width:  25% ;
     }
+    #form_part select{
+		width: 82%;
+	}
 }
 /* ----------------- TIMEPICKER ------------------*/
 .ui-timepicker-wrapper {
