@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html dir="ltr">
+	<head>
+	<meta charset="utf-8">
+	
+	<title>concertian - create, organize and promote concerts more effectively</title>
+	
+	<link href='https://fonts.googleapis.com/css?family=Open+Sans:300,400,600&subset=latin,latin-ext' rel='stylesheet' type='text/css'>
+	<link rel="stylesheet" type="text/css" href="css/custom.css">
+    <script src="//code.jquery.com/jquery-1.11.3.min.js"></script>
+    <script src="//code.jquery.com/jquery-migrate-1.2.1.min.js"></script>
+    <script src="js/trunk.js"></script>
+        
+	<meta name="author" content="QUAWER">
+	<meta name="robots" content="nofollow, noindex">
+</head>
+<body>
+    <div id="topBar">
+        <header class="slide">
+		<ul id="navToggle" class="burger slide">
+			<li></li><li></li><li></li>
+		</ul>
+        <span class="concertian slideRight"><img class="logo" src="img/concertian.logo.png"></span>
+	   </header>
+        
+        <nav class="slide">
+        <ul>
+            <li><a href="index.html" class="text_button">LANGUAGE</a></li>
+            <li><a href="manager_lite.html" class="text_button">O CONCERTIAN</a></li>
+            <li><a href="index.html" class="text_button">BLOG</a></li>
+            <li><a href="index.html" class="login_button">LOG IN</a></li>
+            <li><a href="regsitrate.html" class="registrate_button">REGISTROVAŤ</a></li>
+        </ul>
+        </nav>
+    </div>
+    <div id="corepage" class="content slide">
+        <span class="left_column">
+            <span class="registrate_banner">
+                <span class="registrate_heading">
+                    <a>Registrácia jednoducho a rýchlo,<br><strong class="under_text">rovnako akým sa stalo vytvorenie koncertu</strong></a>
+                </span>
+                <span class="registrate_banner_img">
+                    <img class="banner_img" src="img/concertian_registration_mockup.png">
+                </span>
+            </span>
+        </span>
+        <span class="right_column">
+            <span class="registrate_form">
+    <form id="registration_form" action="php/registrate.php" name="registrate_form" method="post" onsubmit="if(document.getElementById('agree').checked) { return true; } else { alert('Pre pokračovanie je nutné, aby ste potvrdili Váš súhlas obchodnými podmienkami a ochranou osobných údajov.'); return false; }">
+		<span id="response1"></span>
+		<span id="response2"></span>
+        <span class="input_mark">
+            <img class="input_number" src="img/step.1.png">
+            <a class="input_title">Emailová adresa</a>
+        </span>
+        <label><input id="email" type="text" name="email" placeholder="concertian@club.com" required></label>
+        <span class="input_mark">
+            <img class="input_number" src="img/step.2.png">
+            <a class="input_title">Názov klubu</a>
+        </span>
+        <label><input id="venueName" type="text" name="venue_name" placeholder="concertian music club" required></label>
+        <span class="input_mark">
+            <img class="input_number" src="img/step.3.png">
+            <a class="input_title">Heslo</a>
+        </span>
+        <label><input id="password" type="password" name="password" placeholder="**********" required></label>
+        <span class="input_mark">
+            <img class="input_number" src="img/step.4.png">
+            <a class="input_title">Adresa Vášho klubu</a>
+        </span>
+        <label><input id="state" type="text" name="state" placeholder="Krajina" required></label>
+        <label><input id="city" type="text" name="city" placeholder="Mesto" required></label>
+        <label><input id="addressFirst" type="text" name="address" placeholder="Adresa" required></label>
+        <span class="checkbox">
+            <label><input id="agree" type="checkbox" name="checkbox" class="checkbox"></label>
+            <a class="checkbox_text">Súhlasim s Obchodnými podmienkami platnými pre túto službu</a>
+        </span>
+            
+        <label><input type="submit" name="button" value="Dokončiť registráciu"></label>
+    </form>
+            </span>
+        </span>
+    </div>
+<!-- ClickDesk Live Chat Service for websites -->
+<script type='text/javascript'>
+var _glc =_glc || []; _glc.push('all_ag9zfmNsaWNrZGVza2NoYXRyDwsSBXVzZXJzGKOPt9UMDA');
+var glcpath = (('https:' == document.location.protocol) ? 'https://my.clickdesk.com/clickdesk-ui/browser/' : 
+'http://my.clickdesk.com/clickdesk-ui/browser/');
+var glcp = (('https:' == document.location.protocol) ? 'https://' : 'http://');
+var glcspt = document.createElement('script'); glcspt.type = 'text/javascript'; 
+glcspt.async = true; glcspt.src = glcpath + 'livechat-new.js';
+var s = document.getElementsByTagName('script')[0];s.parentNode.insertBefore(glcspt, s);
+</script>
+<!-- End of ClickDesk -->
+</body>
+</html>
