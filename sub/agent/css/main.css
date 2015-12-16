@@ -459,14 +459,26 @@ div#resultList{
 .venueImg:hover{
     z-index: 33;
 }
-.venueImgChart{
+.venuePointChart{
     position: absolute;
-    display: inline-block;
-    vertical-align: middle;
-    width: 10%;
+    width: 25px;
+    height: 25px;
+    border-radius: 33px;
+    border: none;
+    background-color: #ffcd29;
+    cursor: pointer;
 }
-.venueImgChart:hover{
+.venuePointChart:hover{
     z-index: 33;
+}
+td{
+	position: relative;
+	width: 150px;
+	border: 1px solid #000000;
+	text-align: center;
+}
+#concertsDate{
+	text-align: center;
 }
 .resultImg{
 	position: absolute;

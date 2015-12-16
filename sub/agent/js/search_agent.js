@@ -37,6 +37,9 @@ $(document).ready(function() {
 		page = 0;
 		selectLoad = byCity;
 		$("#resultList").empty();
+		$("#concerts").empty();
+		$("#concertsDate").empty();
+		chartData = new Array();
 		
 		if($("#cityId").val() === ''){
 			loadAllConcert('https://api.bandcloud.net/users/events');
@@ -79,6 +82,8 @@ $(document).ready(function() {
 	};
 
 	$("#resultList").empty();
+	$("#concerts").empty();
+	$("#concertsDate").empty();
 	loadAllConcert('https://api.bandcloud.net/users/events');
 	
 	// CREATE CONCERT FORM
@@ -288,11 +293,11 @@ function addElements(json){
 	
 	var minus = 0;
 	page++;
+	var bufferedArray = new Array();
 	for(var i = 0; i < json.events.length; i++){
 		var value = json.events[i];
         var arr = value.stringDate.split('-');
-		
-		chartData.push(new Array(value.stringDate, value.time, value.urlPhoto));
+	
         results[length + i] = value;
         
 		var element = '<div class="resultElement">'+
@@ -323,6 +328,20 @@ function addElements(json){
 			$("#resultList").append('<span id="spinnerActivator"></span>');
 			minus = 1;
 		}
+		
+		if(chartData.length > 0 && bufferedArray.length === 0 && value.stringDate == chartData[chartData.length - 1][0][0]){
+			bufferedArray = chartData[chartData.length - 1];
+			chartData = jQuery.grep(chartData, function( a ) {
+							  return a !== bufferedArray;
+						});
+		}
+		
+		bufferedArray.push(new Array(value.stringDate, value.time, value.urlPhoto));
+		
+		if((i + 1 < json.events.length && value.stringDate != json.events[i+1].stringDate) || i + 1 == json.events.length){
+			chartData.push(bufferedArray);
+			bufferedArray = new Array();
+		}
 	}
     /*
     $(".wrapper").on( "click", function() {
@@ -331,74 +350,84 @@ function addElements(json){
 			loadConcertForClub(clickedClubId);
 	});*/
 	
-	var min = null;
-	var max = null;
-	for (var i = 0; i < chartData.length; i++){
-		if(min == null){
-			min = chartData[i][1];
-			max = chartData[i][1];
-		}else if(chartData[i][1] > max){
-			max = chartData[i][1];
-		}else if(chartData[i][1] < min){
+	$("#concerts").empty();
+	$("#concertsDate").empty();
+	
+	for(var i = 0; i < chartData.length; i++){
+		var arrayForDay = chartData[i];
+		var element = '<td>';
+		for(var j = 0; j < arrayForDay.length; j++){
+			element = element + '<span class="venuePointChart">' + i + '</span>';
 		}
+		$("#concerts").append(element + '</td>');
+		$("#concertsDate").append('<td>' + arrayForDay[0][0] + '</td>');
 	}
 	
-	var minSplit = min.split(":");
-	var minHour = minSplit[0];
-	var minMinute = minSplit[1];
-	var maxSplit = max.split(":");
-	var maxHour = maxSplit[0];
-	var maxMinute = maxSplit[1];
 	
-	min = getMinutes(min);
-	max = getMinutes(max);
-//	var different = (max - min) / $("#graph").height();
-	var height = $("#graph").height();
-	var different = max / height;
-	var distanceLeft = 10;
-
-	var datePreviev = null;
-	var width = 0;
-	var element = '<td>';
-	
-	for (var i = 0; i < chartData.length; i++){
-		if(i > 0 && (getMinutes(chartData[i][1]) / different) == (getMinutes(chartData[i-1][1]) / different)){
-			distanceLeft = distanceLeft + 15;
-			width = width + 57;
-		}else if (datePreviev = chartData[i][0]){
-			distanceLeft = distanceLeft + 150;
-			width = width + 192;
-		}
-		
-		element = element + '<span class="venueImgChart" style="left: ' + distanceLeft + 'px; top: ' + (max - getMinutes(chartData[i][1])) / different + 'px;">'+
-								'<span class="resultImg" >'+
-									'<img src="' + chartData[i][2] + '" alt="venue_img" class="img_result">'+ 
-								'</span>'+
-								(((i + 1 < chartData.length) && chartData[i][1] != chartData[i+1][1]) || i + 1 == chartData.length ? '<span style="position: absolute; right: -15px; top: 15px;">' + chartData[i][1] + '</span>' : '')+
-						    '</span>';
-		if(((i + 1 < chartData.length) && chartData[i][1] != chartData[i+1][1]) || i + 1 == chartData.length){
-			width = width + 65;
-		}
-		
-		if(((i + 1 < chartData.length) && chartData[i][0] != chartData[i+1][0]) || i + 1 == chartData.length){
-			$("#concerts").append(element + "</td>");
-			console.log(width);
-			$("#concertsDate").append('<td style="width:' + width + 'px;">' + chartData[i][0] + '</td>');
-			width = 0;
-		}else{
-			$("#graph").append(element);
-		}
-	}
-    
-    if(minus == 1){
-        $("#resultList").append('<div class="spinner">' +
-                                          '<div class="dot1"></div>'+
-                                          '<div class="dot2"></div>'+
-                                    '</div>');
-    }
-	
-	$('.bold').empty();
-	$('.bold').append($("#resultList").children().length - minus + ' results');
+//	var min = null;
+//	var max = null;
+//	for (var i = 0; i < chartData.length; i++){
+//		if(min == null){
+//			min = chartData[i][1];
+//			max = chartData[i][1];
+//		}else if(chartData[i][1] > max){
+//			max = chartData[i][1];
+//		}else if(chartData[i][1] < min){
+//		}
+//	}
+//	
+//	var minSplit = min.split(":");
+//	var minHour = minSplit[0];
+//	var minMinute = minSplit[1];
+//	var maxSplit = max.split(":");
+//	var maxHour = maxSplit[0];
+//	var maxMinute = maxSplit[1];
+//	
+//	min = getMinutes(min);
+//	max = getMinutes(max);
+////	var different = (max - min) / $("#graph").height();
+//	var height = $("#graph").height();
+//	var different = max / height;
+//	var distanceLeft = 10;
+//
+//	var datePreviev = null;
+//	var width = 0;
+//	var element = '<td>';
+//	
+//	for (var i = 0; i < chartData.length; i++){
+//		if(i > 0 && getMinutes(chartData[i][1]) == getMinutes(chartData[i-1][1])){
+//			distanceLeft = distanceLeft + 15;
+//			continue;
+//			width = width + 57;
+//		}
+////		else if (datePreviev = chartData[i][0]){
+////			distanceLeft = distanceLeft + 150;
+////			width = width + 192;
+////		}
+//		
+//		element = element + '<td><span class="venuePointChart"' +
+//								  'style="left: ' + distanceLeft + 'px; top: ' + (max - getMinutes(chartData[i][1])) / different + 'px;"></span></td>';
+//		
+//		if(((i + 1 < chartData.length) && chartData[i][1] != chartData[i+1][1]) || i + 1 == chartData.length){
+//			width = width + 65;
+//		}
+//		
+//		if(((i + 1 < chartData.length) && chartData[i][0] != chartData[i+1][0]) || i + 1 == chartData.length){
+//			$("#concerts").append(element + "</td>");
+//			console.log(width);
+//			$("#concertsDate").append('<td>' + chartData[i][0] + '</td>');
+//			width = 0;
+//		}else{
+//			$("#concerts").append(element + "</td>");
+//		}
+//	}
+//    
+//    if(minus == 1){
+//        $("#resultList").append('<div class="spinner">' +
+//                                          '<div class="dot1"></div>'+
+//                                          '<div class="dot2"></div>'+
+//                                    '</div>');
+//    }
 }
 
 function getMinutes(time){
