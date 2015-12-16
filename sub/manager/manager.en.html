@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html dir="ltr">
+	<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<title>concertian - create, organize and promote concerts more effectively</title>
+	
+	<link href='https://fonts.googleapis.com/css?family=Open+Sans:300,400,600&subset=latin,latin-ext' rel='stylesheet' type='text/css'>
+	<link rel="stylesheet" type="text/css" href="css/custom.css">
+    <script src="js/jquery-1.11.3.min.js"></script>
+    <script src="js/trunk.js"></script>
+        
+	<meta name="author" content="QUAWER">
+	<meta name="robots" content="nofollow, noindex">
+</head>
+<body>
+    <div id="topBar">
+        <header class="slide">
+		<ul id="navToggle" class="burger slide">
+			<li></li><li></li><li></li>
+		</ul>
+        <a class="concertian slideRight" href="../index.html"><img class="logo" src="img/concertian.logo.png"></a>
+	   </header>
+        
+        <nav class="slide">
+        <ul>
+            <li><a id="language_menu" class="text_button">LANGUAGE</a>
+                            <ul class="languagemenu">
+                                <li><a href="manager.en.html">ENGLISH</a></li>
+                                <li><a href="manager.html">SLOVAK</a></li>
+                                <li><a href="manager.cz.html">CZECH</a></li>
+                            </ul>
+            </li>
+            <li><a href="manager_lite.en.html" class="text_button">ABOUT CONCERTIAN</a></li>
+            <li><a href="https://blog.concertian.com/" class="text_button">BLOG</a></li>
+            <li><a href="../agent/index.html" class="login_button">LOG IN</a></li>
+            <li><a href="email_verification.en.html" class="registrate_button">REGISTRATE</a></li>
+        </ul>
+        </nav>
+    </div>
+    <div id="corepage" class="content slide">
+        <span class="gradient">
+        <span class="left_column">
+            <span class="mockup_header_lite hvr-float"><img class="lite" src="img/concertian_lite.png"></span>
+            <span class="header_text"><a>concertian<strong> LITE</strong></a></span>
+            <span class="call_to_action"><a href="email_verification.en.html" class="button">TRY NOW</a></span>
+            <span class="call_to_action"><a href="manager_lite.en.html" class="button_more">FIND OUT MORE</a></span>
+            <span class="tryforfree"><a class="free_text">Try app for <strong class="true">15 days - it's free</strong></a></span>
+        </span>
+        <span class="right_column">
+        <span class="pro_opacity">
+            <span class="mockup_header_pro"><img class="pro" src="img/concertian_pro.png"></span>
+            <span class="header_text"><a>concertian<strong> PRO</strong></a></span>
+            <span class="call_to_action"><a class="button_border">COMING SOON</a></span>
+        </span>
+        </span>
+        </span>
+    </div>
+<script>
+    $("#language_menu").click(function(){
+        event.stopPropagation();
+        $(".languagemenu").fadeIn(200);
+    });
+    $(document).click( function(){
+    $('.languagemenu').fadeOut(200);
+    });
+</script>
+<script>
+  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+  })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+  ga('create', 'UA-66706530-1', 'auto');
+  ga('send', 'pageview');
+
+</script>
+<!-- ClickDesk Live Chat Service for websites -->
+<script type='text/javascript'>
+var _glc =_glc || []; _glc.push('all_ag9zfmNsaWNrZGVza2NoYXRyDwsSBXVzZXJzGKOPt9UMDA');
+var glcpath = (('https:' == document.location.protocol) ? 'https://my.clickdesk.com/clickdesk-ui/browser/' : 
+'http://my.clickdesk.com/clickdesk-ui/browser/');
+var glcp = (('https:' == document.location.protocol) ? 'https://' : 'http://');
+var glcspt = document.createElement('script'); glcspt.type = 'text/javascript'; 
+glcspt.async = true; glcspt.src = glcpath + 'livechat-new.js';
+var s = document.getElementsByTagName('script')[0];s.parentNode.insertBefore(glcspt, s);
+</script>
+<!-- End of ClickDesk -->
+</body>
+</html>

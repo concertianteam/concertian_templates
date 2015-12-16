@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html dir="ltr">
+	<head>
+	<meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+	<title>concertian - tvorte, organizujte a propagujte koncerty efektívnejšie</title>
+	
+	<link href='https://fonts.googleapis.com/css?family=Open+Sans:300,400,600&subset=latin,latin-ext' rel='stylesheet' type='text/css'>
+	<link rel="stylesheet" type="text/css" href="css/custom.css">
+    <script src="js/jquery-1.11.3.min.js"></script>
+    <script src="js/trunk.js"></script>
+        
+	<meta name="author" content="QUAWER">
+	<meta name="robots" content="nofollow, noindex">
+</head>
+<body>
+    <div id="topBar">
+        <header class="slide">
+		<ul id="navToggle" class="burger slide">
+			<li></li><li></li><li></li>
+		</ul>
+        <a class="concertian slideRight" href="../index.html"><img class="logo" src="img/concertian.logo.png"></a>
+	   </header>
+        
+        <nav class="slide">
+        <ul>
+            <li><a id="language_menu" class="text_button">LANGUAGE</a>
+                            <ul class="languagemenu">
+                                <li><a href="email_verification.en.html">ENGLISH</a></li>
+                                <li><a href="email_verification.html">SLOVAK</a></li>
+                                <li><a href="email_verification.cz.html">CZECH</a></li>
+                            </ul>
+            </li>
+            <li><a href="manager_lite.html" class="text_button">O CONCERTIAN</a></li>
+            <li><a href="https://blog.concertian.com/" class="text_button">BLOG</a></li>
+            <li><a href="../agent/index.html" class="login_button">LOG IN</a></li>
+            <li><a href="email_verification.html" class="registrate_button">REGISTROVAŤ</a></li>
+        </ul>
+        </nav>
+    </div>
+    <div id="corepage" class="slide">
+        <span class="left_column">
+            <span class="registrate_banner">
+                <span class="registrate_heading">
+                    <a>Registrácia jednoducho a rýchlo,<br><strong class="under_text">rovnako akým sa stalo vytvorenie koncertu</strong></a>
+                </span>
+                <span class="registrate_banner_img">
+                    <img class="banner_img" src="img/concertian_registration_mockup.png">
+                </span>
+            </span>
+        </span>
+        <span class="right_column">
+            <span class="registrate_form">
+                <span class="verify-column">
+                    <span class="verification_header">
+                            <a>Pre najrýchlejšiu registráciu Vás poprosíme zadať len <strong>kontaktný email</strong></a>
+                    </span>
+                    <form id="verify" name="email_verification" action="php/verify_email.php" method="post">
+                        <label><input type="email" name="email" placeholder="concertian@club.com"></label>
+                        <label><input type="submit" name="submit" value="Aktivovať účet" class="hvr-buzz-out"></label>
+                    </form>
+                   <span id="response"></span>
+                </span>
+            </span>
+        </span>
+    </div>
+<script>
+    $("#language_menu").click(function(){
+        event.stopPropagation();
+        $(".languagemenu").fadeIn(200);
+    });
+    $(document).click( function(){
+    $('.languagemenu').fadeOut(200);
+    });
+</script>
+<script>
+  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+  })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+  ga('create', 'UA-66706530-1', 'auto');
+  ga('send', 'pageview');
+
+</script>
+<!-- ClickDesk Live Chat Service for websites -->
+<script type='text/javascript'>
+var _glc =_glc || []; _glc.push('all_ag9zfmNsaWNrZGVza2NoYXRyDwsSBXVzZXJzGKOPt9UMDA');
+var glcpath = (('https:' == document.location.protocol) ? 'https://my.clickdesk.com/clickdesk-ui/browser/' : 
+'http://my.clickdesk.com/clickdesk-ui/browser/');
+var glcp = (('https:' == document.location.protocol) ? 'https://' : 'http://');
+var glcspt = document.createElement('script'); glcspt.type = 'text/javascript'; 
+glcspt.async = true; glcspt.src = glcpath + 'livechat-new.js';
+var s = document.getElementsByTagName('script')[0];s.parentNode.insertBefore(glcspt, s);
+</script>
+<!-- End of ClickDesk -->
+</body>
+</html>

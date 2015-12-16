@@ -179,8 +179,34 @@ $(window).resize(function() {
 	$("#results_list").empty();
     $("#form").css('visibility', 'hidden');
 	loadlandingCards();
-}
 
+	/* ---- Facebook graph stories ----- */
+		/* Facebook jquery sdk implementation */
+	  $.ajaxSetup({ cache: true });
+	  $.getScript('//connect.facebook.net/en_US/sdk.js', function(){
+		FB.init({
+		  appId: '1128811043811214',
+		  version: 'v2.5' // or v2.0, v2.1, v2.2, v2.3
+		});     
+		$('#loginbutton,#feedbutton').removeAttr('disabled');
+		FB.getLoginStatus(updateStatusCallback);
+	  });
+	
+	//* -------- Slim scroll ------- *//
+	$(function(){
+      $('#results_list').slimscroll({
+		  height: '91.5%',
+      });
+	  $('#event_name').slimscroll({
+		  height: '91.5%',
+      });
+    });
+	//* -------------- Hide Banner ---------- *//
+	 $("#close").click(function(){
+        $("#landing_banner").hide(800);
+		$(".slimScrollDiv").css('height', '108%');
+     });
+}
 function repaindTextSecond (){
     for(var i = 0; i < $("#results_list").children().length; i++){
        if(!disabled){
@@ -378,33 +404,21 @@ function addElements(json){
         results[length + i] = value;
 		
 		var element = '<span class="resultElement">'+
-						  '<a class="resultImage" href="mailto:' + value.venueEmail + '"><img src="' + value.urlPhoto + '" alt="venue_img" class="image">'+
-						  '</a>'+
-						'<span class="wrapper">'+
-						  '<span class="wrapper_text">' + (length + i) + '</span>'+
-						  '<span class="resultTextContainer">'+
-					  		  '<span class="resultTextFirst">' + shortenText( value.eventName, 40) + '</span>'+
-                              '<span class="resultTextSecond">'+
-                                    '<span class="city">' + ($(window).width()<limitWidth? shortenText(value.city, 15) : value.city) + '</span>'+
-                                    '<span class="venueName">' + value.venueName + '</span>'+
-			'<input type="hidden" class="idVenue" val="' + value.venueId + '">'+ 
-                              '</span>'+
-                          '</span>' +
-						  '<span class="resultTextContainer_datetime resultBorder">'+
-						   '<span id="date" class="date_formated">'+
-                              '<span>'+arr[2]+' '+arr[1]+
-                                    '<strong>'+arr[0]+'</strong>'+
-                              '</span>'+
-                              '</span>'+
-                          	  '<span id="time" class="resultTextSecond">' + value.time + '</span>'+
-						  '</span>'+
-			'</span>'+
-                          '<span class="resultInfoButton">'+						                          '<span class="imgInfo" style="font-size: 0px;">' + (length + i) + '</span>'+ 
-                          '</span>'+
-						  '<span class="resultShareButton">'+
-                            '<span class="imgShare"></span>'+
-                          '</span>'+
-					  '</span>';
+						'<span class="elementCore">'+
+							'<span class="lenght">'+ (length + i) +'</span>'+
+			'<input type="hidden" class="idVenue" val="' + value.venueId + '">'+		
+							'<img class="elementCore_cover" src="'+ value.urlPhoto +'">'+
+							'<span class="when_element">'+
+								'<span class="date_value">'+arr[2]+' '+arr[1]+'<strong>'+' '+arr[0]+'</strong>'+'</span>'+
+								'<span class="time_value">'+ value.time +'</span>'+
+							'</span>'+
+							'<span class="share_button">'+
+								'<span class="share_icon">'+ (length + i) +'</span>'+
+							'</span>'+
+							'<span id="event_name">'+ shortenText( value.eventName, 40) +'</span>'+
+							'<span id="hover"></span>'+
+						'</span>'+
+					'</span>';
         
 		$("#results_list").append(element);
 		if(json.events.length % 20 == 0 && i == json.events.length - 5){
@@ -412,50 +426,32 @@ function addElements(json){
 			minus = 2;
 		}
 	} 
-    
-	$(".wrapper").on( "click", function() {
-        var value = results[$(this).find(".wrapper_text").text()];
+    $(".share_button").on("click", function() {
+		var value = results[$(this).find(".share_icon").text()];
+				FB.ui({
+				  method: 'feed',
+				  picture: value.urlPhoto,
+				  name: value.eventName,
+				  caption: value.venueName,
+				  description: value.date +" o "+value.time,
+				}, function(response){});
+	});
+							   
+	$(".elementCore").on( "click", function() {
+        var value = results[$(this).find(".lenght").text()];
 		var clickedClubId = value.venueId;
 			loadConcertForClub(clickedClubId);
+		var elementDetails = 
+			'<span class="bar_detail">'+
+				'<span class="detail_text">' + value.venueName + '<strong>' + ' ' + ($(window).width()<limitWidth? shortenText(value.city, 15) : value.city) + ' ' + value.address + '</strong></span>'+
+				'<a href="mailto:'+ value.venueEmail +'">'+
+					'<span class="send_message">'+
+						'<span class="send_message_icon"></span>'+
+					'</span>'+
+				'</a>'+
+			'</span>';
+		$("#results_list").append(elementDetails);
 	});
-
-	
-	$(".resultInfoButton").on("click", function() {
-        $("#results_list_sm").empty();
-        $(".containerForm").addClass("overlay");
-        $("#landing_banner").addClass("overlay");
-        $("#results_list").addClass("overlay");
-        
-        var value = results[$(this).find(".imgInfo").text()];
-		console.log(value);
-        var element = '<span class="top">'+
-                            '<span class="header_img"><img class="img" src="' + value.urlPhoto + '"></span>'+
-                                '<span class="top_text">'+
-                                    '<span class="header_name">' + value.venueName + '</span>'+
-                                    '<span class="header_city">'+value.city+'</span>'+
-                                    '</span>'+
-                                '<span id="close_details"><span class="detail_close"></span></span>'+
-                                '</span>'+
-                                '<span class="body">'+
-                                '<span class="details_list">'+
-                                    '<span class="eventDate">'+value.stringDate+'</span>'+
-                                    '<span class="eventTime">' + value.time + '</span>'+
-                                    '<span class="eventName">'+value.eventName+'</span>'+
-                                '</span>'+
-                                '<span class="detail_cta_buttons"><span><a  class="imgMessage" href="mailto:' + value.venueEmail + '"></a></span><span><a class="imgSocial"></a></span><span><a class="imgAdress"></a></span>'+    
-                                '</span>'+
-                            '</span>';
-    $("#results_list_sm").append(element);
-    $("#results_list_sm").fadeIn(200);
-        
-    $("#close_details").on("click", function() {
-        $("#results_list_sm").hide();
-        $(".containerForm").removeClass("overlay");
-        $("#landing_banner").removeClass("overlay");
-        $("#results_list").removeClass("overlay");
-    });
-	});
-    
     
 	/**
 	 *	Search location and add markers
@@ -473,13 +469,14 @@ function addElements(json){
 					  var lat = parseFloat($(location).find('lat').text());
 					  var lng = parseFloat($(location).find('lng').text());
 					  var title = $(doc).find('formatted_address').text();
-					
+					 
 					  if(!isNaN(lat)){
 						  var myLatLng = new google.maps.LatLng(lat, lng);
 						  var marker = new google.maps.Marker({
 							  position: myLatLng,
 							  map: map,
-							  title: title
+							  title: title,
+							  icon: 'images/marker.svg'
 					      });
 						  
 						  markers.push(marker);
@@ -492,6 +489,9 @@ function addElements(json){
   				   console.log('Error. ' + error);
   			   }
 	    });
+		$( ".resultElement" ).on("click", function() {
+		 	marker.setIcon('images/marker.red.svg');
+		});
 	}
 	
     if(minus == 2){
