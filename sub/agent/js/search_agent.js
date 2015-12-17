@@ -302,7 +302,7 @@ function addElements(json){
         
 		var element = '<div class="resultElement">'+
                         '<div class="wrapper">'+
-						    /*'<div class="wrapper_text">' + (length + i) + '</div>'+*/
+						    '<div class="wrapper_text">' + (length + i) + '</div>'+
                             '<input type="hidden" value="' + value.venueId  + '">'+
                             '<div class="whenElement">'+
                                 '<div class="resultDate">'  + arr[2] + ' ' + arr[1] + "</span><br>" + arr[0] + '</div>'+
@@ -336,31 +336,37 @@ function addElements(json){
 						});
 		}
 		
-		bufferedArray.push(new Array(value.stringDate, value.time, value.urlPhoto));
+		bufferedArray.push(new Array(value.stringDate, value.time, value.urlPhoto, value.eventName));
 		
 		if((i + 1 < json.events.length && value.stringDate != json.events[i+1].stringDate) || i + 1 == json.events.length){
 			chartData.push(bufferedArray);
 			bufferedArray = new Array();
 		}
 	}
-    /*
     $(".wrapper").on( "click", function() {
+        $("#resultList").empty();
+        $("#concerts").empty();
+		$("#concertsDate").empty();
+		chartData = new Array();
         var value = results[$(this).find(".wrapper_text").text()];
 		var clickedClubId = value.venueId;
 			loadConcertForClub(clickedClubId);
-	});*/
+	});
 	
 	$("#concerts").empty();
 	$("#concertsDate").empty();
 	
 	for(var i = 0; i < chartData.length; i++){
 		var arrayForDay = chartData[i];
+        var dateFormated = arrayForDay[0][0];
+            console.log(dateFormated);
+        var dateFormated = $.datepicker.formatDate('MM dd, yy', new Date(dateFormated));
 		var element = '<td>';
 		for(var j = 0; j < arrayForDay.length; j++){
 			element = element + '<span class="venuePointChart">' + i + '</span>';
 		}
 		$("#concerts").append(element + '</td>');
-		$("#concertsDate").append('<td>' + arrayForDay[0][0] + '</td>');
+		$("#concertsDate").append('<td>' + dateFormated + '</td>');
 	}
 	
 	

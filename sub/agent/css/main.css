@@ -468,18 +468,6 @@ div#resultList{
     background-color: #ffcd29;
     cursor: pointer;
 }
-.venuePointChart:hover{
-    z-index: 33;
-}
-td{
-	position: relative;
-	width: 150px;
-	border: 1px solid #000000;
-	text-align: center;
-}
-#concertsDate{
-	text-align: center;
-}
 .resultImg{
 	position: absolute;
 	top: 0px;
@@ -867,9 +855,22 @@ table{
 	width: 100%;
 	height: 100%;
 }
+td{
+	position: relative;
+	width: 150px;
+	text-align: center;
+}
+#concertsDate{
+	text-align: center;
+}
 #concertsDate{
 	bottom:0px;
-	height:50px;	
+	height:50px;
+    color: #ffbb33;
+    font-weight: 100;
+}
+.venuePointChart:hover{
+    z-index: 33;
 }
 .graphColumn{
 	position: relative;
