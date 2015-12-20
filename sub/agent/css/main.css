@@ -459,15 +459,6 @@ div#resultList{
 .venueImg:hover{
     z-index: 33;
 }
-.venuePointChart{
-    position: absolute;
-    width: 25px;
-    height: 25px;
-    border-radius: 33px;
-    border: none;
-    background-color: #ffcd29;
-    cursor: pointer;
-}
 .resultImg{
 	position: absolute;
 	top: 0px;
@@ -859,15 +850,42 @@ td{
 	position: relative;
 	width: 150px;
 	text-align: center;
-}
-#concertsDate{
-	text-align: center;
+	padding: 0px 20px;
 }
 #concertsDate{
 	bottom:0px;
 	height:50px;
     color: #ffbb33;
     font-weight: 100;
+    text-align: center;
+}
+.timeLine{
+	position: absolute;
+	width: 100%;
+	height: 1px;
+	display: block;
+}
+.timeLineText{
+	font-size: 9pt;
+	padding-left: 10px;
+	text-align: left;
+	color: gray;
+}
+.timeLineLine{
+	position: absolute;
+	top: 13px;
+	left: 50px;
+	width: 100%;
+	height: 1px;
+	background-color: gray;
+}
+.venuePointChart{
+    position: absolute;
+    width: 25px;
+    height: 25px;
+    border-radius: 33px;
+    border: none;
+    cursor: pointer;
 }
 .venuePointChart:hover{
     z-index: 33;

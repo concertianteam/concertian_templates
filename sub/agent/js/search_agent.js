@@ -302,7 +302,7 @@ function addElements(json){
         
 		var element = '<div class="resultElement">'+
                         '<div class="wrapper">'+
-						    '<div class="wrapper_text">' + (length + i) + '</div>'+
+						    /*'<div class="wrapper_text">' + (length + i) + '</div>'+*/
                             '<input type="hidden" value="' + value.venueId  + '">'+
                             '<div class="whenElement">'+
                                 '<div class="resultDate">'  + arr[2] + ' ' + arr[1] + "</span><br>" + arr[0] + '</div>'+
@@ -336,110 +336,65 @@ function addElements(json){
 						});
 		}
 		
-		bufferedArray.push(new Array(value.stringDate, value.time, value.urlPhoto, value.eventName));
+		bufferedArray.push(new Array(value.stringDate, value.time, value.urlPhoto));
 		
 		if((i + 1 < json.events.length && value.stringDate != json.events[i+1].stringDate) || i + 1 == json.events.length){
 			chartData.push(bufferedArray);
 			bufferedArray = new Array();
 		}
 	}
+    /*
     $(".wrapper").on( "click", function() {
-        $("#resultList").empty();
-        $("#concerts").empty();
-		$("#concertsDate").empty();
-		chartData = new Array();
         var value = results[$(this).find(".wrapper_text").text()];
 		var clickedClubId = value.venueId;
 			loadConcertForClub(clickedClubId);
-	});
+	});*/
 	
 	$("#concerts").empty();
 	$("#concertsDate").empty();
+	$("#lineContainer").empty();
+	
+	var height = $("#concerts").innerHeight() - 75;
+	var constant = height / 1440;
+	var counter = 0;
+	/*
+	 *  <= 5  - yelou
+	 *  <= 12 - blue
+	 *  > 12 - red
+	 */
+	var color = {'yelou' : '#00ff00',
+        		  'blue'  : '#0000ff',
+        		  'red'  : '#ff0000'};
 	
 	for(var i = 0; i < chartData.length; i++){
 		var arrayForDay = chartData[i];
-        var dateFormated = arrayForDay[0][0];
-            console.log(dateFormated);
-        var dateFormated = $.datepicker.formatDate('MM dd, yy', new Date(dateFormated));
 		var element = '<td>';
 		for(var j = 0; j < arrayForDay.length; j++){
-			element = element + '<span class="venuePointChart">' + i + '</span>';
+			if((j+1 < arrayForDay.length && arrayForDay[j][1] != arrayForDay[j+1][1]) || j+1 == arrayForDay.length){
+				element = element + '<span class="venuePointChart" style="top:' + (height - getMinutes(arrayForDay[j][1]) * constant) + 'px; background-color: ' + (counter <= 5 ? color['yelou'] : (counter <= 12 ? color['blue'] : color['red'])) + ';">' + i + '</span>';
+				counter = 0;
+			}else{
+				counter++;
+			}
 		}
 		$("#concerts").append(element + '</td>');
-		$("#concertsDate").append('<td>' + dateFormated + '</td>');
+		$("#concertsDate").append('<td>' + arrayForDay[0][0] + '</td>');
 	}
 	
-	
-//	var min = null;
-//	var max = null;
-//	for (var i = 0; i < chartData.length; i++){
-//		if(min == null){
-//			min = chartData[i][1];
-//			max = chartData[i][1];
-//		}else if(chartData[i][1] > max){
-//			max = chartData[i][1];
-//		}else if(chartData[i][1] < min){
-//		}
-//	}
-//	
-//	var minSplit = min.split(":");
-//	var minHour = minSplit[0];
-//	var minMinute = minSplit[1];
-//	var maxSplit = max.split(":");
-//	var maxHour = maxSplit[0];
-//	var maxMinute = maxSplit[1];
-//	
-//	min = getMinutes(min);
-//	max = getMinutes(max);
-////	var different = (max - min) / $("#graph").height();
-//	var height = $("#graph").height();
-//	var different = max / height;
-//	var distanceLeft = 10;
-//
-//	var datePreviev = null;
-//	var width = 0;
-//	var element = '<td>';
-//	
-//	for (var i = 0; i < chartData.length; i++){
-//		if(i > 0 && getMinutes(chartData[i][1]) == getMinutes(chartData[i-1][1])){
-//			distanceLeft = distanceLeft + 15;
-//			continue;
-//			width = width + 57;
-//		}
-////		else if (datePreviev = chartData[i][0]){
-////			distanceLeft = distanceLeft + 150;
-////			width = width + 192;
-////		}
-//		
-//		element = element + '<td><span class="venuePointChart"' +
-//								  'style="left: ' + distanceLeft + 'px; top: ' + (max - getMinutes(chartData[i][1])) / different + 'px;"></span></td>';
-//		
-//		if(((i + 1 < chartData.length) && chartData[i][1] != chartData[i+1][1]) || i + 1 == chartData.length){
-//			width = width + 65;
-//		}
-//		
-//		if(((i + 1 < chartData.length) && chartData[i][0] != chartData[i+1][0]) || i + 1 == chartData.length){
-//			$("#concerts").append(element + "</td>");
-//			console.log(width);
-//			$("#concertsDate").append('<td>' + chartData[i][0] + '</td>');
-//			width = 0;
-//		}else{
-//			$("#concerts").append(element + "</td>");
-//		}
-//	}
-//    
-//    if(minus == 1){
-//        $("#resultList").append('<div class="spinner">' +
-//                                          '<div class="dot1"></div>'+
-//                                          '<div class="dot2"></div>'+
-//                                    '</div>');
-//    }
+	$("#lineContainer").append(	'<span class="timeLine" style="top: ' + (height - 1320 * constant) + 'px;">' +
+						  	   		'<span class="timeLineText">22:00</span>' +
+						  	   		'<span class="timeLineLine"></span>' +
+					  	   		'</span>' +
+					  	   		'<span class="timeLine" style="top: ' + (height - 1200 * constant) + 'px;">' +
+									'<span class="timeLineText">20:00</span>' +
+									'<span class="timeLineLine"></span>' +
+							   	'</span>');
 }
 
 function getMinutes(time){
 	var timeSplit = time.split(":");
-	var hour = timeSplit[0];
-	var minute = timeSplit[1];
+	var hour = parseInt(timeSplit[0]);
+	var minute = parseInt(timeSplit[1]);
 	
 	return (hour * 60) + minute;
 }
