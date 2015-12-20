@@ -25,10 +25,7 @@ $(document).ready(function() {
 			$('#program').slimscroll({
 				height: '77%',
       		});
-				$('#graph').slimscroll({
-					width: '100%',
-      			});
-    });		
+	});		
 	
  // EVENTS SEARCH	
 	$('form').attr('action', 'javascript:void(0);');
@@ -225,6 +222,25 @@ function loadCreatedConcerts(){
       $("#timepicker").timepicker();
       $("#visibility").selectmenu();
   });
+	
+	//* Mouse position tracker *//
+	$(document).mousemove(function(e){
+           mouseX = e.pageX;
+           mouseY = e.pageY;
+           //To Get the relative position
+           if( this.offsetLeft !=undefined)
+             mouseX = e.pageX - this.offsetLeft;
+           if( this.offsetTop != undefined)
+             mouseY = e.pageY - this.offsetTop;
+
+           if(mouseX < 0)
+                mouseX =0;
+           if(mouseY < 0)
+               mouseY = 0;
+
+           windowWidth  = $(window).width()+$(window).scrollLeft();
+           windowHeight = $(window).height()+$(window).scrollTop();
+   });
 });
 
 var page = 0;
@@ -234,6 +250,8 @@ var byCity = 1;
 var selectLoad = all;
 var chartData = new Array();
 var results = [];
+var mouseX,mouseY,windowWidth,windowHeight;
+var popupLeft,popupTop;
 
 function loadAllConcert(url){
 	$.ajax({ 'url' : url,
@@ -343,10 +361,12 @@ function addElements(json){
 			bufferedArray = new Array();
 		}
 	}
+	
     $(".wrapper").on( "click", function() {
         $("#resultList").empty();
         $("#concerts").empty();
 		$("#concertsDate").empty();
+		$("#custom_program_menu").empty();
 		chartData = new Array();
         var value = results[$(this).find(".wrapper_text").text()];
 		var clickedClubId = value.venueId;
@@ -355,20 +375,67 @@ function addElements(json){
 	
 	$("#concerts").empty();
 	$("#concertsDate").empty();
+	$("#custom_program_menu").empty();
 	
 	for(var i = 0; i < chartData.length; i++){
 		var arrayForDay = chartData[i];
-        var dateFormated = arrayForDay[0][0];
-            console.log(dateFormated);
-        var dateFormated = $.datepicker.formatDate('MM dd, yy', new Date(dateFormated));
+		console.log("/");
+		console.log(arrayForDay);		
+		console.log("/");
 		var element = '<td>';
 		for(var j = 0; j < arrayForDay.length; j++){
 			element = element + '<span class="venuePointChart">' + i + '</span>';
 		}
 		$("#concerts").append(element + '</td>');
-		$("#concertsDate").append('<td>' + dateFormated + '</td>');
+		$("#concertsDate").append('<td>' + arrayForDay[0][0] + '</td>');
 	}
-	
+	//* ----- On click concerts showcase ----- *//
+	$(".venuePointChart").on('mouseenter', function(){
+		$("#custom_program_menu").empty();
+		var value = chartData[$(this).text()];
+		for(var i = 0; i < value.length; i++){
+			var element = 
+			'<span class="result">'+
+				'<span class="event_time">'+ value[i][1] +'</span>'+
+				'<span class="box">'+
+				'<span class="venue_img">'+
+					'<img class="venue_img_src" src="'+ value[i][2] +'">'+
+				'</span>'+	
+				'<span class="event_name">'+ value[i][3] +'</span>'+
+				'</span>'+
+			'</span>';
+			$("#custom_program_menu").append(element);
+		}
+		$("#custom_program_menu").show();
+		 var popupWidth  = $('#custom_program_menu').outerWidth();
+		 var popupHeight =  $('#custom_program_menu').outerHeight();
+
+		if(mouseX+popupWidth > windowWidth)
+         popupLeft = mouseX-popupWidth;
+		  else
+		   popupLeft = mouseX;
+
+			if(mouseY+popupHeight > windowHeight)
+		     popupTop = mouseY-popupHeight;
+				else
+			     popupTop = mouseY; 
+
+			if( popupLeft < $(window).scrollLeft()){
+			 popupLeft = $(window).scrollLeft();
+			}
+			if( popupTop < $(window).scrollTop()){
+			 popupTop = $(window).scrollTop();
+			}
+			if(popupLeft < 0 || popupLeft === undefined)
+			 popupLeft = 0;
+		    if(popupTop < 0 || popupTop === undefined)
+			 popupTop = 0;
+
+	$('#custom_program_menu').offset({top:popupTop,left:popupLeft});
+	});
+	$("#custom_program_menu").on('mouseleave', function(){
+		$("#custom_program_menu").hide(200);
+	});
 	
 //	var min = null;
 //	var max = null;
