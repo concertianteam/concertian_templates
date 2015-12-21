@@ -26,7 +26,7 @@ $(document).ready(function(){
             'password'  : $('#password').val(),
     };
 
-	if (email && password) { // values are not empty
+	if (loginData['email'] && loginData['password']) { // values are not empty
       $.ajax({
         type: "POST",
         url: "https://api.bandcloud.net/agents/auth",
@@ -53,7 +53,7 @@ $(document).ready(function(){
            
         },
 		  error: function(json){
-		 $("#loginResult").text(JSON.parse(json.responseText).message);
+			  $("#loginResult").text(JSON.parse(json.responseText).message);
 	  }
       }); // ajax
     } // if

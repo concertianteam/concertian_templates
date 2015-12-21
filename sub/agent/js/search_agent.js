@@ -49,7 +49,6 @@ $(document).ready(function() {
 			clearTimeout($.data(this, 'scrollTimer'));
 		    $.data(this, 'scrollTimer', setTimeout(function() {
 	        	if($("#spinnerActivator").is_on_screen()){
-	        		console.log($("#spinnerActivator").length);
 	        		$("#spinnerActivator").remove();
 	        		
 	        		if(selectLoad == all){
@@ -241,6 +240,12 @@ function loadCreatedConcerts(){
            windowWidth  = $(window).width()+$(window).scrollLeft();
            windowHeight = $(window).height()+$(window).scrollTop();
    });
+	//* Mousewheel horizontal scrolling *//
+	$("html, body, #graph, *").mousewheel(function(event, delta) {
+		this.scrollLeft -= (delta * 80);
+		this.scrollRight -= (delta * 80);
+		event.preventDefault();
+	});
 });
 
 var page = 0;
@@ -342,7 +347,7 @@ function addElements(json){
                     '</div>';
 		
 		$("#resultList").append(element);
-		if(json.events.length % 20 === 0 && i == json.events.length - 5){
+		if(json.events.length % 20 === 0 && i == json.events.length - 5)		{
 			$("#resultList").append('<span id="spinnerActivator"></span>');
 			minus = 1;
 		}
@@ -379,18 +384,69 @@ function addElements(json){
 	
 	for(var i = 0; i < chartData.length; i++){
 		var arrayForDay = chartData[i];
-		console.log("/");
-		console.log(arrayForDay);		
-		console.log("/");
 		var element = '<td>';
 		for(var j = 0; j < arrayForDay.length; j++){
 			element = element + '<span class="venuePointChart">' + i + '</span>';
 		}
+	}
+	//* Timeline - vertical align based on time *//
+		$("#concerts").empty();
+	$("#concertsDate").empty();
+	$("#lineContainer").empty();
+	
+	var height = $("#concerts").innerHeight() - 75;
+	var constant = height / 1440;
+	var counter = 0;
+	/*
+	 *  <= 5  - yelow
+	 *  <= 12 - blue
+	 *  > 12 - red
+	 */
+	var color = {'yelow' : '#ffbb33',
+        		  'blue'  : '#5F7395',
+        		  'red'  : '#FF4747'};
+	
+	for(var i = 0; i < chartData.length; i++){
+		var arrayForDay = chartData[i];
+		var element = '<td>';
+		for(var j = 0; j < arrayForDay.length; j++){
+			if((j+1 < arrayForDay.length && arrayForDay[j][1] != arrayForDay[j+1][1]) || j+1 == arrayForDay.length){
+				element = element + '<span class="venuePointChart" style="top:' + (height - getMinutes(arrayForDay[j][1]) * constant) + 'px; background-color: ' + (counter <= 5 ? color['yelow'] : (counter <= 12 ? color['blue'] : color['red'])) + ';">' + i + '</span>';
+				counter = 0;
+			}else{
+				counter++;
+			}
+		}
 		$("#concerts").append(element + '</td>');
 		$("#concertsDate").append('<td>' + arrayForDay[0][0] + '</td>');
+		$('#concertsDate td').each(function() { 
+			var dateFormat = $(this).text()
+			var dateFormat = $.datepicker.formatDate('dd MM <br> yy', new Date(dateFormat));
+        //alert(dateFormat);
+        $(this).html(dateFormat);
+     	});
 	}
+	
+	$("#lineContainer").append(	'<span class="timeLine" style="top: ' + (height - 1320 * constant) + 'px;">' +
+						  	   		'<span class="timeLineText">22:00</span>' +
+						  	   		'<span class="timeLineLine"></span>' +
+					  	   		'</span>' +
+					  	   		'<span class="timeLine" style="top: ' + (height - 1200 * constant) + 'px;">' +
+									'<span class="timeLineText">20:00</span>' +
+									'<span class="timeLineLine"></span>' +
+							   	'</span>');
+
+
+function getMinutes(time){
+	var timeSplit = time.split(":");
+	var hour = parseInt(timeSplit[0]);
+	var minute = parseInt(timeSplit[1]);
+	
+	return (hour * 60) + minute;
+}
 	//* ----- On click concerts showcase ----- *//
 	$(".venuePointChart").on('mouseenter', function(){
+		console.log("1");
 		$("#custom_program_menu").empty();
 		var value = chartData[$(this).text()];
 		for(var i = 0; i < value.length; i++){
@@ -436,81 +492,7 @@ function addElements(json){
 	$("#custom_program_menu").on('mouseleave', function(){
 		$("#custom_program_menu").hide(200);
 	});
-	
-//	var min = null;
-//	var max = null;
-//	for (var i = 0; i < chartData.length; i++){
-//		if(min == null){
-//			min = chartData[i][1];
-//			max = chartData[i][1];
-//		}else if(chartData[i][1] > max){
-//			max = chartData[i][1];
-//		}else if(chartData[i][1] < min){
-//		}
-//	}
-//	
-//	var minSplit = min.split(":");
-//	var minHour = minSplit[0];
-//	var minMinute = minSplit[1];
-//	var maxSplit = max.split(":");
-//	var maxHour = maxSplit[0];
-//	var maxMinute = maxSplit[1];
-//	
-//	min = getMinutes(min);
-//	max = getMinutes(max);
-////	var different = (max - min) / $("#graph").height();
-//	var height = $("#graph").height();
-//	var different = max / height;
-//	var distanceLeft = 10;
-//
-//	var datePreviev = null;
-//	var width = 0;
-//	var element = '<td>';
-//	
-//	for (var i = 0; i < chartData.length; i++){
-//		if(i > 0 && getMinutes(chartData[i][1]) == getMinutes(chartData[i-1][1])){
-//			distanceLeft = distanceLeft + 15;
-//			continue;
-//			width = width + 57;
-//		}
-////		else if (datePreviev = chartData[i][0]){
-////			distanceLeft = distanceLeft + 150;
-////			width = width + 192;
-////		}
-//		
-//		element = element + '<td><span class="venuePointChart"' +
-//								  'style="left: ' + distanceLeft + 'px; top: ' + (max - getMinutes(chartData[i][1])) / different + 'px;"></span></td>';
-//		
-//		if(((i + 1 < chartData.length) && chartData[i][1] != chartData[i+1][1]) || i + 1 == chartData.length){
-//			width = width + 65;
-//		}
-//		
-//		if(((i + 1 < chartData.length) && chartData[i][0] != chartData[i+1][0]) || i + 1 == chartData.length){
-//			$("#concerts").append(element + "</td>");
-//			console.log(width);
-//			$("#concertsDate").append('<td>' + chartData[i][0] + '</td>');
-//			width = 0;
-//		}else{
-//			$("#concerts").append(element + "</td>");
-//		}
-//	}
-//    
-//    if(minus == 1){
-//        $("#resultList").append('<div class="spinner">' +
-//                                          '<div class="dot1"></div>'+
-//                                          '<div class="dot2"></div>'+
-//                                    '</div>');
-//    }
 }
-
-function getMinutes(time){
-	var timeSplit = time.split(":");
-	var hour = timeSplit[0];
-	var minute = timeSplit[1];
-	
-	return (hour * 60) + minute;
-}
-
 // SMARTPHONE RESPONSIVITY
 $(function() {
     function mobilecheck() {
