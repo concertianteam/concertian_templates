@@ -51,10 +51,12 @@ $(document).ready(function() {
 	        	if($("#spinnerActivator").is_on_screen()){
 	        		$("#spinnerActivator").remove();
 	        		
-	        		if(selectLoad == all){
+	        		if(selectLoad == byAll){
 	        			loadAllConcert('https://api.concertian.com/users/events');
 	        		}else if(selectLoad == byCity){
 	        			loadConcertByCity($("#cityId").val());
+	        		}else if(selectLoad == byClub){
+	        			loadConcertForClub(selectClub);
 	        		}
 	        	}
 		    }, 19));
@@ -214,7 +216,6 @@ function loadCreatedConcerts(){
         type: "DELETE", 
         url: base_url,
         success: function(json){
-			console.log(json);
 			window.location = 'index.html';
             $('#loginResult').append('<div class="loged_out">Boli ste úspešne dohlásený</div>');
 			},
@@ -256,9 +257,11 @@ function loadCreatedConcerts(){
 
 var page = 0;
 
-var all = 0;
+var byAll = 0;
 var byCity = 1;
-var selectLoad = all;
+var byClub = 2;
+var selectClub;
+var selectLoad = byAll;
 var chartData = new Array();
 var results = [];
 var mouseX,mouseY,windowWidth,windowHeight;
@@ -283,7 +286,7 @@ function loadAllConcert(url){
 function loadConcertByCity(city){
 	$.ajax({ 'url' : 'https://api.concertian.com/users/events/city',
 		  'method' : 'POST',
-		  'data' : { 'results' : "10",
+		  'data' : { 'results' : "20",
 			 		 'page' : page,
 			 		 'city' : city
 		 		   },
@@ -299,11 +302,10 @@ function loadConcertByCity(city){
 
 // Load concerts for Club (on club click)
 function loadConcertForClub(clickedClubId){
-	$("#results_list").empty();
 	$.ajax({ 'url' : 'https://api.concertian.com/users/events/venue',
 		  'method' : 'POST',
 		  'data' : { 'results' : "20",
-					 'page' : 0,
+					 'page' : page,
 					 'idVenue' : clickedClubId
 				   },
 		  contentType : "application/x-www-form-urlencoded",
@@ -321,8 +323,8 @@ function addElements(json){
 	$(".spinner").remove();
 	
 	var minus = 0;
-	page++;
 	var bufferedArray = new Array();
+	var length = page * 20;
 	for(var i = 0; i < json.events.length; i++){
 		var value = json.events[i];
         var arr = value.stringDate.split('-');
@@ -373,15 +375,21 @@ function addElements(json){
 		}
 	}
 	
+	if(page > 0){
+		$(".wrapper").off();
+	}
+	
     $(".wrapper").on( "click", function() {
         $("#resultList").empty();
         $("#concerts").empty();
 		$("#concertsDate").empty();
 		$("#custom_program_menu").empty();
 		chartData = new Array();
-        var value = results[$(this).find(".wrapper_text").text()];
-		var clickedClubId = value.venueId;
-			loadConcertForClub(clickedClubId);
+		page = 0;
+		selectLoad = byClub;
+		selectClub = results[$(this).find(".wrapper_text").text()].venueId;
+		loadConcertForClub(selectClub);
+		console.log("Load 1");
 	});
 	
 	$("#concerts").empty();
@@ -447,7 +455,6 @@ function getMinutes(time){
 }
 	//* ----- On click concerts showcase ----- *//
 	$(".venuePointChart").on('mouseenter', function(){
-		console.log("1");
 		$("#custom_program_menu").empty();
 		var value = chartData[$(this).text()];
 		for(var i = 0; i < value.length; i++){
@@ -493,6 +500,8 @@ function getMinutes(time){
 	$("#custom_program_menu").on('mouseleave', function(){
 		$("#custom_program_menu").hide(200);
 	});
+	
+	page++;
 }
 // SMARTPHONE RESPONSIVITY
 $(function() {
