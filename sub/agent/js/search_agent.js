@@ -39,7 +39,7 @@ $(document).ready(function() {
 		chartData = new Array();
 		
 		if($("#cityId").val() === ''){
-			loadAllConcert('https://api.bandcloud.net/users/events');
+			loadAllConcert('https://api.concertian.com/users/events');
 		}else{
 			loadConcertByCity($("#cityId").val());
 		}
@@ -52,7 +52,7 @@ $(document).ready(function() {
 	        		$("#spinnerActivator").remove();
 	        		
 	        		if(selectLoad == all){
-	        			loadAllConcert('https://api.bandcloud.net/users/events');
+	        			loadAllConcert('https://api.concertian.com/users/events');
 	        		}else if(selectLoad == byCity){
 	        			loadConcertByCity($("#cityId").val());
 	        		}
@@ -80,7 +80,7 @@ $(document).ready(function() {
 	$("#resultList").empty();
 	$("#concerts").empty();
 	$("#concertsDate").empty();
-	loadAllConcert('https://api.bandcloud.net/users/events');
+	loadAllConcert('https://api.concertian.com/users/events');
 	
 	// CREATE CONCERT FORM
 	
@@ -107,7 +107,7 @@ $(document).ready(function() {
                     request.setRequestHeader("Authorization", apiKey);
 					request.withCredentials = true;
                 },
-				url         : 'https://api.bandcloud.net/agents/events',
+				url         : 'https://api.concertian.com/agents/events',
 				data        : formData,
 				dataType    : 'json',
                 success     : function(json){
@@ -157,7 +157,7 @@ $(document).ready(function() {
 	
 	// LOAD CREATED CONCERTS
 function loadCreatedConcerts(){
-	var base_url = 'https://api.bandcloud.net/users/events/venue';
+	var base_url = 'https://api.concertian.com/users/events/venue';
     var response = "";
     var form_data = {
 		idVenue: idVenue,
@@ -204,7 +204,7 @@ function loadCreatedConcerts(){
 	$('#logOff').click(function(){
 		
 		var apiKey = Cookies.get('apiKey');
-		var base_url = 'https://api.bandcloud.net/agents/auth';
+		var base_url = 'https://api.concertian.com/agents/auth';
 
 	$.ajax({
 		beforeSend: function (request)
@@ -281,7 +281,7 @@ function loadAllConcert(url){
 }
 
 function loadConcertByCity(city){
-	$.ajax({ 'url' : 'https://api.bandcloud.net/users/events/city',
+	$.ajax({ 'url' : 'https://api.concertian.com/users/events/city',
 		  'method' : 'POST',
 		  'data' : { 'results' : "10",
 			 		 'page' : page,
@@ -300,7 +300,7 @@ function loadConcertByCity(city){
 // Load concerts for Club (on club click)
 function loadConcertForClub(clickedClubId){
 	$("#results_list").empty();
-	$.ajax({ 'url' : 'https://api.bandcloud.net/users/events/venue',
+	$.ajax({ 'url' : 'https://api.concertian.com/users/events/venue',
 		  'method' : 'POST',
 		  'data' : { 'results' : "20",
 					 'page' : 0,

@@ -19,7 +19,7 @@ $(document).ready(function() {
 	$('#logOff').click(function(){
 		
 		var apiKey = Cookies.get('apiKey');
-		var base_url = 'https://api.bandcloud.net/agents/auth';
+		var base_url = 'https://api.concertian.com/agents/auth';
 
 	$.ajax({
 		beforeSend: function (request)

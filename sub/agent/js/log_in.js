@@ -29,7 +29,7 @@ $(document).ready(function(){
 	if (loginData['email'] && loginData['password']) { // values are not empty
       $.ajax({
         type: "POST",
-        url: "https://api.bandcloud.net/agents/auth",
+        url: "https://api.concertian.com/agents/auth",
         contentType: "application/x-www-form-urlencoded",
         data: loginData,
         success: function(json){
