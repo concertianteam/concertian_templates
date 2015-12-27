@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html dir="ltr">
+	<head>
+	<meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+	
+	<title>concertian - for managers</title>
+	
+    <link rel="stylesheet" type="text/css" href="css/main.night.css">
+    <link rel="stylesheet" type="text/css" href="css/main.css">
+     
+    <script src="js/jquery-1.11.3.min.js"></script>
+	<link href='https://fonts.googleapis.com/css?family=Open+Sans:300,400,600&subset=latin,latin-ext' rel='stylesheet' type='text/css'>
+    <script src="js/manage_account.js"></script>
+	<script src="js/js.cookie.js"></script>
+            
+    <meta name="author" content="QUAWER">
+	<meta name="robots" content="nofollow, noindex">
+
+    </head>
+    <body>
+        <div id="container">
+            <header id="homePanel" class="slide slideRight">
+                <div id="venue_logo"></div>
+                <div class="upgrade_pro">UPGRADE<br>TO<br>
+					<a class="pro_text" href="http://manager.concertian.com/"><strong>PRO</strong></a>
+                </div>
+                    <ul id="navToggle" class="burger slide">
+                            <li></li><li></li><li></li>
+		              </ul>
+				<div class="color_mode">
+					<button id="normal">DAY</button>
+					<button id="night">NIGHT</button>
+                </div>
+                <a id="logOff"></a>
+                <a id="manage_account" href="manage_account.html"></a>
+            </header>
+            <section id="contentPanel" class="manage_account">
+                   <span id="topBanner">
+                        <span class="leftPanel">
+                            <a href="manager.html"><span class="leftPaneltext">Nový level organizovania a propagácie koncertov</span></a>
+                       </span>
+                       <span class="rightPanel">
+                            <a href="manager.html"><span class="leftPaneltext">S pohodlia vášho PC, tabletu alebo smartphonu</span></a>
+                       </span>
+                   </span>
+                   <span id="columnParent">
+                        <span class="leftMenu">
+                            <span class="deleteAccount">
+                                <span class="deleteAccounttext">Kliknutím na zmazať účet nenávratne zmažete všetky informácie o Vašom klube (podniku) a zároveň všetky koncerty, ktoré ste za obdobie používania vytvorili. Preto prosím zvážte vaše rozhodnutie, nakoľko zmazanie účtu bude mať dopad na pokles návštevnosti vášho klubu.</span>
+                                <span class="deleteAccountbutton">ZMAZAŤ ÚČET</span>
+                            </span>
+                            <span class="unsubscribe">
+                                <span class="unsubscribetext">Kliknutím na prerušiť odber, už nebude možné viac využívať balík concertian LITE. Prerušiť odber je možné v ktoromkoľvek momente bez ohľadu na to či ste s nami mesiac alebo 6 mesiacov. Samozrejme treba zvážiť dopad na pokles návštevnosti vo vašom klube, nakoľko po zrušení odberu nebude môcť pristupovať do aplikácie.</span>
+                                <span class="unsubscribebutton">ZRUŠIŤ ODBER</span>
+                            </span>
+                        </span>
+                        <span class="rightMenu">
+                            <span class="payment_box">
+                                <span class="payment-header"><a>BrainTree</a></span>
+                                    <form id="checkout" method="post" action="php/transactionCheckout.php">
+                                        <span id="payment-form"></span>
+                                        <input type="submit" value="ZAPLATIŤ 19€">
+                                    </form>
+                            </span>  
+                        </span>
+                   </span>
+            </section>
+        </div>
+<script src="https://js.braintreegateway.com/v2/braintree.js"></script>
+<script type="text/javascript" src="js/jquery.slimscroll.min.js"></script>
+<!-- ClickDesk Live Chat Service for websites -->
+<script type='text/javascript'>
+var _glc =_glc || []; _glc.push('all_ag9zfmNsaWNrZGVza2NoYXRyDwsSBXVzZXJzGKOPt9UMDA');
+var glcpath = (('https:' == document.location.protocol) ? 'https://my.clickdesk.com/clickdesk-ui/browser/' : 
+'http://my.clickdesk.com/clickdesk-ui/browser/');
+var glcp = (('https:' == document.location.protocol) ? 'https://' : 'http://');
+var glcspt = document.createElement('script'); glcspt.type = 'text/javascript'; 
+glcspt.async = true; glcspt.src = glcpath + 'livechat-new.js';
+var s = document.getElementsByTagName('script')[0];s.parentNode.insertBefore(glcspt, s);
+</script>
+<!-- End of ClickDesk -->
+    </body>
+</html>

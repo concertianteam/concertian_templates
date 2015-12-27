@@ -100,9 +100,12 @@ $(document).ready(function() {
 
 			$.ajax({
 				type        : 'POST',
+				//crossDomain	: true,
+				//xhrFields	: {withCredentials:false},
                 beforeSend: function (request)
                 {
                     request.setRequestHeader("Authorization", apiKey);
+					request.withCredentials = true;
                 },
 				url         : 'https://api.bandcloud.net/agents/events',
 				data        : formData,
@@ -165,9 +168,12 @@ function loadCreatedConcerts(){
 	
 		$.ajax({
 			type: "POST", 
+			//crossDomain	: true,
+			//xhrFields	: {withCredentials: false},
             beforeSend: function (request)
             {
                 request.setRequestHeader("Authorization", apiKey);
+				request.withCredentials = true;
             },
 			url: base_url, 
 			data: form_data,
