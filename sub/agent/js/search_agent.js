@@ -247,11 +247,11 @@ function loadCreatedConcerts(){
            windowHeight = $(window).height()+$(window).scrollTop();
    });
 	//* Mousewheel horizontal scrolling *//
-	$("html, body, #graph, *").mousewheel(function(event, delta) {
-		this.scrollLeft -= (delta * 80);
-		this.scrollRight -= (delta * 80);
-		event.preventDefault();
-	});
+//	$("html, body, #graph, *").mousewheel(function(event, delta) {
+//		this.scrollLeft -= (delta * 80);
+//		this.scrollRight -= (delta * 80);
+//		event.preventDefault();
+//	});
 });
 
 var page = 0;
@@ -334,7 +334,7 @@ function addElements(json){
 						    '<div class="wrapper_text">' + (length + i) + '</div>'+
                             '<input type="hidden" value="' + value.venueId  + '">'+
                             '<div class="whenElement">'+
-                                '<div class="resultDate">'  + arr[2] + ' ' + arr[1] + "</span><br>" + arr[0] + '</div>'+
+                                '<div class="resultDate">' + arr[2] + ' ' + arr[1] + "</span><br>" + arr[0] + '</div>'+
                                 '<div class="resultTime">' + value.time + '</div>'+
                             '</div>'+
                             '<div class="whereElement">'+
@@ -424,13 +424,8 @@ function addElements(json){
 			}
 		}
 		$("#concerts").append(element + '</td>');
-		$("#concertsDate").append('<td>' + arrayForDay[0][0] + '</td>');
-		$('#concertsDate td').each(function() { 
-			var dateFormat = $(this).text()
-			var dateFormat = $.datepicker.formatDate('dd MM <br> yy', new Date(dateFormat));
-        //alert(dateFormat);
-        $(this).html(dateFormat);
-     	});
+		var arr = arrayForDay[0][0].split('-');
+		$("#concertsDate").append('<td>' + arr[2] + ' ' + arr[1] + "<br>" + arr[0] + '</td>');
 	}
 	
 	$("#lineContainer").append(	'<span class="timeLine" style="top: ' + (height - 1320 * constant) + 'px;">' +
