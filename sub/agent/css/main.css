@@ -2,6 +2,7 @@ body{
     position: absolute;
     width: 100%;
     height: 100%;
+	min-height: 400px;
     padding: 0px;
     margin: 0px;
     background-color: #fff;
@@ -208,33 +209,6 @@ div#bottom_bar :-ms-input-placeholder {
     visibility:hidden;
     }
 }
-#core ::-webkit-input-placeholder {
-   color: #c3cbd9;
-   line-height: 1em;
-   font-size: 1.1em;
-   font-weight: 100;
-}
-
-#core :-moz-placeholder { /* Firefox 18- */
-   color: #c3cbd9;
-   line-height: 2.2em;
-   font-size: 1.1em;
-   font-weight: 100;
-}
-
-#core ::-moz-placeholder {  /* Firefox 19+ */
-   color: #c3cbd9;
-   line-height: 2.2em;
-   font-size: 1.1em;
-   font-weight: 100;
-}
-
-#core :-ms-input-placeholder {  
-   color: #c3cbd9;
-   line-height: 1em;
-   font-size: 1.1em;
-   font-weight: 100;
-}
 div#container{
     width: 100%;
     height: 100%;
@@ -309,13 +283,18 @@ strong{
 }
 .color_mode{
     position: fixed;
-    bottom: 80px;
+    bottom: 110px;
     width: 50px;
     height: 100px;
     left: 5px;
     color: #fff;
     font-size: 0.8em;
     text-align: center;
+}
+@media only screen and (max-height: 560px) and (min-width: 1080px) {
+	.color_mode{
+		display: none;
+	}
 }
 .color_mode button{
 	letter-spacing: 0.05em;
@@ -355,6 +334,47 @@ strong{
     color: #fff;
     font-size: 0.8em;
     text-align: center;
+    cursor: pointer;
+}
+#manage_account{
+	display: block;
+	position: absolute;
+	width: 60px;
+	height: 60px;
+	top: 280px;
+	cursor: pointer;
+}
+#manage_account:hover{
+	background: #ffc95c;
+}
+#manage_program{
+	display: block;
+	position: absolute;
+	width: 60px;
+	height: 60px;
+	top: 220px;
+	cursor: pointer;
+}
+#manage_program:hover{
+	background: #ffc95c;
+}
+.manage_account_icon{
+	display: block;
+    position: fixed;
+    background: url('../img/sprite.png') no-repeat -22px -23px;
+	width: 19px;
+	height: 19px;
+	margin-left: 19px;
+	margin-top: 20px;
+}
+.manage_program_icon{
+	display: block;
+    position: fixed;
+    background: url('../img/sprite.png') no-repeat -22px -44px;
+	width: 19px;
+	height: 19px;
+	margin-left: 19px;
+	margin-top: 20px;
 }
 /* -------------------- BODY PANEL ---------------- */
 section#contentPanel{
@@ -384,6 +404,16 @@ section#searchPanel{
 .search{
     margin: 10px 10px;
     text-align: center;
+}
+.back_button{
+	position: absolute;
+	z-index: 4;
+	background: url('../img/sprite.png') no-repeat -20px -65px;
+	width: 22px;
+	height: 16px;
+	top: 27px;
+	left: 8%;
+	cursor: pointer;
 }
 #form{
     margin-top: 20px;
@@ -421,13 +451,14 @@ input[name="city"]{
 }
 input[name="search_button"]{
     position: absolute;
-    top: 3.5%;
-    right: 11%;
+    top: 27px;
+    right: 8%;
     border: none;
     background: url('../img/sprite.png') no-repeat -2px -2px;
 	width: 18px;
 	height: 19px;
     z-index: 2;
+	cursor: pointer;
 }
 div#resultList{
     position: relative;
@@ -545,7 +576,7 @@ section#corePanel{
     width: 75%;
     height: 100%;
 }
-@media only screen and (max-width: 1300px) {
+@media only screen and (max-width: 1340px) {
     section#corePanel{
         position: relative;
         box-sizing: border-box;
@@ -623,7 +654,7 @@ button.discover{
 .form{
     position: relative;
     display: inline-block;
-    width: 45%;
+    width: 100%;
     height: 100%;
     float: left;
 }
@@ -632,8 +663,8 @@ button.discover{
     height: 94%;
     background: #fff;
     border-radius: 4px;
-    margin-left: 2%;
-    margin-top: 2.5%;
+    margin-left: 1%;
+    margin-top: 1%;
 }
 /* -------- response ------- */
 .response_sign{
@@ -661,7 +692,7 @@ button.discover{
     display: block;
     font-size: 1.5em;
 }
-.form_button{
+#form_button{
     background: #ffbb33;
     font-size: 1em;
     padding: 10px 40px;
@@ -671,59 +702,37 @@ button.discover{
     margin-top: 2%;
     cursor: pointer;
 }
-.form_button:hover{
+#form_button:hover{
     background: #ffc95c;
 }
 #create_event{
 	height: 100%;
 	overflow-y: scroll;	
+    text-align: left;
 }
 .create_concert{
+    display: block;
     color: #ffc95c;
     text-align: left;
-    padding: 20px 40px;
+    padding: 10px 40px;
 }
-.input{
+#left_form{
     display: inline-block;
-    width: 15%;
-    font-size: 1em;
-    font-weight: bold;
-    font-weight: 100;
-    color: #A8B3C7;
-}
-#form_part input[type="text"],
-#form_part select{
-    border: none;
-    border-radius: 4px;
-    background: #F3F4F7;
-    margin: 1% 0;
+    width: 50%;
+    float: left;
+    height: 100%;
+    box-sizing: border-box;
     padding: 0 20px;
 }
-#form_part input[type="text"]:focus,
-#form_part select:focus{
-    outline: none;
-}
-input[name="eventName"]{
+#right_form{
     display: inline-block;
-    width: 70%;
-    height: 40px;
+    width: 50%;
+    float: left;
+    height: 100%;
+    box-sizing: border-box;
+    padding: 0 20px;
 }
-input[name="eventDate"]{
-    display: inline-block;
-    width: 70%;
-    height: 40px;
-}
-input[name="eventTime"]{
-    display: inline-block;
-    width: 70%;
-    height: 40px;
-}
-select[name="visibility"]{
-    display: inline-block;
-    width: 80%;
-    height: 40px;
-}
-#form_part input[type="submit"]{
+#create_event button[type="submit"]{
     width: 96%;
     height: 35px;
     border: none;
@@ -731,92 +740,22 @@ select[name="visibility"]{
     background: #ffc95c;
     color: #fff;
     font-size: 0.9em;
-    margin-top: 1%;
-}
-::-webkit-placeholder {
-    color: #A8B3C7;
-
-}
-:-moz-placeholder { /* Firefox 18- */
-     color: #A8B3C7;
-
-}
-::-moz-placeholder {  /* Firefox 19+ */
-    color: #A8B3C7;
-
-}
-:-ms--placeholder{  
-     color: #A8B3C7;
-
-}
-.overview{
-    position: relative;
-    display: inline-block;
-    width: 55%;
-    height: 100%;
-    float: right;
-}
-.outer{
+    margin-top: 4%;
     margin-left: 2%;
-    margin-top: 2%;
-    width: 96%;
-    height: 94%;
-    background: #fff;
-    border-radius: 4px;
 }
-#created_concerts{
-    color: #ffc95c;
-    text-align: left;
-    padding: 20px 40px;
-}
-#program{
-    width: 90%;
-    height: 80%;
-    margin-left: 40px;
-    overflow-y: scroll;
-}
-.concert_element{
-    width: 100%;
-    height: 50px;
-    margin: 10px 0;
-}
-.concert_name{
-    width: 50%;
-    display: inline-block;
-    vertical-align: middle;
-    float: left;
-    color: #A8B3C7;
-    text-align: left;
-    font-size: 0.9em;
-    line-height: 1em;
-    height: 2em;
+#create_event input,
+#create_event textarea{
+    display: block;
     font-weight: 100;
-}
-.concert_date{
-    width: 25%;
-    display: inline-block;
-    vertical-align: middle;
-    float: left;
-    font-size: 0.9em;
-}
-.concert_visibility{
-    display: inline-block;
-    vertical-align: middle;
-    width: 70px;
-    height: 25px;
-    line-height: 25px;
-    border-radius: 4px;
-    background: #ffbb33;
-    font-size: 0.8em;
-    color: #fff;
-    margin-top: -5px;
-}
-.action{
-	display: inline-block;
-	float: right;
-	background: url('../img/sprite.png') no-repeat -43px -2px;
-	width: 16px;
-	height: 19px;
+    font-size: 16px;
+    box-sizing: border-box;
+    margin: 16px 0px 0px;
+    padding: 0px 14px;
+    width: 100%;
+    outline: 0px none;
+    border: medium none;
+    background-color: transparent;
+    background-image: none;
 }
 #program_part{
     background: #fff;
@@ -835,12 +774,19 @@ select[name="visibility"]{
 .statistics{
     color: #ffc95c;
     text-align: left;
-    padding: 20px 40px;
+    padding: 10px 40px;
 }
 #graph{
-	height: calc(100% - 63px);
-	height: -webkit-calc(100% - (63px));
-	height: calc(100% - (63px));
+	height: 100%;
+   	/* Firefox */
+    height: -moz-calc(100% - 63px);
+    /* WebKit */
+    height: -webkit-calc(100% - 63px);
+    /* Opera */
+    height: -o-calc(100% - 63px);
+    /* Standard */
+    height: calc(100% - 63px);
+	margin-left: 50px;
 	overflow-x: visible;
 }
 /* --------- custom program table --------- */
@@ -912,13 +858,13 @@ select[name="visibility"]{
 	overflow: hidden !important;
 }
 /* --------- custom program table END --------- */
-table{
+#graph table{
 	width: 100%;
 	height: 100%;
 }
-td{
+#graph td{
 	position: relative;
-	width: 150px;
+	min-width: 150px;
 	text-align: center;
 	padding: 0px 20px;
 }
@@ -928,6 +874,11 @@ td{
     color: #ffbb33;
     font-weight: 100;
     text-align: center;
+}
+#lineContainer{
+	position: relative;
+	display: block;
+	width: 100%;
 }
 .timeLine{
 	position: absolute;
@@ -947,6 +898,14 @@ td{
 	top: 13px;
 	left: 50px;
 	width: 100%;
+   	/* Firefox */
+    width: -moz-calc(100% - 50px);
+    /* WebKit */
+    width: -webkit-calc(100% - 50px);
+    /* Opera */
+    width: -o-calc(100% - 50px);
+    /* Standard */
+    width: calc(100% - 50px);
 	height: 1px;
 	background-color: #C3CBD9;
 }
@@ -954,6 +913,7 @@ td{
     position: absolute;
     width: 25px;
     height: 25px;
+    margin-left: -13px;
     border-radius: 4px;
     border: none;
     cursor: pointer;
@@ -1085,10 +1045,19 @@ td{
     }
     #logOff{
         position: relative;
-        display: block;
-        right: 100px; 
-        top: 18px;
+        display: inline-block;
+        float: right;
+        margin-right: 50px; 
+        top: 20px;
     }
+    #manage_account{
+        left: 250px;
+		top: 0;
+    }
+	#manage_program{
+        left: 190px;
+		top: 0;
+    }  
     section#contentPanel{
         position: relative;
         width: 100%;
@@ -1118,56 +1087,37 @@ td{
         box-sizing: border-box;
     }
     #form_part{
-        height: 65%;
+        height: 60%;
         width: 100%;
         text-align: center;
     }
-     .form{
+    .form{
         display: block;
         width: 100%;
-        height: 60%;
+        height: 100%;
+        box-sizing: border-box;
+        padding-bottom: 0 !important;
+        padding-top: 2%;
     }
     #outer_form{
-        width: 96%;
+        width: 98%;
         box-sizing: border-box;
         padding: 10px 20px;
     }
     .create_concert{
         padding: 10px 12px;
     }
-    #form_part input[name="eventName"]{
-        width: 70%;
-        margin: 0;
-    }
-    #form_part input[name="eventTime"]{
-		margin-bottom: 0 !important;
-	}
-    .input{
-        width: 16%;
-    }
-    #form_part input{
-        width: 20%;
-        margin: 0;
-    }
-    #form_part select{
-        width: 78%;
-    }
-    .overview{
-        display: block;
-        box-sizing: border-box;
-        width: 100%;
-        height: 40%;
-    }
     .program_outer{
         display: block;
         width: 100%;
-        height: 35%;
-        padding-top: 2%;
+        height: 40%;
+        box-sizing: border-box;
+        padding-bottom: 10px;
+        padding-top: 0 !important;
     }
     #program_part{
-        width: 96%;
-        margin-left: 2%;
-        height: 90%;
+        width: 98%;
+        height: 100%;
     }
     .response_sign{
         display: block;
@@ -1300,14 +1250,23 @@ td{
 	transform: translate3d(0,0,0); 
     }
     #venue_logo{
-        margin-left: 55px;
+        display: none;
     }
     .upgrade_pro{
-        margin-left: 55px;
+        margin-left: 0px;
     }
     #logOff{
-        margin-left: 55px;
+		position: absolute;
+       left: 240px;
     }
+    #manage_account{
+        left: 210px;
+		top: 0;
+    }
+	#manage_program{
+        left: 150px;
+		top: 0;
+    } 
     .burger{
         display: inline-block;
     }
@@ -1380,18 +1339,12 @@ td{
     .input{
         display: none !important;
     }
-    #form_part input{
-        width:  25%;
-    }
-    #form_part select{
-		width: 82%;
-	}
 }
 /* ----------------- TIMEPICKER ------------------*/
 .ui-timepicker-wrapper {
 	overflow-y: auto;
 	height: 150px;
-	width: 24.5%;
+	width: 33%;
 	background: #fff;
 	outline: none;
 	z-index: 10001;
@@ -1519,4 +1472,217 @@ li.ui-timepicker-selected .ui-timepicker-duration,
 	overflow: hidden;
 	text-overflow: ellipsis;
 	white-space: nowrap;
+}
+/* --------- Manage Account --------- */
+.manage_account{
+    padding: 0;
+    margin: 0;
+}
+.manage_account
+#topBanner{
+    display: block;
+    width: 100%;
+    height: 80px;
+}
+#topBanner
+.leftPanel{
+    display: inline-block;
+    width: 55%;
+    height: 100%;
+    float: left;
+    background: url('../img/concertian.header.jpg');
+    background-size: cover;
+    text-align: center;
+    box-sizing: border-box;
+    padding-top: 25px;
+}
+#topBanner
+.rightPanel{
+    display: inline-block;
+    width: 45%;
+    height: 100%;
+    float: right;
+    background: url('../img/concertian.header.2.jpg');
+    background-size: cover;
+    background-position: bottom right;
+    text-align: center;
+    box-sizing: border-box;
+    padding-top: 25px;
+}
+#topBanner
+.leftPaneltext{
+    color: #fff;
+    font-size: 1.1em;
+    font-weight: 100;
+    background: #ffcd29;
+    padding: 5px 20px;
+    border-radius: 4px;
+    cursor: pointer;
+}
+#topBanner
+a{
+    text-decoration: none;
+}
+#columnParent{
+    display: block;
+    width: 100%;
+     /* Firefox */
+    height: -moz-calc(100% - 80px);
+    /* WebKit */
+    height: -webkit-calc(100% - 80px);
+    /* Opera */
+    height: -o-calc(100% - 80px);
+    /* Standard */
+    height: calc(100% - 80px);
+    background: #f5f5f5;
+}
+#columnParent
+.leftMenu{
+    display: inline-block;
+    width: 50%;
+    height: 100%;
+    float: left;
+    box-sizing: border-box;
+    padding: 10px 10px;
+    text-align: center;
+}
+.leftMenu
+.deleteAccount{
+    display: block;
+    width: 100%;
+    height: auto;
+    box-sizing: border-box;
+    padding: 20px 20px;
+    background: #fff;
+    border-radius: 4px;
+}
+.leftMenu
+.deleteAccount
+.deleteAccounttext{
+    display: block;
+    text-align: left !important;
+}
+.leftMenu
+.deleteAccount
+.deleteAccountbutton{
+    display: block;
+    width: 30%;
+    border-radius: 4px;
+    color: #fff;
+    padding: 5px 10px;
+    font-weight: 100;
+    background: #ff5c5c;
+    margin-top: 2%;
+    cursor: pointer;
+}
+.leftMenu
+.unsubscribe{
+    display: block;
+    width: 100%;
+    height: auto;
+    box-sizing: border-box;
+    padding: 20px 20px;
+    background: #fff;
+    border-radius: 4px;
+    margin-top: 10px;
+}
+.leftMenu
+.unsubscribe
+.unsubscribetext{
+    display: block;
+    text-align: left !important;
+}
+.leftMenu
+.unsubscribe
+.unsubscribebutton{
+    display: block;
+    width: 30%;
+    border-radius: 4px;
+    color: #fff;
+    padding: 5px 10px;
+    font-weight: 100;
+    background: #ff5c5c;
+    margin-top: 2%;
+    cursor: pointer;
+}
+#columnParent
+.rightMenu{
+    display: inline-block;
+    width: 50%;
+    height: 100%;
+    float: right;
+    text-align: center;
+    box-sizing: border-box;
+    padding: 10px 10px;
+}
+/* -----------------------------------------------------
+------------- PAYMENT ------------------------
+-------------------------------------------------------*/
+.payment_box{
+    position: relative;
+    display: inline-block;
+    width: 100%;
+    background: #fff;
+    border-radius: 4px;
+    box-sizing: border-box;
+    padding: 20px 20px;
+    text-align: left;
+}
+.payment-header a{
+	text-align: left;
+    display: block;
+    margin-bottom: 3%;
+    font-size: 2em;
+    color: #C3CBD9;
+    font-weight: 100;
+}
+#checkout input[type="submit"]{
+    width: 100%;
+    height: 45px;
+    border: none;
+    border-radius: 4px;
+    background: #ffc95c;
+    color: #fff;
+    font-size: 1.2em;
+    font-weight: 100;
+	cursor: pointer;
+}
+#checkout input[type="submit"]:hover{
+    background: #ffbb33;
+}
+.custom_input_label{
+    display: block;
+    border-bottom: 1px solid #DEE2E5;
+    padding: 8px 0px;
+    margin-top: -1px;
+    z-index: 1;
+    position: relative;
+    overflow: hidden;
+    transform: translate3d(0px, 0px, 0px);
+    transition: background-color 131ms linear 0s;
+}
+.fieldName{
+    color: #6E787F;
+    font-size: 1em;
+    position: relative;
+    left: 14px;
+    top: 14px;
+    display: block;
+    opacity: 1;
+    transform: translate3d(0px, 0px, 0px);
+    transition: transform 0s ease 0s, opacity 0s ease 0s;
+    font-weight: 100;
+}
+#checkout input{
+    display: block;
+    font-weight: 100;
+    font-size: 16px;
+    box-sizing: border-box;
+    margin: 16px 0px 0px;
+    padding: 0px 14px;
+    width: 100%;
+    outline: 0px none;
+    border: medium none;
+    background-color: transparent;
+    background-image: none;
 }

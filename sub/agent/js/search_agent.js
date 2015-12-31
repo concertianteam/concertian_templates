@@ -39,7 +39,7 @@ $(document).ready(function() {
 		chartData = new Array();
 		
 		if($("#cityId").val() === ''){
-			loadAllConcert('https://api.bandcloud.net/users/events');
+			loadAllConcert('https://api.concertian.com/users/events');
 		}else{
 			loadConcertByCity($("#cityId").val());
 		}
@@ -51,10 +51,12 @@ $(document).ready(function() {
 	        	if($("#spinnerActivator").is_on_screen()){
 	        		$("#spinnerActivator").remove();
 	        		
-	        		if(selectLoad == all){
-	        			loadAllConcert('https://api.bandcloud.net/users/events');
+	        		if(selectLoad == byAll){
+	        			loadAllConcert('https://api.concertian.com/users/events');
 	        		}else if(selectLoad == byCity){
 	        			loadConcertByCity($("#cityId").val());
+	        		}else if(selectLoad == byClub){
+	        			loadConcertForClub(selectClub);
 	        		}
 	        	}
 		    }, 19));
@@ -80,7 +82,7 @@ $(document).ready(function() {
 	$("#resultList").empty();
 	$("#concerts").empty();
 	$("#concertsDate").empty();
-	loadAllConcert('https://api.bandcloud.net/users/events');
+	loadAllConcert('https://api.concertian.com/users/events');
 	
 	// CREATE CONCERT FORM
 	
@@ -92,7 +94,7 @@ $(document).ready(function() {
         var formData = {
             'idVenue' : idVenue,
             'name'    : $('input[name=eventName]').val(),
-            'date'    : $('input[name=Date]').val(),
+            'date'    : $('input[name=eventDate]').val(),
             'time'    : $('input[name=eventTime]').val(),
             'visible' : $('input[name=visibility]').val(),
             'status'  : $('input[name=status]').val(),
@@ -100,11 +102,14 @@ $(document).ready(function() {
 
 			$.ajax({
 				type        : 'POST',
+				//crossDomain	: true,
+				//xhrFields	: {withCredentials:false},
                 beforeSend: function (request)
                 {
                     request.setRequestHeader("Authorization", apiKey);
+					request.withCredentials = true;
                 },
-				url         : 'https://api.bandcloud.net/agents/events',
+				url         : 'https://api.concertian.com/agents/events',
 				data        : formData,
 				dataType    : 'json',
                 success     : function(json){
@@ -112,7 +117,7 @@ $(document).ready(function() {
                                     '<span class="response_img_success"></span>'+
                                           '</span>'+
                                     '<span class="response_text">Podujatie vytvorené</span>'+
-                                    '<button class="form_button">OK</button>';
+                                    '<a id="form_button">OK</a>';
                     $("#outer_form").empty();
                     $("#outer_form").append(element_success);
                 },
@@ -121,13 +126,12 @@ $(document).ready(function() {
                                     '<span class="response_img_error"></span>'+
                                           '</span>'+
                                     '<span class="response_text">Podujatie nevytvorené</span>'+
-                                    '<button class="form_button">RETRY</button>';
+                                    '<a id="form_button">RETRY</a>';
                     $("#outer_form").empty();
                     $("#outer_form").append(element_error);
                 },
                 });
-      });
-            $(".form_button").on('click', (function(){
+		  $(document).on('click','#form_button',function(e){
                 var form =  '<div class="create_concert">Založte koncert:</div>'+
                             '<form id="create_event" name="form_event">'+
                             '<input type="hidden" name="apiKey" id="apiKey">'+
@@ -139,40 +143,35 @@ $(document).ready(function() {
                                 '<span class="input">Čas</span>'+
                             '<input id="timepicker" data-time-format="H:i:s" type="text" name="eventTime" placeholder="čas HH:mm:ss" required>'+
                                 '<span class="input">Stav</span>'+
-                            '<select id="visibility" name="visibility" placeholder="" required>'+
-                            '<option value="1">Visible</option>'+	
-                            '<option value="0">Hidden</option>'+	
-                            '</select>'+
+                            '<input id="visibility" name="visibility" type="hidden" value="1" required>'+
                             '<input type="hidden" name="status" value="1">'+
                             '<button type="submit" id="submit_button" name="submit">Vytvoriť koncert</button>'+
                             '</form>';
-                loadCreatedConcerts();
                 $("#outer_form").empty();
                 $("#outer_form").append(form);
-            })
-    );
-	
+     	});
+      });
 	// LOAD CREATED CONCERTS
-function loadCreatedConcerts(){
-	var base_url = 'https://api.bandcloud.net/users/events/venue';
-    var response = "";
-    var form_data = {
-		idVenue: idVenue,
-        results: 10,
-        page: 0,
-		
-    };
-	
+	$(document).ready(function(){
+		var apiKey = Cookies.get('apiKey');
+		var idVenue = Cookies.get('idVenue'); 
+		var form_data = {'idVenue': idVenue,
+					  'results': 10,
+					  'page': 0};
 		$.ajax({
-			type: "POST", 
-            beforeSend: function (request)
-            {
-                request.setRequestHeader("Authorization", apiKey);
-            },
-			url: base_url, 
-			data: form_data,
-			success: function(data){
-			var events = data.events;
+			'type': 'POST', 
+			//crossDomain	: true,
+			//xhrFields	: {withCredentials: false},
+			'beforeSend': function (request)
+				{
+					request.setRequestHeader("Authorization", apiKey);
+					request.withCredentials = true;
+				},
+			'url': 'https://api.concertian.com/users/events/venue', 
+			'data': form_data,
+			contentType : 'application/x-www-form-urlencoded',
+			'success': function(json){
+			var events = json.events;
 			for(var event in events)
 
 				$("#program").append('<div class="concert_element">'+
@@ -182,9 +181,8 @@ function loadCreatedConcerts(){
 						'</div>');
 
 			},
-			dataType: "json"//set to JSON    
 	});	
-}
+});
 	
 	// STYLE SWITCHER
 	$('button#night').click(function (){
@@ -194,33 +192,42 @@ function loadCreatedConcerts(){
    		$('link[href="css/main.night.css"]').attr('href','css/main.css');
 	});
 	
+	// Date & Time picker initialization
+	$(function() {
+      $("#datepicker").datepicker();
+      $("#timepicker").timepicker();
+  });
+	
 	//LOGOUT
 	$('#logOff').click(function(){
-		
+			console.log("1");
 		var apiKey = Cookies.get('apiKey');
-		var base_url = 'https://api.bandcloud.net/agents/auth';
+		var base_url = 'https://api.concertian.com/agents/auth';
 
 	$.ajax({
 		beforeSend: function (request)
-        {
-            request.setRequestHeader("Authorization", apiKey);
-        },
+                {
+                    request.setRequestHeader("Authorization", apiKey);
+					request.withCredentials = true;
+                },
         type: "DELETE", 
         url: base_url,
         success: function(json){
-			console.log(json);
 			window.location = 'index.html';
             $('#loginResult').append('<div class="loged_out">Boli ste úspešne dohlásený</div>');
 			},
 		});
 	});
 	
-	// Date & Time picker initialization
-	$(function() {
-      $("#datepicker").datepicker();
-      $("#timepicker").timepicker();
-      $("#visibility").selectmenu();
-  });
+	// searchPanel - back_button
+	$(".back_button").on('click', function(){
+		$("#resultList").empty();
+		$("#concerts").empty();
+		$("#concertsDate").empty();
+		page = 0;
+		selectLoad = byAll;
+		loadAllConcert('https://api.concertian.com/users/events');
+	});
 	
 	//* Mouse position tracker *//
 	$(document).mousemove(function(e){
@@ -241,18 +248,19 @@ function loadCreatedConcerts(){
            windowHeight = $(window).height()+$(window).scrollTop();
    });
 	//* Mousewheel horizontal scrolling *//
-	$("html, body, #graph, *").mousewheel(function(event, delta) {
-		this.scrollLeft -= (delta * 80);
-		this.scrollRight -= (delta * 80);
-		event.preventDefault();
-	});
-});
+//	$("html, body, #graph, *").mousewheel(function(event, delta) {
+//		this.scrollLeft -= (delta * 80);
+//		this.scrollRight -= (delta * 80);
+//		event.preventDefault();
+//	});
+});	
 
 var page = 0;
-
-var all = 0;
+var byAll = 0;
 var byCity = 1;
-var selectLoad = all;
+var byClub = 2;
+var selectClub;
+var selectLoad = byAll;
 var chartData = new Array();
 var results = [];
 var mouseX,mouseY,windowWidth,windowHeight;
@@ -275,9 +283,9 @@ function loadAllConcert(url){
 }
 
 function loadConcertByCity(city){
-	$.ajax({ 'url' : 'https://api.bandcloud.net/users/events/city',
+	$.ajax({ 'url' : 'https://api.concertian.com/users/events/city',
 		  'method' : 'POST',
-		  'data' : { 'results' : "10",
+		  'data' : { 'results' : "20",
 			 		 'page' : page,
 			 		 'city' : city
 		 		   },
@@ -293,11 +301,10 @@ function loadConcertByCity(city){
 
 // Load concerts for Club (on club click)
 function loadConcertForClub(clickedClubId){
-	$("#results_list").empty();
-	$.ajax({ 'url' : 'https://api.bandcloud.net/users/events/venue',
+	$.ajax({ 'url' : 'https://api.concertian.com/users/events/venue',
 		  'method' : 'POST',
 		  'data' : { 'results' : "20",
-					 'page' : 0,
+					 'page' : page,
 					 'idVenue' : clickedClubId
 				   },
 		  contentType : "application/x-www-form-urlencoded",
@@ -315,8 +322,8 @@ function addElements(json){
 	$(".spinner").remove();
 	
 	var minus = 0;
-	page++;
 	var bufferedArray = new Array();
+	var length = page * 20;
 	for(var i = 0; i < json.events.length; i++){
 		var value = json.events[i];
         var arr = value.stringDate.split('-');
@@ -328,7 +335,7 @@ function addElements(json){
 						    '<div class="wrapper_text">' + (length + i) + '</div>'+
                             '<input type="hidden" value="' + value.venueId  + '">'+
                             '<div class="whenElement">'+
-                                '<div class="resultDate">'  + arr[2] + ' ' + arr[1] + "</span><br>" + arr[0] + '</div>'+
+                                '<div class="resultDate">' + arr[2] + ' ' + arr[1] + "</span><br>" + arr[0] + '</div>'+
                                 '<div class="resultTime">' + value.time + '</div>'+
                             '</div>'+
                             '<div class="whereElement">'+
@@ -367,15 +374,20 @@ function addElements(json){
 		}
 	}
 	
+	if(page > 0){
+		$(".wrapper").off();
+	}
+	
     $(".wrapper").on( "click", function() {
         $("#resultList").empty();
         $("#concerts").empty();
 		$("#concertsDate").empty();
 		$("#custom_program_menu").empty();
 		chartData = new Array();
-        var value = results[$(this).find(".wrapper_text").text()];
-		var clickedClubId = value.venueId;
-			loadConcertForClub(clickedClubId);
+		page = 0;
+		selectLoad = byClub;
+		selectClub = results[$(this).find(".wrapper_text").text()].venueId;
+		loadConcertForClub(selectClub);
 	});
 	
 	$("#concerts").empty();
@@ -418,13 +430,8 @@ function addElements(json){
 			}
 		}
 		$("#concerts").append(element + '</td>');
-		$("#concertsDate").append('<td>' + arrayForDay[0][0] + '</td>');
-		$('#concertsDate td').each(function() { 
-			var dateFormat = $(this).text()
-			var dateFormat = $.datepicker.formatDate('dd MM <br> yy', new Date(dateFormat));
-        //alert(dateFormat);
-        $(this).html(dateFormat);
-     	});
+		var arr = arrayForDay[0][0].split('-');
+		$("#concertsDate").append('<td>' + arr[2] + ' ' + arr[1] + "<br>" + arr[0] + '</td>');
 	}
 	
 	$("#lineContainer").append(	'<span class="timeLine" style="top: ' + (height - 1320 * constant) + 'px;">' +
@@ -446,7 +453,6 @@ function getMinutes(time){
 }
 	//* ----- On click concerts showcase ----- *//
 	$(".venuePointChart").on('mouseenter', function(){
-		console.log("1");
 		$("#custom_program_menu").empty();
 		var value = chartData[$(this).text()];
 		for(var i = 0; i < value.length; i++){
@@ -492,6 +498,8 @@ function getMinutes(time){
 	$("#custom_program_menu").on('mouseleave', function(){
 		$("#custom_program_menu").hide(200);
 	});
+	
+	page++;
 }
 // SMARTPHONE RESPONSIVITY
 $(function() {

@@ -6,7 +6,7 @@
 	
 	<title>concertian - for managers</title>
 	
-    <link rel="stylesheet" type="text/css" href="css/main.night.css">
+    <link rel="stylesheet" type="text/css" href="css/main.night.csss">
     <link rel="stylesheet" type="text/css" href="css/main.css">
      
     <script src="js/jquery-1.11.3.min.js"></script>
@@ -28,6 +28,8 @@
                 <div class="upgrade_pro">UPGRADE<br>TO<br>
 					<a class="pro_text" href="http://manager.concertian.com/"><strong>PRO</strong></a>
                 </div>
+				<a id="manage_program" href="app.html"><span class="manage_program_icon"></span></a>
+				<a id="manage_account" href="manage_account.html"><span class="manage_account_icon"></span></a>
                     <ul id="navToggle" class="burger slide">
                             <li></li><li></li><li></li>
 		              </ul>
@@ -40,6 +42,7 @@
             <section id="contentPanel">
                 <section id="searchPanel" class="content slide slideRight">
                     <div class="search">
+						<span class="back_button"></span>
                         <form id="form">
                             <input id="cityId" type="text" name="city" placeholder="Zadajte mesto">
                             <input id="button" type="submit" name="search_button" value="">
@@ -62,33 +65,39 @@
                             <div class="form">
                                 <div id="outer_form">
                                     <div class="create_concert">Založte koncert:</div>
-                                <form id="create_event" name="form_event"> 
+                            <form id="create_event" name="form_event"> 
+                                <span id="left_form">
 								<input type="hidden" name="apiKey" id="apiKey">
 								<input type="hidden" name="idVenue" id="idVenue">
-                                <span class="input">Názov</span>
-                                <input type="text" class="eventName" name="eventName" placeholder="Názov koncertu" required>
-                                    <span class="input">Dátum</span>
-                                <input id="datepicker" type="text" name="eventDate" name="Date" placeholder="dátum YYYY-MM-dd" required>
-                                    <span class="input">Čas</span>
-                                <input id="timepicker" data-time-format="H:i:s" type="text" name="eventTime" placeholder="čas HH:mm:ss" required>
-                                    <span class="input">Stav</span>
-                                <select id="visibility" name="visibility" placeholder="" required>
-								<option value="1">Visible</option>	
-								<option value="0">Hidden</option>	
-								</select>
+                                    <label class="custom_input_label" for="eventName">
+                                <span class="fieldName">Názov</span>
+                                <input type="text" id="eventName" class="eventName" name="eventName" required>
+                                    </label>
+                                    <label class="custom_input_label" class="group_date" for="datepicker">
+                                <span class="fieldName">Dátum</span>
+                                <input id="datepicker" type="text" name="eventDate" required>
+                                    </label>
+                                    <label class="custom_input_label" class="group_time" for="timepicker">
+                                <span class="fieldName">Čas</span>
+                                <input id="timepicker" data-time-format="H:i:s" type="text" name="eventTime" required>
+                                    </label>
+                                <input type="hidden" id="visibility" name="visibility" value="1" required>
 								<input type="hidden" name="status" value="1">
-								<button type="submit" id="submit_button" name="submit">Vytvoriť koncert</button>
+                                </span>
                                 
-                                </form>
-                                </div>
-                            </div>
-                            <div class="overview">
-                                <div class="outer">
-                                <div id="created_concerts">
-									<span></span>
-								</div>
-                                <div id="program">
-                                </div>
+                                <span id="right_form">
+                                    <label class="custom_input_label" for="price">
+                                        <span class="fieldName">Vstupné</span>
+                                        <input type="text" id="price" inputmode="numeric">
+                                    </label>
+                                    <label class="custom_input_label" for="eventName">
+                                <span class="fieldName">Detail</span>
+                                        <textarea type="text" id="eventDetails" class="eventDetails" rows="5" name="eventDetails"></textarea>
+                                    </label>
+								<button type="submit" id="submit_button" name="submit">Vytvoriť koncert</button>
+                                </span>
+                                
+                            </form>
                                 </div>
                             </div>
                         </div>
