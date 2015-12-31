@@ -151,38 +151,6 @@ $(document).ready(function() {
                 $("#outer_form").append(form);
      	});
       });
-	// LOAD CREATED CONCERTS
-	$(document).ready(function(){
-		var apiKey = Cookies.get('apiKey');
-		var idVenue = Cookies.get('idVenue'); 
-		var form_data = {'idVenue': idVenue,
-					  'results': 10,
-					  'page': 0};
-		$.ajax({
-			'type': 'POST', 
-			//crossDomain	: true,
-			//xhrFields	: {withCredentials: false},
-			'beforeSend': function (request)
-				{
-					request.setRequestHeader("Authorization", apiKey);
-					request.withCredentials = true;
-				},
-			'url': 'https://api.concertian.com/users/events/venue', 
-			'data': form_data,
-			contentType : 'application/x-www-form-urlencoded',
-			'success': function(json){
-			var events = json.events;
-			for(var event in events)
-
-				$("#program").append('<div class="concert_element">'+
-								'<div class="concert_name">'+events[event].eventName+'</div>'+
-								'<div class="concert_date">'+events[event].date+'</div>'+
-								'<div class="concert_visibility">'+(events[event].visible == 1 ? "Visible" : "Hidden")+'</div>'+
-						'</div>');
-
-			},
-	});	
-});
 	
 	// STYLE SWITCHER
 	$('button#night').click(function (){
@@ -407,7 +375,10 @@ function addElements(json){
 	$("#lineContainer").empty();
 	
 	var height = $("#concerts").innerHeight() - 75;
-	var constant = height / 1440;
+//	For 24 hour
+//	var constant = height / 1440;
+//	For 10 hours
+	var constant = height / 600;
 	var counter = 0;
 	/*
 	 *  <= 5  - yelow
@@ -423,7 +394,9 @@ function addElements(json){
 		var element = '<td>';
 		for(var j = 0; j < arrayForDay.length; j++){
 			if((j+1 < arrayForDay.length && arrayForDay[j][1] != arrayForDay[j+1][1]) || j+1 == arrayForDay.length){
-				element = element + '<span class="venuePointChart" style="top:' + (height - getMinutes(arrayForDay[j][1]) * constant) + 'px; background-color: ' + (counter <= 5 ? color['yelow'] : (counter <= 12 ? color['blue'] : color['red'])) + ';">' + i + '</span>';
+				if(arrayForDay[j][1].split(':')[0] > 13){
+					element = element + '<span class="venuePointChart" style="top:' + (height - getMinutes(arrayForDay[j][1]) * constant) + 'px; background-color: ' + (counter <= 5 ? color['yelow'] : (counter <= 12 ? color['blue'] : color['red'])) + ';">' + i + '</span>';
+				}
 				counter = 0;
 			}else{
 				counter++;
@@ -434,12 +407,19 @@ function addElements(json){
 		$("#concertsDate").append('<td>' + arr[2] + ' ' + arr[1] + "<br>" + arr[0] + '</td>');
 	}
 	
-	$("#lineContainer").append(	'<span class="timeLine" style="top: ' + (height - 1320 * constant) + 'px;">' +
+//	22 = 1320
+//	20 = 1200
+	
+	$("#lineContainer").append(	'<span class="timeLine" style="top: ' + (height - 480 * constant) + 'px;">' +
 						  	   		'<span class="timeLineText">22:00</span>' +
 						  	   		'<span class="timeLineLine"></span>' +
 					  	   		'</span>' +
-					  	   		'<span class="timeLine" style="top: ' + (height - 1200 * constant) + 'px;">' +
+					  	   		'<span class="timeLine" style="top: ' + (height - 360 * constant) + 'px;">' +
 									'<span class="timeLineText">20:00</span>' +
+									'<span class="timeLineLine"></span>' +
+							   	'</span>' +
+								'<span class="timeLine" style="top: ' + height + 'px;">' +
+									'<span class="timeLineText">14:00</span>' +
 									'<span class="timeLineLine"></span>' +
 							   	'</span>');
 
@@ -449,7 +429,7 @@ function getMinutes(time){
 	var hour = parseInt(timeSplit[0]);
 	var minute = parseInt(timeSplit[1]);
 	
-	return (hour * 60) + minute;
+	return (hour * 60) + minute - 840;
 }
 	//* ----- On click concerts showcase ----- *//
 	$(".venuePointChart").on('mouseenter', function(){
