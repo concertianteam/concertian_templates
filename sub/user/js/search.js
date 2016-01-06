@@ -3,6 +3,27 @@ arrayVenueName = new Array();
 limitWidth = 620;
 
 function init() {
+	
+	if(Cookies.get('language') == null){
+		language = slovak;
+	}else{
+		switch(Cookies.get('language')){
+			case "slovak":
+				language = slovak;
+				$("#language_menu").text('SK');
+				break;
+			case "english":
+				language = english;
+				$("#language_menu").text('EN');
+				break;
+			case "czech":
+				language = czech;
+				$("#language_menu").text('CZ');
+				break;
+		}
+	}
+	setLanguage();
+	
     var rtime = 0;
     var timeout = false;
     var delta = 200;
@@ -26,9 +47,16 @@ $(window).resize(function() {
 });
 //	// FORM after enter press don't reload page
 	$('#form').attr('action', 'javascript:void(0);');
+	
+	//Back button handler
+	$("#backButton").click(function(){
+		hiddenClubConcerts();
+	});
     
 	// Handler for search button click
 	$(".imgSearch").click(function(){
+		hiddenClubConcerts();
+		
         if(selectLoad != byCategories){
             page = 0;
             //selectLoad = byCity;
@@ -46,9 +74,46 @@ $(window).resize(function() {
             }
         }
 	});
+	// LANGUAGE OPERATOR
+	
+	    // LANGUAGE MENU HANDLER
+    $("#language_menu").click(function(event){
+        event.stopPropagation();
+        $(".languagemenu").fadeIn(200);
+    });
+    $(document).click( function(){
+    $('.languagemenu').fadeOut(200);
+    });
+    
+    //SET COOKIE FOR LANGUAGE
+    $("#en").on('click', function(){
+		language = english;
+		$("#language_menu").text('EN');
+		setLanguage();
+        Cookies.set('language', 'english', { expires: 100 });
+    });
+    $("#sk").on('click', function(){
+		language = slovak;
+		$("#language_menu").text('SK');
+		setLanguage();
+        Cookies.set('language', 'slovak', { expires: 100 });
+    });
+    $("#cz").on('click', function(){
+		language = czech;
+		$("#language_menu").text('CZ');
+		setLanguage();
+        Cookies.set('language', 'czech', { expires: 100 });
+    });
+	
+	
+	(function(d, src, c) { var t=d.scripts[d.scripts.length - 1],s=d.createElement('script');s.id='la_x2s6df8d';s.async=true;s.src=src;s.onload=s.onreadystatechange=function(){var rs=this.readyState;if(rs&&(rs!='complete')&&(rs!='loaded')){return;}c(this);};t.parentElement.insertBefore(s,t.nextSibling);})(document,
+'//concertian.ladesk.com/scripts/track.js',
+function(e){ LiveAgent.createButton('bfe3d30c', e); });
 	
 	// Handler for click on button Categories
 	$("#categories").click(function(){
+		hiddenClubConcerts();
+		
 		selectLoad = byCategories;
         $("#form").css('visibility', 'hidden');
 
@@ -60,8 +125,10 @@ $(window).resize(function() {
 	
 	// Handler for click on button City
 	$("#city").click(function(){
+		hiddenClubConcerts();
+		
         $("#form").css('visibility', 'visible');
-		$("#search_input").attr("placeholder", "V akom meste hľadáme?");
+		$("#search_input").attr("placeholder", language["searchByCity"]);
 		page = 0;
 		
 		if(selectLoad == byClub){
@@ -81,8 +148,10 @@ $(window).resize(function() {
     
 	// Handler for click on button Club
 	$("#club").click(function(){
+		hiddenClubConcerts();
+		
         $("#form").css('visibility', 'visible');
-		$("#search_input").attr("placeholder", "Aký club hľadáme?");
+		$("#search_input").attr("placeholder", language["searchByClub"]);
 		page = 0;
 		selectLoad = byClub;
         $("#search_input").val("");
@@ -103,7 +172,7 @@ $(window).resize(function() {
         source: function (request, response) {
 			if(selectLoad == byClub){
 				$.ajax({
-					'url': 'https://api.bandcloud.net/agents/venues/name',
+					'url': 'https://api.concertian.com/agents/venues/name',
 					'method': 'POST',
 					'data': {'startsWith': request.term},
 					'success': function (data) {
@@ -191,7 +260,23 @@ $(window).resize(function() {
 		$('#loginbutton,#feedbutton').removeAttr('disabled');
 		FB.getLoginStatus(updateStatusCallback);
 	  });
-	
+	//* --------- Twitter asynchronus calling -------- *//
+	window.twttr = (function(d, s, id) {
+		  var js, fjs = d.getElementsByTagName(s)[0],
+			t = window.twttr || {};
+		  if (d.getElementById(id)) return t;
+		  js = d.createElement(s);
+		  js.id = id;
+		  js.src = "https://platform.twitter.com/widgets.js";
+		  fjs.parentNode.insertBefore(js, fjs);
+
+		  t._e = [];
+		  t.ready = function(f) {
+			t._e.push(f);
+		  };
+  	return t;
+	}
+	(document, "script", "twitter-wjs"));
 	//* -------- Slim scroll ------- *//
 	$(function(){
       $('#results_list').slimscroll({
@@ -205,6 +290,8 @@ $(window).resize(function() {
 	 $("#close").click(function(){
         $("#landing_banner").hide(800);
 		$(".slimScrollDiv").css('height', '108%');
+		$("#clubconcerts").css('top', '0');
+		$("#clubconcerts").css('height', '100%');
      });
 }
 function repaindTextSecond (){
@@ -247,15 +334,58 @@ var byCategories = 2;
 var byClub = 3;
 var selectLoad = byCategories;
 var selectedClubId;
+var clubclicked = false;
 var markers = [];
 var results = [];
+var language;
+var slovak = {
+	categories:"PONUKA", 
+	city:"MESTO", 
+	club:"KLUBY",
+	searchByCity:"V akom meste hľadáme?",
+	searchByClub:"Aký klub hľadáme?",
+	textHeader:"Zviditelnite Vaše koncerty jednoducho a efektívne s <strong>concertian for managers</strong> teraz <strong>na 15 dní zadarmo</strong>",
+	tryit:"VYSKÚŠAŤ",
+	googleBadge:"Stiahnite si appku<br><strong>do smartphonu"
+}
+var english = {
+	categories:"CATEGORIES", 
+	city:"CITY", 
+	club:"CLUBS",
+	searchByCity:"In which city we are looking?",
+	searchByClub:"What club are we looking for?",
+}
+var czech = {
+}
 
-function emptyContainerAddSpinner(){
-	$("#results_list").empty();
-	$("#results_list").append('<div class="spinner">' +
+function hiddenClubConcerts(){
+	if(clubclicked){
+		clubclicked = false;
+		$('#clubconcerts').removeClass('pullDown');
+		$("#backButton").css('visibility', 'hidden');
+		$('#clubconcerts').addClass('pullUp');
+		setTimeout(function(){
+			$('#clubconcerts').removeClass('pullUp');
+		}, 500);
+	}
+}
+
+function emptyContainerAddSpinner(elementDetails){
+	if(clubclicked){
+		$("#backButton").css('visibility', 'visible');
+		$("#clubconcerts").empty();
+		$("#clubconcerts").append(elementDetails+
+								  '<div class="spinner">' +
 									  '<div class="dot1"></div>'+
 									  '<div class="dot2"></div>'+
-								'</div>');
+								  '</div>');
+	}else{
+		$("#results_list").empty();
+		$("#results_list").append('<div class="spinner">' +
+									  '<div class="dot1"></div>'+
+									  '<div class="dot2"></div>'+
+								  '</div>');
+	}
 }
 
 function removeAllMarkers(){
@@ -267,7 +397,7 @@ function removeAllMarkers(){
 
 // Load all concert
 function loadAllConcert(){
-	$.ajax({ 'url' : 'https://api.bandcloud.net/users/events',
+	$.ajax({ 'url' : 'https://api.concertian.com/users/events',
 		  'method' : 'POST',
 		  'data' : { 'results' : "20",
 			 		 'page' : page
@@ -285,7 +415,7 @@ function loadAllConcert(){
 
 // Load Landing Cards
 function loadlandingCards(){
-	$.ajax({ 'url' : 'https://api.bandcloud.net/users/cards',
+	$.ajax({ 'url' : 'https://api.concertian.com/users/cards',
 		  'method' : 'GET',
 	  	  contentType : "application/x-www-form-urlencoded",
 		  'success' : function (json){
@@ -299,7 +429,7 @@ function loadlandingCards(){
 
 // Load concert by City
 function loadConcertByCity(){
-	$.ajax({ 'url' : 'https://api.bandcloud.net/users/events/city',
+	$.ajax({ 'url' : 'https://api.concertian.com/users/events/city',
 		  'method' : 'POST',
 		  'data' : { 'results' : "20",
 			 		 'page' : page,
@@ -318,7 +448,7 @@ function loadConcertByCity(){
 
 // Load concert by Club
 function loadConcertByClub(){
-	$.ajax({ 'url' : 'https://api.bandcloud.net/users/events/venue',
+	$.ajax({ 'url' : 'https://api.concertian.com/users/events/venue',
 		  'method' : 'POST',
 		  'data' : { 'results' : "20",
 					 'page' : page,
@@ -334,25 +464,13 @@ function loadConcertByClub(){
 		}
 	});
 }
-// Load concerts for Club (on club click)
-function loadConcertForClub(clickedClubId){
-	$("#results_list").empty();
-	$.ajax({ 'url' : 'https://api.bandcloud.net/users/events/venue',
-		  'method' : 'POST',
-		  'data' : { 'results' : "20",
-					 'page' : 0,
-					 'idVenue' : clickedClubId
-				   },
-		  contentType : "application/x-www-form-urlencoded",
-		  'success' : function (json){
-			  addElements(json);
-		},
-		'error': function(error){
-			console.log('Error. ' + error);
-			$(".spinner").remove();
-		}
-	});
-}
+// SET TEXT BUILDER
+function setLanguage(){
+		$("#categories").text(language["categories"]);
+		$("#city").text(language["city"]);
+		$("#club").text(language["club"]);
+		$("#search_input").attr('placeholder','V akom meste hľadáme?');
+	}
 
 function addCategories(json){
     $(".slim").empty();
@@ -419,8 +537,11 @@ function addElements(json){
 							'<span id="hover"></span>'+
 						'</span>'+
 					'</span>';
-        
-		$("#results_list").append(element);
+        if(clubclicked){
+			$("#clubconcerts").append(element);
+		}else{
+			$("#results_list").append(element);
+		}
 		if(json.events.length % 20 == 0 && i == json.events.length - 5){
 			$("#results_list").append('<span id="spinnerActivator"></span>');
 			minus = 2;
@@ -439,8 +560,6 @@ function addElements(json){
 							   
 	$(".elementCore").on( "click", function() {
         var value = results[$(this).find(".lenght").text()];
-		var clickedClubId = value.venueId;
-			loadConcertForClub(clickedClubId);
 		var elementDetails = 
 			'<span class="bar_detail">'+
 				'<span class="detail_text">' + value.venueName + '<strong>' + ' ' + ($(window).width()<limitWidth? shortenText(value.city, 15) : value.city) + ' ' + value.address + '</strong></span>'+
@@ -450,7 +569,16 @@ function addElements(json){
 					'</span>'+
 				'</a>'+
 			'</span>';
-		$("#results_list").append(elementDetails);
+		
+		clubclicked = true;
+		emptyContainerAddSpinner(elementDetails);
+		
+		$('#clubconcerts').removeClass('pullUp');
+		$('#clubconcerts').addClass('pullDown');
+		
+		selectedClubId = value.venueId;
+		page = 0;
+		loadConcertByClub();
 	});
     
 	/**
@@ -458,7 +586,7 @@ function addElements(json){
 	 */
 	var bounds = new google.maps.LatLngBounds();
 	for(var i = 0; i < address.length; i++){
-		$.ajax({ 'url' : 'http://maps.googleapis.com/maps/api/geocode/xml?address=' + address[i] + '&sensor=false?key= AIzaSyABFQjmkcjHWLYzAzibPX5Dp-LKYbC5-Jc',
+		$.ajax({ 'url' : 'https://maps.googleapis.com/maps/api/geocode/xml?address=' + address[i] + '&sensor=false?key= AIzaSyABFQjmkcjHWLYzAzibPX5Dp-LKYbC5-Jc',
 			  'method' : 'GET',
 		  	  contentType : "application/x-www-form-urlencoded",
 			  'success' : function (results, status){

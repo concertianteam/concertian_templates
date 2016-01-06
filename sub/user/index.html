@@ -2,15 +2,17 @@
 <html dir="ltr">
     <head>
         <meta charset="utf-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
         <title>concertian - local concert search engine</title>
 
         <link rel="stylesheet" type="text/css" href="css/main.css">
         <link href='https://fonts.googleapis.com/css?family=Open+Sans:300,400,600&subset=latin,latin-ext' rel='stylesheet' type='text/css'>
-        <script src="js/jquery.js"></script>
+		<script src="//code.jquery.com/jquery-1.11.3.min.js"></script>
+		<script src="//code.jquery.com/jquery-migrate-1.2.1.min.js"></script>
+		<script src="js/jquery-ui.min.js"></script>
+		<script src="js/js.cookie.js"></script>
 		<script src="js/search.js"></script>
         <script src="js/jquery.slimscroll.min.js"></script>
-		<script src="js/jquery-ui.min.js"></script>
         
         <script type="text/javascript">
         	map = null;
@@ -25,13 +27,21 @@
                 init();
             }
 		</script>
-		
 		<script async defer
 	 		src="https://maps.googleapis.com/maps/api/js?key= AIzaSyABFQjmkcjHWLYzAzibPX5Dp-LKYbC5-Jc&callback=initMap">
 	 	</script>
 
         <meta name="author" content="QUAWER">
-        <meta name="robots" content="nofollow, noindex">
+		<meta property="fb:app_id" content="1128811043811214">
+		<meta name="twitter:card" content="summary" />
+		<meta name="twitter:site" content="@concertian" />
+		<meta name="twitter:title" content="I love searching for concerts via concertian" />
+		<meta name="twitter:image" content="https://www.concertian.com/images/concertian.google.play.logo.png" />
+		<meta name="twitter:description" content="Try it right now on concertian.com or via android app concertian" />
+		<meta property="og:url" content="https://concertian.com">
+		<meta property="og:title" content="I love searching for concerts via concertian" />
+		<meta property="og:image" content="https://www.concertian.com/images/concertian.google.play.logo.png" />
+		<meta property="og:description" content="Try it right now on concertian.com or via android app concertian" />
     </head>
 
     <body>
@@ -39,26 +49,39 @@
             <div class="containerForm">
                 <span class="firstRow">
                     <span class="company"><div class="concertian_logo" href="index.html"></div></span>
+					<span class="language_selector">
+						<a id="language_menu" class="text_button">SK</a>
+                            <ul class="languagemenu">
+                                <li><a id="en">EN</a></li>
+                                <li><a id="sk">SK</a></li>
+                                <li><a id="cz">CZ</a></li>
+                            </ul>
+            		</span>
                     <span class="tellContainer">
-                        <span class="imgBorder"><span class="imgFB"></span></span>
-                        <span class="imgBorder"><span class="imgG"></span></span>
-                        <span class="imgBorder"><span class="imgTwitter"></span></span>
+						<a onclick="FB.ui({
+  method: 'share',
+  href: 'https://concertian.com',
+}, function(response){});"><span class="imgBorder"><span class="imgFB"></span></span></a>
+                        <a action="share" href="https://plus.google.com/share?url=https://concertian.com"  onclick="javascript:window.open(this,'',
+ 'menubar=no,toolbar=no,resizable=yes,scrollbars=yes,height=600,width=600');return false;"><span class="imgBorder"><span class="imgG"></span></span></a>
+						<a href="https://twitter.com/intent/tweet?text=I+love+searching+for+concerts+with+concertian&url=https://concertian.com/&via=concertian"><span class="imgBorder"><span class="imgTwitter"></span></span></a>
                     </span>
                 </span>
                 <span class="secondRow">
                     <span class="textButton">
-                        <span id="categories" class="text border_right">CATEGORIES</span>
+                        <span id="categories" class="text border_right"></span>
                     </span>
                     <span class="textButton">
-                        <span id="city" class="text border_right">CITY</span>
+                        <span id="city" class="text border_right"></span>
                     </span>
                     <span class="textButton">
-                        <span id="club" class="text">CLUB</span>
+                        <span id="club" class="text"></span>
                     </span>
                 </span>
                 <div class="thirdsRow">
+					<a id="backButton">Back</a>
                     <form id="form">
-                        <input id="search_input" type="text" name="city" placeholder="V akom meste hľadáme?"/>
+                        <input id="search_input" type="text" name="city" placeholder=""/>
 						<input id="clubId" type="hidden"/>
                         <input class="imgSearch" type="submit"/>
                     </form>
@@ -67,12 +90,14 @@
             <span class="containerResult">
                 <span id="landing_banner">
                     <span class="thick"><span class="thick_mark"><span class="imgThick"></span></span></span>
-                    <span class="header_text">Zviditelnite Vaše koncerty jednoducho a efektívne s<br><strong>concertian for managers</strong> teraz <strong>na 15 dní zadarmo</strong></span>
-                    <span class="tryit_button"><a href="https://manager.concertian.com/"><button class="tryIt">VYSKÚŠAŤ TERAZ</button></a></span>
+                    <span class="header_text"></span>
+                    <span class="tryit_button"><a href="https://manager.concertian.com/"><button class="tryIt"></button></a></span>
                     <span id="close"><span class="imgClose"></span></span>
                 </span>
                 <span id="results_list">
+					
 				</span>
+				<span id="clubconcerts" class=""></span>
             </span>
         </div>
         <div id="columnMap">
@@ -80,9 +105,9 @@
                 <span class="slim"><span class="bold"></span></span>
             </span>
             <span id="map"></span>
-                <span class="banner_text">Stiahnite si appku<br><strong>do smartphonu</strong></span>
+                <span class="banner_text"></span>
                 <span class="google_badge">
-                    <a href="https://play.google.com/store/apps/details?id=com.facebook.orca&utm_source=global_co&utm_medium=prtnr&utm_content=Mar2515&utm_campaign=PartBadge&pcampaignid=MKT-AC-global-none-all-co-pr-py-PartBadges-Oct1515-1"><img class="google" alt="Get it on Google Play" src="https://play.google.com/intl/en_us/badges/images/apps/en-play-badge.png" /></a>
+                    <a href="https://play.google.com/store/apps/details?id=com.quawer.concertian"><img class="google" alt="Get it on Google Play" src="https://play.google.com/intl/en_us/badges/images/apps/en-play-badge.png" /></a>
                 </span>
         </div>
     </body>
