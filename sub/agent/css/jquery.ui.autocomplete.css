@@ -227,7 +227,7 @@ button.ui-button::-moz-focus-inner {
 }
 
 .ui-datepicker {
-	width: 24.5%;
+	width: 33% !important;
 	padding: .2em .2em 0;
 	display: none;
 }

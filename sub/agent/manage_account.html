@@ -25,6 +25,8 @@
                 <div class="upgrade_pro">UPGRADE<br>TO<br>
 					<a class="pro_text" href="http://manager.concertian.com/"><strong>PRO</strong></a>
                 </div>
+				<a id="manage_program" href="app.html"><span class="manage_program_icon"></span></a>
+				<a id="manage_account" href="manage_account.html"><span class="manage_account_icon"></span></a>
                     <ul id="navToggle" class="burger slide">
                             <li></li><li></li><li></li>
 		              </ul>
@@ -33,7 +35,6 @@
 					<button id="night">NIGHT</button>
                 </div>
                 <a id="logOff"></a>
-                <a id="manage_account" href="manage_account.html"></a>
             </header>
             <section id="contentPanel" class="manage_account">
                    <span id="topBanner">
@@ -59,6 +60,19 @@
                             <span class="payment_box">
                                 <span class="payment-header"><a>BrainTree</a></span>
                                     <form id="checkout" method="post" action="php/transactionCheckout.php">
+                                    <label class="custom_input_label" for="firstName">
+                                        <span class="fieldName">Meno</span>
+										<input type="text" id="firstName" name="first_name" required />
+                                    </label>
+                                    <label class="custom_input_label" for="lastName">
+                                        <span class="fieldName">Priezvisko</span>
+                                        <input type="text" id="lastName" name="last_name" required />
+                                    </label>  
+                                    <label class="custom_input_label" for="company">
+                                        <span class="fieldName">Obchodné meno</span>
+                                        <input type="text" id="company" name="company" class="margin_bottom" required />
+                                    </label>  
+                                        <br>
                                         <span id="payment-form"></span>
                                         <input type="submit" value="ZAPLATIŤ 19€">
                                     </form>
