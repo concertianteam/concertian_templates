@@ -138,7 +138,7 @@ strong{
 					display: none;
 					width: 30px;
 					height: 60px;
-					right: -8px;
+					left: 25%;
 					background: #ffc95c;
 					padding: 10px 2px;
 					text-align: center;
@@ -153,6 +153,7 @@ strong{
 					position: relative;
 					font-size: 1.2em;
 					color: #fff !important;
+					cursor: pointer;
 				}
                 #columnSearch
                 .containerForm
@@ -217,11 +218,15 @@ strong{
             #columnSearch
 			.thirdsRow
 			#backButton{
+				display: block;
 				position: absolute;
 				z-index: 2;
-				left: 10px;
-				top: 10px;
 				cursor: pointer;
+				background: url('../images/sprite.png') no-repeat -38px -23px;
+				width: 19px;
+				height: 14px;
+				top: 13px;
+				left: 5%;	
 			}
                 #columnSearch
                 .thirdsRow
@@ -443,7 +448,7 @@ strong{
     border: none;
     outline: none;
     border-radius: 4px;
-    background: #FF5C5C;
+    background: #ffad0a;
     color: #fff;
     font-size: 0.9em !important;
 	font-weight: bold !important;
@@ -547,6 +552,63 @@ strong{
 					font-size: 1.0em !important;
 					font-weight: 100;
 				}
+			.elementCore
+			.where_element{
+					position: absolute;
+					display: block;
+					top: 52px;
+					right: 6px;
+					width: auto;
+					height: 20px;
+					border-radius: 4px;
+					background: #ffbb33;
+					box-sizing: border-box;
+					padding: 1px 12px;
+					font-size: 1em !important;
+					text-align: center !important;
+					color: #fff;
+			}
+			.elementCore
+			.where_element
+			.where_element_value{
+				display: block;
+				font-size: 1.0em !important;
+				font-weight: 400;
+			}
+            .elementCore
+            .price_element{
+                position: absolute;
+                display: block;
+                width: 50px;
+                height: 25px;
+                background-color: #8ab800;
+                bottom: 50px;
+                right: 0;
+                cursor: pointer;
+            }
+            .elementCore
+            .hide{
+                display: none;    
+            }
+            .elementCore
+            .price_element
+            .price_element_value{
+                position: absolute;
+                display: block;
+                right: 22px;
+                top: 2px;
+                font-size: 1.2em;
+            }
+            .elementCore
+            .price_element
+            .price_tag{
+                position: absolute;
+                display: block;
+                right: 4px;
+                top: 4px;
+                font-size: 0.9em;
+                font-weight: 100;
+            }
 				.elementCore
 				.share_button{
 					position: absolute;

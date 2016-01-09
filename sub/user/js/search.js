@@ -354,8 +354,19 @@ var english = {
 	club:"CLUBS",
 	searchByCity:"In which city we are looking?",
 	searchByClub:"What club are we looking for?",
+	textHeader:"Organize and promote your concerts with <strong>concertian for managers</strong> now <strong>15 day for free</strong>",
+	tryit:"GIVE A TRY",
+	googleBadge:"Get the app<br><strong>for your smartphone"
 }
 var czech = {
+	categories:"NABÍDKA", 
+	city:"MĚSTO", 
+	club:"KLUBY",
+	searchByCity:"V jakém městě hledáme?",
+	searchByClub:"Jaký klub hledáme?",
+	textHeader:"Zviditelní vaše koncerty jednoduše a efektivně s <strong>concertian for managers</strong> nyní <strong> na 15 dnů zdarma</strong>",
+	tryit:"VYZKOUŠET",
+	googleBadge:"Stáhněte si aplikaci<br><strong>do smartphonu"
 }
 
 function hiddenClubConcerts(){
@@ -469,7 +480,10 @@ function setLanguage(){
 		$("#categories").text(language["categories"]);
 		$("#city").text(language["city"]);
 		$("#club").text(language["club"]);
-		$("#search_input").attr('placeholder','V akom meste hľadáme?');
+		$("#search_input").attr(language["searchByCity"]);
+		$(".header_text").html(language["textHeader"]);
+		$(".tryIt").text(language["tryit"]);
+		$(".banner_text").html(language["googleBadge"]);
 	}
 
 function addCategories(json){
@@ -530,6 +544,13 @@ function addElements(json){
 								'<span class="date_value">'+arr[2]+' '+arr[1]+'<strong>'+' '+arr[0]+'</strong>'+'</span>'+
 								'<span class="time_value">'+ value.time +'</span>'+
 							'</span>'+
+							'<span class="where_element">'+
+								'<span class="where_element_value">' + value.venueName + '</span>'+	
+							'</span>'+
+                            '<span class="price_element ' + (value.entry == 0 ? 'hide' : '') +' ">'+ 
+								'<span class="price_element_value">' + value.entry + '</span>'+	
+                                '<span class="price_tag">' + (value.state == 'Czech Republic' ? 'czk':'eur') + '</span>'+
+							'</span>'+
 							'<span class="share_button">'+
 								'<span class="share_icon">'+ (length + i) +'</span>'+
 							'</span>'+
@@ -547,7 +568,7 @@ function addElements(json){
 			minus = 2;
 		}
 	} 
-    $(".share_button").on("click", function() {
+    $(".share_button").on("click", function(){
 		var value = results[$(this).find(".share_icon").text()];
 				FB.ui({
 				  method: 'feed',
